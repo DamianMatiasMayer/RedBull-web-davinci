@@ -9,6 +9,7 @@ header {
     height: 600px; /* o el alto que desees */
     color: white;
     position: relative;
+    
 }
 
 /*fin inicio header*/
@@ -16,14 +17,12 @@ header {
 /*texto*/
 
 .texto-sobre-imagen {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
   text-align: center;
   color: black;
   font-family: 'Oswald', sans-serif;
   padding: 20px;
+  margin-top: 40px;  
+  margin-bottom: 60px;
 }
 
 .texto-sobre-imagen h1 {
@@ -32,4 +31,76 @@ header {
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
 }
 
+
 /* fin texto*/
+
+/*productos latas */ 
+
+.latas {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.lata {
+  border-radius: 20px;
+  padding: 20px;
+  width: 180px;
+  display: flex;
+  flex-direction: column; /* 🔥 Esto hace que el <img> y el <p> estén uno debajo del otro */
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+
+.lata img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.lata:hover {
+  transform: scale(1.05);
+}
+
+/* Colores para el fondo de cada lata */
+
+.lata.normal {
+  background-color: white
+}
+
+.lata.normal p {
+  color: black; 
+}
+
+.lata.verano {
+  background-color: #f47920;
+}
+
+.lata.tropical {
+  background-color: #f9d400;
+}
+
+.lata.libreazucar {
+  background-color: #b1def2;
+}
+
+.lata.roja {
+  background-color: #c73832;
+}
+
+.lata p {
+  margin-top: 10px;
+  font-size: 20px;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+}
+
+
+
+/*productos latas */ 
