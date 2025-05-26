@@ -1,0 +1,35 @@
+/*inicio header*/
+
+header {
+    background-image: url('../imagenes/productos.avif'); /* ajustá si es necesario */
+    background-size: contain; /* muestra toda la imagen sin recortar */
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 600px; /* o el alto que desees */
+    color: white;
+    position: relative;
+}
+
+/*fin inicio header*/
+
+/*texto*/
+
+.texto-sobre-imagen {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: black;
+  font-family: 'Oswald', sans-serif;
+  padding: 20px;
+}
+
+.texto-sobre-imagen h1 {
+  font-size: 60px;
+  font-weight: 700;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* fin texto*/
