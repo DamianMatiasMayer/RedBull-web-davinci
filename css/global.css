@@ -35,11 +35,8 @@ nav {
 
 nav ul {
     display: flex;
-    /* Links en fila */
     list-style: none;
-    /* Elimina los puntos de lista */
     gap: 30px;
-    /* Espacio entre los enlaces */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

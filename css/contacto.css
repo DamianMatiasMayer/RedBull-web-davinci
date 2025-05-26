@@ -4,9 +4,7 @@
 header {
     background-image: url('../imagenes/contacto.jpg');
     background-size: cover;
-    /* para imagen completa sin distorcionar */
     background-position: center;
-    /* Centra la imagen */
     height: 100vh;
     color: white;
     position: relative;
@@ -56,8 +54,8 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-   height: 100px; /* ← antes estaba en 50px, ahora más fina */
-  background-color: #c70000; /* rojo Red Bull */
+  height: 100px; 
+  background-color: #c70000; 
   clip-path: polygon(0 10px, 100% 0, 100% 9px, 0% 52%);
   z-index: -1;
 }

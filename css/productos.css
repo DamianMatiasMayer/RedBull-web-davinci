@@ -1,12 +1,12 @@
 /*inicio header*/
 
 header {
-    background-image: url('../imagenes/productos.avif'); /* ajustá si es necesario */
-    background-size: contain; /* muestra toda la imagen sin recortar */
+    background-image: url('../imagenes/productos.avif'); 
+    background-size: contain; 
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
-    height: 600px; /* o el alto que desees */
+    height: 600px; 
     color: white;
     position: relative;
     
@@ -50,7 +50,7 @@ header {
   padding: 20px;
   width: 180px;
   display: flex;
-  flex-direction: column; /* 🔥 Esto hace que el <img> y el <p> estén uno debajo del otro */
+  flex-direction: column; 
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
