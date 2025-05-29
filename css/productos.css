@@ -26,6 +26,15 @@ header {
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
 }
 
+.texto-descripcion{
+  text-align: center;
+  color: rgb(148, 148, 148);
+  font-family: 'Oswald', sans-serif;
+  padding: 20px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
 /* Latas */
 .latas {
   display: flex;
@@ -165,4 +174,16 @@ header {
 
 .oculto {
   display: none;
+}
+
+.imagen-trabajo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  
+}
+.imagen-trabajo img {
+  max-width: 500px;
+  height: auto;
 }
