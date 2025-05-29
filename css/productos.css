@@ -1,27 +1,22 @@
-/*inicio header*/
-
+/* Header */
 header {
-    background-image: url('../imagenes/productos.avif'); 
-    background-size: contain; 
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 100%;
-    height: 600px; 
-    color: white;
-    position: relative;
-    
+  background-image: url('../imagenes/productos.avif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 600px;
+  color: white;
+  position: relative;
 }
 
-/*fin inicio header*/
-
-/*texto*/
-
+/* Texto superior */
 .texto-sobre-imagen {
   text-align: center;
   color: black;
   font-family: 'Oswald', sans-serif;
   padding: 20px;
-  margin-top: 40px;  
+  margin-top: 40px;
   margin-bottom: 60px;
 }
 
@@ -31,31 +26,30 @@ header {
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
 }
 
-
-/* fin texto*/
-
-/*productos latas */ 
-
+/* Latas */
 .latas {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
   padding: 40px 20px;
-  margin-top: 60px;
 }
 
+.contenedor-lata {
+  width: 200px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+/* Estilos de cada lata */
 .lata {
   border-radius: 20px;
   padding: 20px;
-  width: 180px;
   display: flex;
-  flex-direction: column; 
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   transition: transform 0.3s ease;
 }
-
 
 .lata img {
   width: 100%;
@@ -67,40 +61,108 @@ header {
   transform: scale(1.05);
 }
 
-/* Colores para el fondo de cada lata */
-
-.lata.normal {
-  background-color: white
+.lata p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+  text-align: center;
 }
 
-.lata.normal p {
-  color: black; 
+/* Colores de fondo de las latas */
+.lata.normal {
+  background-color: white;
 }
 
 .lata.verano {
   background-color: #f47920;
 }
-
 .lata.tropical {
   background-color: #f9d400;
 }
-
 .lata.libreazucar {
   background-color: #b1def2;
 }
-
 .lata.roja {
   background-color: #c73832;
 }
 
-.lata p {
-  margin-top: 10px;
-  font-size: 20px;
+/* Botón agregar al carrito base */
+
+.boton-agregar {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
   color: white;
-  font-family: 'Oswald', sans-serif;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* Colores de botón según el tipo de lata */
+
+.boton-agregar.normal {
+  background-color: white;
+  color: black;
+}
+.boton-agregar.verano {
+  background-color: #f47920;
+}
+.boton-agregar.tropical {
+  background-color: #f9d400;
+}
+.boton-agregar.libreazucar {
+  background-color: #b1def2;
+}
+.boton-agregar.roja {
+  background-color: #c73832;
+}
+
+/* Contador oculto inicialmente */
+
+.contador-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.contador-container input {
+  width: 60px;
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #002654;
+  border-radius: 5px;
   text-align: center;
 }
 
+.confirmar, .cancelar {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 
+.confirmar {
+  background-color: #ffc72c;
+  color: #ffffff;
+}
+.confirmar:hover {
+  background-color: #c70000;
+  color: white;
+}
 
-/*productos latas */ 
+.cancelar {
+  background-color: #ccc;
+  color: #ffffff;
+}
+.cancelar:hover {
+  background-color: #999;
+}
+
+.oculto {
+  display: none;
+}

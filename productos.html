@@ -43,33 +43,104 @@
 
 
     <div class="latas">
-        <div class="lata normal">
-            <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="energizante RedBull">
-            <p>Red Bull energizante</p>
+        <!-- Lata 1 -->
+        <div class="contenedor-lata">
+            <div class="lata normal">
+                <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="energizante RedBull">
+                <p>Red Bull energizante</p>
+            </div>
+            <div class="agregar-carrito">
+                <button class="boton-agregar normal" onclick="mostrarContador(this)">Agregar al carrito</button>
+                <div class="contador-container oculto">
+                    <input type="number" min="1" value="1" class="contador">
+                    <button class="confirmar">✔</button>
+                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
+                </div>
+            </div>
         </div>
-        <div class="lata libreazucar">
-            <img src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp" alt="redbull libre de azucar">
-            <p>Red Bull libre de azucar</p>
+
+        <!-- Lata 2 -->
+        <div class="contenedor-lata">
+            <div class="lata libreazucar">
+                <img src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp"
+                    alt="redbull libre de azucar">
+                <p>Red Bull libre de azucar</p>
+            </div>
+            <div class="agregar-carrito">
+                <button class="boton-agregar libreazucar" onclick="mostrarContador(this)">Agregar al carrito</button>
+                <div class="contador-container oculto">
+                    <input type="number" min="1" value="1" class="contador">
+                    <button class="confirmar">✔</button>
+                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
+                </div>
+            </div>
         </div>
-        <div class="lata tropical">
-            <img src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp" alt="redbull Tropical Edition">
-            <p>Red Bull edicion tropical</p>
-        </div>  
-        <div class="lata roja">
-            <img src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp" alt="Redbull Edicion melon">
-            <p>Red Bull edicion melon</p>
-        </div> 
-        <div class="lata verano">
-            <img src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp" alt="redbull edicion verano">
-            <p>Red Bull edicion verano</p>
+
+        <!-- Lata 3 -->
+        <div class="contenedor-lata">
+            <div class="lata tropical">
+                <img src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp"
+                    alt="redbull Tropical Edition">
+                <p>Red Bull edicion tropical</p>
+            </div>
+            <div class="agregar-carrito">
+                <button class="boton-agregar tropical" onclick="mostrarContador(this)">Agregar al carrito</button>
+                <div class="contador-container oculto">
+                    <input type="number" min="1" value="1" class="contador">
+                    <button class="confirmar">✔</button>
+                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
+                </div>
+            </div>
         </div>
-            
-        
+
+        <!-- Lata 4 -->
+        <div class="contenedor-lata">
+            <div class="lata roja">
+                <img src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp"
+                    alt="Redbull Edicion melon">
+                <p>Red Bull edicion melon</p>
+            </div>
+            <div class="agregar-carrito">
+                <button class="boton-agregar roja" onclick="mostrarContador(this)">Agregar al carrito</button>
+                <div class="contador-container oculto">
+                    <input type="number" min="1" value="1" class="contador">
+                    <button class="confirmar">✔</button>
+                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lata 5 -->
+        <div class="contenedor-lata">
+            <div class="lata verano">
+                <img src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp"
+                    alt="redbull edicion verano">
+                <p>Red Bull edicion verano</p>
+            </div>
+            <div class="agregar-carrito">
+                <button class="boton-agregar verano" onclick="mostrarContador(this)">Agregar al carrito</button>
+                <div class="contador-container oculto">
+                    <input type="number" min="1" value="1" class="contador">
+                    <button class="confirmar">✔</button>
+                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
+    <script>
+        function mostrarContador(boton) {
+            const container = boton.nextElementSibling;
+            container.classList.remove('oculto');
+        }
 
+        function cancelarContador(boton) {
+            const container = boton.parentElement;
+            container.classList.add('oculto');
+        }
+    </script>
 
 
 </body>
