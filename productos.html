@@ -34,9 +34,12 @@
 
     </header>
 
-    <!-- fin inicio header -->
+    <!-- fin header -->
 
 
+<main>
+
+<section>
     <div class="texto-sobre-imagen">
         <h1>Te da aaalas®</h1>
     </div>
@@ -46,11 +49,24 @@
             Ideal para días intensos, Red Bull combina cafeína, vitaminas y taurina para ayudarte a mantener el foco y el rendimiento. <br>Probá nuestras ediciones clásicas y de temporada: energía para cada momento.       
         </h2>
     </div>
+</section>
+
+
+<section class="galeria-productos">
+  <div class="producto animar">
+    <div class="info">
+      <h3>Red Bull edición clásica</h3>
+      <p>Red Bull Energizante Clásica ofrece un sabor distintivo y ligeramente dulce con un toque cítrico, equilibrado por una leve acidez. Su perfil único combina suavidad y energía, pensado para ser refrescante y revitalizante en cada sorbo.</p>
+      <button class="boton-perfiles">Más perfiles</button>
+    </div>
+    <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="Red Bull Clásica">
+  </div>
+</section>
 
 
     <!-- productos energizantes -->
 
-    <div class="latas">
+    <section class="latas">
         <!-- Lata 1 -->
         <div class="contenedor-lata">
             <div class="lata normal">
@@ -134,17 +150,36 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- fin productos energizantes -->
 
-
+<section>
     <div class="imagen-trabajo">
-        <img src="./imagenes/riding-through-your-workday.avif" alt="">
+        <img src="./imagenes/riding-through-your-workday.avif" alt="redbull en jornada laboral">
     </div>
 
+    <div class="texto-descripcion">
+        <h3>Red Bull te acompaña en tu jornada laboral cuando más lo necesitás: impulsa tu concentración, combate el cansancio y mantiene tu energía al máximo</h3>
+    </div>
+</section>
 
 
+
+</main>
+
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animar').forEach(el => observer.observe(el));
+</script>
 
 
 
