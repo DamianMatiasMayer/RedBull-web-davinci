@@ -1,3 +1,7 @@
+body {
+  background-color: #0d1b2a;
+}
+
 /*inicio video debajo de nav*/
 
 .video-nav {
@@ -18,17 +22,38 @@
 .texto-sobre-video {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 5%;
+  transform: translateY(-50%);
   color: white;
-  text-align: center;
+  text-align: left;
   z-index: 2;
   padding: 20px;
+  max-width: 400px;
+  
 }
 
 .texto-sobre-video h1 {
-  font-size: 36px;
+  font-size: 50px;
   margin-bottom: 20px;
+  font-family: 'Oswald', sans-serif;
 }
 
 /* fin video debajo de nav*/
+
+/* inicio imagen de riders */
+
+.imagen-riders {
+  margin-top: 60px;       /* espacio con el video */
+  padding: 0 40px;        /* espacio a los costados */
+  width: 100%;
+  box-sizing: border-box; /* para que el padding no exceda el ancho */
+}
+
+.imagen-riders img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;    /* borde redondeado */
+}
+
+/*fin imagen de riders */
