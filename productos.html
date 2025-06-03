@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedBull</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/productos.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Document</title>
 </head>
 
 <body>
@@ -22,6 +22,7 @@
                 </a>
 
                 <ul>
+                    <li><a href="energizantes.html">Energizantes</a></li>
                     <li><a href="productos.html">Productos</a></li>
                     <li><a href="#">Eventos y Deportes</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
@@ -36,167 +37,23 @@
 
     <!-- fin header -->
 
+    <!-- inicio video debajo de nav -->
+    <div class="video-nav">
+        <video autoplay muted loop class="video-header">
+            <source src="videos/video red bull.webm" type="video/webm">
+        </video>
 
-<main>
-
-<section>
-    <div class="texto-sobre-imagen">
-        <h1>Te da aaalas®</h1>
-    </div>
-
-    <div class="texto-descripcion">
-        <h2>
-            Ideal para días intensos, Red Bull combina cafeína, vitaminas y taurina para ayudarte a mantener el foco y el rendimiento. <br>Probá nuestras ediciones clásicas y de temporada: energía para cada momento.       
-        </h2>
-    </div>
-</section>
-
-
-<section class="galeria-productos">
-  <div class="producto animar">
-    <div class="info">
-      <h3>Red Bull edición clásica</h3>
-      <p>Red Bull Energizante Clásica ofrece un sabor distintivo y ligeramente dulce con un toque cítrico, equilibrado por una leve acidez. Su perfil único combina suavidad y energía, pensado para ser refrescante y revitalizante en cada sorbo.</p>
-      <button class="boton-perfiles">Más perfiles</button>
-    </div>
-    <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="Red Bull Clásica">
-  </div>
-</section>
-
-
-    <!-- productos energizantes -->
-
-    <section class="latas">
-        <!-- Lata 1 -->
-        <div class="contenedor-lata">
-            <div class="lata normal">
-                <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="energizante RedBull">
-                <p>Red Bull energizante</p>
-            </div>
-            <div class="agregar-carrito">
-                <button class="boton-agregar normal" onclick="mostrarContador(this)">Agregar al carrito</button>
-                <div class="contador-container oculto">
-                    <input type="number" min="1" value="1" class="contador">
-                    <button class="confirmar">✔</button>
-                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
-                </div>
-            </div>
+        <div class="texto-sobre-video">
+            <h1>Descubrí nuestros sabores</h1>
         </div>
-
-        <!-- Lata 2 -->
-        <div class="contenedor-lata">
-            <div class="lata libreazucar">
-                <img src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp"
-                    alt="redbull libre de azucar">
-                <p>Red Bull libre de azucar</p>
-            </div>
-            <div class="agregar-carrito">
-                <button class="boton-agregar libreazucar" onclick="mostrarContador(this)">Agregar al carrito</button>
-                <div class="contador-container oculto">
-                    <input type="number" min="1" value="1" class="contador">
-                    <button class="confirmar">✔</button>
-                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lata 3 -->
-        <div class="contenedor-lata">
-            <div class="lata tropical">
-                <img src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp"
-                    alt="redbull Tropical Edition">
-                <p>Red Bull edicion tropical</p>
-            </div>
-            <div class="agregar-carrito">
-                <button class="boton-agregar tropical" onclick="mostrarContador(this)">Agregar al carrito</button>
-                <div class="contador-container oculto">
-                    <input type="number" min="1" value="1" class="contador">
-                    <button class="confirmar">✔</button>
-                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lata 4 -->
-        <div class="contenedor-lata">
-            <div class="lata roja">
-                <img src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp"
-                    alt="Redbull Edicion melon">
-                <p>Red Bull edicion melon</p>
-            </div>
-            <div class="agregar-carrito">
-                <button class="boton-agregar roja" onclick="mostrarContador(this)">Agregar al carrito</button>
-                <div class="contador-container oculto">
-                    <input type="number" min="1" value="1" class="contador">
-                    <button class="confirmar">✔</button>
-                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lata 5 -->
-        <div class="contenedor-lata">
-            <div class="lata verano">
-                <img src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp"
-                    alt="redbull edicion verano">
-                <p>Red Bull edicion verano</p>
-            </div>
-            <div class="agregar-carrito">
-                <button class="boton-agregar verano" onclick="mostrarContador(this)">Agregar al carrito</button>
-                <div class="contador-container oculto">
-                    <input type="number" min="1" value="1" class="contador">
-                    <button class="confirmar">✔</button>
-                    <button class="cancelar" onclick="cancelarContador(this)">✖</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- fin productos energizantes -->
-
-<section>
-    <div class="imagen-trabajo">
-        <img src="./imagenes/riding-through-your-workday.avif" alt="redbull en jornada laboral">
     </div>
-
-    <div class="texto-descripcion">
-        <h3>Red Bull te acompaña en tu jornada laboral cuando más lo necesitás: impulsa tu concentración, combate el cansancio y mantiene tu energía al máximo</h3>
-    </div>
-</section>
-
-
-
-</main>
-
-
-<script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.animar').forEach(el => observer.observe(el));
-</script>
+    <!-- fin video -->
 
 
 
 
 
 
-    <script>
-        function mostrarContador(boton) {
-            const container = boton.nextElementSibling;
-            container.classList.remove('oculto');
-        }
-
-        function cancelarContador(boton) {
-            const container = boton.parentElement;
-            container.classList.add('oculto');
-        }
-    </script>
 
 
 </body>
