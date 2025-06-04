@@ -2,6 +2,12 @@ body {
   background-color: #0d1b2a;
 }
 
+.contenedor-margenes {
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+}
+
 /*inicio video debajo de nav*/
 
 .video-nav {
@@ -22,15 +28,15 @@ body {
 .texto-sobre-video {
   position: absolute;
   top: 50%;
-  left: 5%;
+  left: 0;
   transform: translateY(-50%);
+  padding-left: 5%;
+  padding-right: 5%;
   color: white;
   text-align: left;
   z-index: 2;
-  padding: 20px;
-  max-width: 400px;
-  
 }
+
 
 .texto-sobre-video h1 {
   font-size: 50px;
@@ -40,20 +46,19 @@ body {
 
 /* fin video debajo de nav*/
 
-/* inicio imagen de riders */
+/* inicio Redbull bora logo*/
 
-.imagen-riders {
-  margin-top: 60px;       /* espacio con el video */
-  padding: 0 40px;        /* espacio a los costados */
-  width: 100%;
-  box-sizing: border-box; /* para que el padding no exceda el ancho */
-}
-
-.imagen-riders img {
-  width: 100%;
+.logo-redbull-bora img {
+  width: 200px;
   height: auto;
-  display: block;
-  border-radius: 10px;    /* borde redondeado */
 }
 
-/*fin imagen de riders */
+.texto-logo  {
+  color: white; /* o el color que quieras */
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: 'Oswald', sans-serif; /* igual al resto si usás Oswald */
+}
+
+
+/* fin Redbull bora logo*/
