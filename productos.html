@@ -2,61 +2,249 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/productos.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/productos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Document</title>
 </head>
 
 <body>
 
-    <!-- inicio header -->
-    <header>
-        <nav>
-            <div class="nav-container contenedor-margenes">
+  <!-- inicio header -->
+  <header>
+    <nav>
+      <div class="nav-container contenedor-margenes">
 
-                <a href="index.html" class="logo">
-                    <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
-                </a>
+        <a href="index.html" class="logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        </a>
 
-                <ul>
-                    <li><a href="energizantes.html">Energizantes</a></li>
-                    <li><a href="productos.html">Productos</a></li>
-                    <li><a href="#">Eventos y Deportes</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-                <a href="#" class="carrito-link">
-                    <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito">
-                </a>
-            </div>
-        </nav>
+        <ul>
+          <li><a href="energizantes.html">Energizantes</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="#">Eventos y Deportes</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <a href="#" class="carrito-link">
+          <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito">
+        </a>
+      </div>
+    </nav>
 
-    </header>
+  </header>
 
-    <!-- fin header -->
+  <!-- fin header -->
 
-    <main>
+  <main>
     <!-- inicio video debajo de nav -->
     <div class="video-nav">
-        <video autoplay muted loop class="video-header">
-            <source src="videos/RBB_Performance_Hero_Header_desktop_new.webm" type="video/webm">
-            Tu navegador no soporta la reproducción de video. <!-- fallback por si falla el video -->
-        </video>
+      <video autoplay muted loop class="video-header">
+        <source src="videos/RBB_Performance_Hero_Header_desktop_new.webm" type="video/webm">
+        Tu navegador no soporta la reproducción de video. <!-- fallback por si falla el video -->
+      </video>
 
-        <div class="texto-sobre-video contenedor-margenes">
-            <h1>Red Bull BORA Team: Rider collections</h1>
-        </div>
+      <div class="texto-sobre-video contenedor-margenes">
+        <h1>Red Bull BORA Team: Rider collections</h1>
+      </div>
     </div>
     <!-- fin video -->
 
-<div class="logo-redbull-bora contenedor-margenes">
-    <img src="imagenes/nav_rbh-logo_small.png" alt="logo redbull bora">
-    <h2 class="texto-logo">Red Bull Bora</h2>
-</div>
 
-    </main>
+    <!-- inicio logo redbull bora -->
+
+    <div class="logo-redbull-bora contenedor-margenes">
+      <img src="imagenes/nav_rbh-logo_small.png" alt="logo redbull bora">
+      <h2 class="texto-logo">Red Bull - Bora - Coleccion hansgrohe</h2>
+    </div>
+
+    <!-- fin logo redbull bora -->
+
+  </main>
+
+  <!-- inicio productos -->
+
+  <section class="seccion-productos contenedor-margenes">
+
+    <button class="flecha izquierda" id="flecha-izq">‹</button>
+
+    <div class="contenedor-productos" id="productos-scroll">
+
+      <div class="producto" data-id="prod1">
+        <div class="imagen-carrusel">
+          <img src="imagenes/conjunto-redbull-riders-1.3.avif" alt="Producto 1">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+      </div>
+
+      <div class="producto" data-id="prod2">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 2">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod3">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 3">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod4">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 4">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod5">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 5">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod6">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 6">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod7">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 7">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod8">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 8">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+      <div class="producto" data-id="prod9">
+
+        <div class="imagen-carrusel">
+          <img src="imagenes/prod1-1.jpg" alt="Producto 9">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p class="precio">$1500</p>
+        <button class="boton-carrito">Agregar al carrito</button>
+      </div>
+
+    </div>
+
+    <button class="flecha derecha" id="flecha-der">›</button>
+  </section>
+
+  <!-- fin productos -->
+
+
+
+
+
+
+  <script>
+    const contenedor = document.getElementById("productos-scroll");
+    const flechaIzq = document.getElementById("flecha-izq");
+    const flechaDer = document.getElementById("flecha-der");
+
+    // Función para mostrar u ocultar flechas según el scroll
+    function actualizarFlechas() {
+      // Mostrar flecha izquierda solo si no estamos al inicio
+      flechaIzq.style.display = contenedor.scrollLeft > 10 ? "block" : "none";
+
+      // Mostrar flecha derecha solo si no estamos al final
+      const alFinal = contenedor.scrollLeft + contenedor.clientWidth >= contenedor.scrollWidth - 10;
+      flechaDer.style.display = alFinal ? "none" : "block";
+    }
+
+    // Inicialmente
+    actualizarFlechas();
+
+    // Cuando se hace scroll manual
+    contenedor.addEventListener("scroll", actualizarFlechas);
+
+    // Scroll con botones
+    flechaDer.onclick = () => {
+      contenedor.scrollBy({ left: 300, behavior: 'smooth' });
+      setTimeout(actualizarFlechas, 350);
+    };
+
+    flechaIzq.onclick = () => {
+      contenedor.scrollBy({ left: -300, behavior: 'smooth' });
+      setTimeout(actualizarFlechas, 350);
+    };
+
+    // Carrusel interno de imágenes
+    const imagenes = {
+      "prod1": ["imagenes/conjunto-redbull-riders-1.3.avif", "imagenes/conjunto-redbull-riders-1.2.avif", "imagenes/conjunto-redbull-riders-1.1.avif"],
+      "prod2": ["imagenes/prod2-1.jpg", "imagenes/prod2-2.jpg", "imagenes/prod2-3.jpg"],
+      "prod3": ["imagenes/prod3-1.jpg", "imagenes/prod3-2.jpg", "imagenes/prod3-3.jpg"],
+      "prod4": ["imagenes/prod4-1.jpg", "imagenes/prod4-2.jpg", "imagenes/prod4-3.jpg"],
+      "prod5": ["imagenes/prod5-1.jpg", "imagenes/prod5-2.jpg", "imagenes/prod5-3.jpg"],
+      "prod6": ["imagenes/prod6-1.jpg", "imagenes/prod6-2.jpg", "imagenes/prod6-3.jpg"],
+      "prod7": ["imagenes/prod7-1.jpg", "imagenes/prod7-2.jpg", "imagenes/prod7-3.jpg"],
+      "prod8": ["imagenes/prod8-1.jpg", "imagenes/prod8-2.jpg", "imagenes/prod8-3.jpg"],
+      "prod9": ["imagenes/prod9-1.jpg", "imagenes/prod9-2.jpg", "imagenes/prod9-3.jpg"],
+    };
+
+    document.querySelectorAll('.producto').forEach((producto) => {
+      const id = producto.dataset.id;
+      let i = 0;
+      const img = producto.querySelector("img");
+      const prev = producto.querySelector(".prev");
+      const next = producto.querySelector(".next");
+
+      prev.onclick = () => {
+        i = (i - 1 + imagenes[id].length) % imagenes[id].length;
+        img.src = imagenes[id][i];
+      };
+
+      next.onclick = () => {
+        i = (i + 1) % imagenes[id].length;
+        img.src = imagenes[id][i];
+      };
+    });
+  </script>
+
+
 
 </body>
 

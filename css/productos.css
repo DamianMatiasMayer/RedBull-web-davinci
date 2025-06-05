@@ -55,10 +55,115 @@ body {
 
 .texto-logo  {
   color: white; /* o el color que quieras */
-  font-size: 12px;
+  font-size: 30px;
   margin-top: 5px;
   font-family: 'Oswald', sans-serif; /* igual al resto si usás Oswald */
 }
 
 
 /* fin Redbull bora logo*/
+
+/*inicio productos*/
+
+.seccion-productos {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.contenedor-productos {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  scrollbar-width: none;
+}
+
+.producto {
+  min-width: 350px;
+  text-align: center;
+  color: white;
+  padding-bottom: 10px;
+}
+
+.imagen-carrusel {
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.imagen-carrusel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.imagen-carrusel:hover img {
+  transform: scale(1.05);
+}
+
+.flecha {
+  width: 100px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border:none;
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.flecha:hover {
+  background-color: #e63946;
+  transform: scale(1.1);
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.prev:hover,
+.next:hover {
+  background: #e63946; /* rojo brillante */
+  transform: translateY(-50%) scale(1.1); /* agrandamiento sutil */
+  color: #fff;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.precio {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+}
+
+
+/*fin productos*/
+
