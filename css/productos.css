@@ -167,3 +167,38 @@ body {
 
 /*fin productos*/
 
+/* inicio Redbull oracle productos*/
+
+.seccion-oracle {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.oracle-contenido img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.oracle-texto {
+  position: absolute; /*mantiene el texto posicionado sobre la imagen*/
+  top: 15%;
+  left: 5%;
+  right: 5%; 
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  padding: 10px 0;
+}
+
+.oracle-texto h2 {
+  color: white; /* o el color que quieras */
+  font-size: 30px;
+  margin-top: 5px;
+  font-family: 'Oswald', sans-serif; 
+  
+}
+
+
+
+/* fin Redbull oracle productos*/
