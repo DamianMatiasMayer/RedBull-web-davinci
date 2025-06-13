@@ -172,7 +172,13 @@ body {
 .seccion-oracle {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
+  padding-bottom: 200px; /* espacio para que el carrusel no se superponga con lo que sigue */
+}
+
+.oracle-contenido {
+  position: relative;
+  z-index: 1;
 }
 
 .oracle-contenido img {
@@ -182,22 +188,33 @@ body {
 }
 
 .oracle-texto {
-  position: absolute; /*mantiene el texto posicionado sobre la imagen*/
-  top: 15%;
+  position: absolute;
+  top: 10%;
   left: 5%;
-  right: 5%; 
+  right: 5%;
   color: white;
   font-family: 'Oswald', sans-serif;
-  padding: 10px 0;
+  z-index: 2;
 }
 
 .oracle-texto h2 {
-  color: white; /* o el color que quieras */
   font-size: 30px;
-  margin-top: 5px;
-  font-family: 'Oswald', sans-serif; 
-  
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
 }
+
+/* Carrusel flotando entre la imagen y el contenido siguiente */
+.oracle-carrusel {
+  position: absolute;
+  top: 80%; /* ajustá este valor según la altura de la imagen */
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  transform: translateY(-50%); /* hace que la mitad esté sobre la imagen y mitad por debajo */
+}
+
+
+
 
 
 
