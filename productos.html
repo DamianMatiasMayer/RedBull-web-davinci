@@ -1,409 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/productos.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/productos.css">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
-  <title>Document</title>
-</head>
+  <body>
+    <!-- inicio header -->
 
-<body>
+    <header>
+      <nav>
+        <div class="nav-container contenedor-margenes">
+          <a href="index.html" class="logo">
+            <img
+              src="imagenes/redbullcom-logo_double-with-text.svg"
+              alt="Red Bull Logo"
+            />
+          </a>
 
-  <!-- inicio header -->
-
-  <header>
-    <nav>
-      <div class="nav-container contenedor-margenes">
-
-        <a href="index.html" class="logo">
-          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
-        </a>
-
-        <ul>
-          <li><a href="energizantes.html">Energizantes</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="#">Eventos y Deportes</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-        <a href="#" class="carrito-link">
-          <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito">
-        </a>
-      </div>
-    </nav>
-
-  </header>
-
-  <!-- fin header -->
-
-  <main>
-    <!-- inicio video debajo de nav -->
-    <div class="video-nav">
-      <video autoplay muted loop class="video-header">
-        <source src="videos/RBB_Performance_Hero_Header_desktop_new.webm" type="video/webm">
-        Tu navegador no soporta la reproducción de video. <!-- fallback por si falla el video -->
-      </video>
-
-      <div class="texto-sobre-video contenedor-margenes">
-        <h1>Red Bull BORA Team: Rider collections</h1>
-      </div>
-    </div>
-    <!-- fin video -->
-
-
-    <!-- inicio logo redbull bora -->
-
-    <div class="logo-redbull-bora contenedor-margenes">
-      <img src="imagenes/nav_rbh-logo_small.png" alt="logo redbull bora">
-      <h2 class="texto-logo">Red Bull - Bora - Coleccion hansgrohe</h2>
-    </div>
-
-    <!-- fin logo redbull bora -->
-
-
-
-    <!-- inicio productos redbull bora -->
-
-    <section class="seccion-productos contenedor-margenes">
-
-      <button class="flecha izquierda" id="flecha-izq">‹</button>
-
-      <div class="contenedor-productos" id="productos-scroll">
-
-        <div class="producto" data-id="prod1">
-          <div class="imagen-carrusel">
-            <img src="imagenes/conjunto-redbull-riders-1.3.avif" alt="Producto 1">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
+          <ul>
+            <li><a href="energizantes.html">Energizantes</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="#">Eventos y Deportes</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+          <a href="#" class="carrito-link">
+            <img
+              src="imagenes/shopping-cart.png"
+              alt="Carrito"
+              class="icono-carrito"
+            />
+          </a>
         </div>
+      </nav>
+    </header>
 
-        <div class="producto" data-id="prod2">
+    <!-- fin header -->
 
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-carrera 1.1.avif" alt="Producto 2">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
+    <main>
+      <!-- inicio video debajo de nav -->
+      <div class="video-nav">
+        <video autoplay muted loop class="video-header">
+          <source
+            src="videos/RBB_Performance_Hero_Header_desktop_new.webm"
+            type="video/webm"
+          />
+          Tu navegador no soporta la reproducción de video.
+          <!-- fallback por si falla el video -->
+        </video>
 
-        <div class="producto" data-id="prod3">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-entrenamiento 1.1.avif" alt="Producto 3">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod4">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/traje-carreras 1.1.avif" alt="Producto 4">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod5">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-carrera-especial 1.1.avif" alt="Producto 5">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod6">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/short-termico 1.1.avif" alt="Producto 6">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod7">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-para-clima 1.1.avif" alt="Producto 7">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod8">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-larga 1.1.avif" alt="Producto 8">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod9">
-
-          <div class="imagen-carrusel">
-            <img src="imagenes/short-carrera 1.1.avif" alt="Producto 9">
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="precio">$1500</p>
-        </div>
-
-      </div>
-
-      <button class="flecha derecha" id="flecha-der">›</button>
-    </section>
-
-    <!-- fin productos redbull bora -->
-
-    <!-- inicio productos redbull oracle f1 -->
-
-    <section class="seccion-oracle">
-      <div class="oracle-contenido">
-        <img src="imagenes/coleccion oracle f1.avif" alt="Colección Oracle F1">
-
-        <!-- Texto superpuesto -->
-        <div class="oracle-texto">
-          <h2>Colección Oracle</h2>
+        <div class="texto-sobre-video contenedor-margenes">
+          <h1>Red Bull BORA Team: Rider collections</h1>
         </div>
       </div>
+      <!-- fin video -->
 
-      <!-- Carrusel flotando entre la imagen y el contenido siguiente -->
-      <div class="oracle-carrusel contenedor-margenes">
-        <section class="seccion-productos">
-          <button class="flecha izquierda" id="flecha-izq-oracle">‹</button>
+      <!-- inicio logo redbull bora -->
 
-          <div class="contenedor-productos" id="productos-scroll-oracle">
+      <div class="logo-redbull-bora contenedor-margenes">
+        <img src="imagenes/nav_rbh-logo_small.png" alt="logo redbull bora" />
+        <h2 class="texto-logo">Red Bull - Bora - Coleccion hansgrohe</h2>
+      </div>
 
-            <div class="producto" data-id="oracle1">
-              <div class="imagen-carrusel">
-                <img src="imagenes/chomba-max-1.1.avif" alt="Oracle Producto 1">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1600</p>
+      <!-- fin logo redbull bora -->
+
+      <!-- inicio productos redbull bora -->
+
+      <section class="seccion-productos contenedor-margenes">
+        <button class="flecha izquierda" id="flecha-izq">‹</button>
+
+        <div class="contenedor-productos" id="productos-scroll">
+          <div class="producto" data-id="prod1">
+            <div class="imagen-carrusel">
+              <img
+                src="imagenes/conjunto-redbull-riders-1.3.avif"
+                alt="Producto 1"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
             </div>
-
-            <div class="producto" data-id="oracle2">
-              <div class="imagen-carrusel">
-                <img src="imagenes/remera-max 1.1.avif" alt="Oracle Producto 2">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle3">
-              <div class="imagen-carrusel">
-                <img src="imagenes/chomba-max-mujer-1.1.avif" alt="Oracle Producto 3">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle4">
-              <div class="imagen-carrusel">
-                <img src="imagenes/oracle-producto-2.1.avif" alt="Oracle Producto 4">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle5">
-              <div class="imagen-carrusel">
-                <img src="imagenes/oracle-producto-2.1.avif" alt="Oracle Producto 5">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle6">
-              <div class="imagen-carrusel">
-                <img src="imagenes/oracle-producto-2.1.avif" alt="Oracle Producto 6">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle7">
-              <div class="imagen-carrusel">
-                <img src="imagenes/oracle-producto-2.1.avif" alt="Oracle Producto 7">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle8">
-              <div class="imagen-carrusel">
-                <img src="imagenes/oracle-producto-2.1.avif" alt="Oracle Producto 8">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle9">
-              <div class="imagen-carrusel">
-                <img src="imagenes/oracle-producto-2.1.avif" alt="Oracle Producto 9">
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="precio">$1800</p>
-            </div>
-
+            <p class="precio">$1500</p>
           </div>
 
-          <button class="flecha derecha" id="flecha-der-oracle">›</button>
-        </section>
-      </div>
-    </section>
+          <div class="producto" data-id="prod2">
+            <div class="imagen-carrusel">
+              <img src="imagenes/camiseta-carrera 1.1.avif" alt="Producto 2" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
+          <div class="producto" data-id="prod3">
+            <div class="imagen-carrusel">
+              <img
+                src="imagenes/camiseta-entrenamiento 1.1.avif"
+                alt="Producto 3"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
+          <div class="producto" data-id="prod4">
+            <div class="imagen-carrusel">
+              <img src="imagenes/traje-carreras 1.1.avif" alt="Producto 4" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
+          <div class="producto" data-id="prod5">
+            <div class="imagen-carrusel">
+              <img
+                src="imagenes/camiseta-carrera-especial 1.1.avif"
+                alt="Producto 5"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
-    <!-- fin productos redbull oracle f1 -->
+          <div class="producto" data-id="prod6">
+            <div class="imagen-carrusel">
+              <img src="imagenes/short-termico 1.1.avif" alt="Producto 6" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
+          <div class="producto" data-id="prod7">
+            <div class="imagen-carrusel">
+              <img
+                src="imagenes/camiseta-para-clima 1.1.avif"
+                alt="Producto 7"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
+          <div class="producto" data-id="prod8">
+            <div class="imagen-carrusel">
+              <img src="imagenes/camiseta-larga 1.1.avif" alt="Producto 8" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
 
+          <div class="producto" data-id="prod9">
+            <div class="imagen-carrusel">
+              <img src="imagenes/short-carrera 1.1.avif" alt="Producto 9" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precio">$1500</p>
+          </div>
+        </div>
 
+        <button class="flecha derecha" id="flecha-der">›</button>
+      </section>
 
+      <!-- fin productos redbull bora -->
 
+      <!-- inicio productos redbull oracle f1 -->
 
+      <section class="seccion-oracle">
+        <div class="oracle-contenido">
+          <img
+            src="imagenes/coleccion oracle f1.avif"
+            alt="Colección Oracle F1"
+          />
 
+          <!-- Texto superpuesto -->
+          <div class="oracle-texto">
+            <h2>Colección Oracle</h2>
+          </div>
+        </div>
 
+        <div class="oracle-carrusel contenedor-margenes">
+          <section class="seccion-productos">
+            <button class="flecha izquierda" id="flecha-izq-oracle">‹</button>
+            <!-- flecha izquierda carrousel -->
 
-  </main>
+            <div class="contenedor-productos" id="productos-scroll-oracle">
+              <div class="producto" data-id="oracle1">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/chomba-max-1.1.avif"
+                    alt="Oracle Producto 1"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1600</p>
+              </div>
 
+              <div class="producto" data-id="oracle2">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/remera-max 1.1.avif"
+                    alt="Oracle Producto 2"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-  <script>
-    const contenedor = document.getElementById("productos-scroll");
-    const flechaIzq = document.getElementById("flecha-izq");
-    const flechaDer = document.getElementById("flecha-der");
+              <div class="producto" data-id="oracle3">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/chomba-max-mujer-1.1.avif"
+                    alt="Oracle Producto 3"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-    // Función para mostrar u ocultar flechas según el scroll
-    function actualizarFlechas() {
-      // Mostrar flecha izquierda solo si no estamos al inicio
-      flechaIzq.style.display = contenedor.scrollLeft > 10 ? "block" : "none";
+              <div class="producto" data-id="oracle4">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/remera-max-femenino 1.1.avif"
+                    alt="Oracle Producto 4"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-      // Mostrar flecha derecha solo si no estamos al final
-      const alFinal = contenedor.scrollLeft + contenedor.clientWidth >= contenedor.scrollWidth - 10;
-      flechaDer.style.display = alFinal ? "none" : "block";
-    }
+              <div class="producto" data-id="oracle5">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/chaleco-oracle1.1.avif"
+                    alt="Oracle Producto 5"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-    // Inicialmente
-    actualizarFlechas();
+              <div class="producto" data-id="oracle6">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/campera-oracle 1.1.avif"
+                    alt="Oracle Producto 6"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-    // Cuando se hace scroll manual
-    contenedor.addEventListener("scroll", actualizarFlechas);
+              <div class="producto" data-id="oracle7">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/hoodie-oracle 1.1.avif"
+                    alt="Oracle Producto 7"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-    // Scroll con botones
-    flechaDer.onclick = () => {
-      contenedor.scrollBy({ left: 300, behavior: 'smooth' });
-      setTimeout(actualizarFlechas, 350);
-    };
+              <div class="producto" data-id="oracle8">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/campera-invierno-oracle 1.1.avif"
+                    alt="Oracle Producto 8"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
 
-    flechaIzq.onclick = () => {
-      contenedor.scrollBy({ left: -300, behavior: 'smooth' });
-      setTimeout(actualizarFlechas, 350);
-    };
+              <div class="producto" data-id="oracle9">
+                <div class="imagen-carrusel">
+                  <img
+                    src="imagenes/buzo-campera-oracle.avif"
+                    alt="Oracle Producto 9"
+                  />
+                  <button class="prev">‹</button>
+                  <button class="next">›</button>
+                </div>
+                <p class="precio">$1800</p>
+              </div>
+            </div>
 
-    // Carrusel interno de imágenes
-    const imagenes = {
-      //productos redbull bora
+            <button class="flecha derecha" id="flecha-der-oracle">›</button>
+            <!-- flecha derecha de carrousel -->
+          </section>
+        </div>
+      </section>
 
-      "prod1": ["imagenes/conjunto-redbull-riders-1.3.avif", "imagenes/conjunto-redbull-riders-1.2.avif", "imagenes/conjunto-redbull-riders-1.1.avif"],
-      "prod2": ["imagenes/camiseta-carrera 1.1.avif", "imagenes/camiseta-carrera 1.2.avif", "imagenes/camiseta-carrera 1.3.avif"],
-      "prod3": ["imagenes/camiseta-entrenamiento 1.1.avif", "imagenes/camiseta-entrenamiento 1.2.avif", "imagenes/camiseta-entrenamiento 1.3.avif"],
-      "prod4": ["imagenes/traje-carreras 1.1.avif", "imagenes/traje-carreras 1.2.avif", "imagenes/traje-carreras 1.3.avif"],
-      "prod5": ["imagenes/camiseta-carrera-especial 1.1.avif", "imagenes/camiseta-carrera-especial 1.2.avif", "imagenes/camiseta-carrera-especial 1.3.avif"],
-      "prod6": ["imagenes/short-termico 1.1.avif", "imagenes/short-termico 1.2.avif", "imagenes/short-termico 1.3.avif"],
-      "prod7": ["imagenes/camiseta-para-clima 1.1.avif", "imagenes/camiseta-para-clima 1.2.avif", "imagenes/camiseta-para-clima 1.3.avif"],
-      "prod8": ["imagenes/camiseta-larga 1.1.avif", "imagenes/camiseta-larga 1.2.avif", "imagenes/camiseta-larga 1.3.avif"],
-      "prod9": ["imagenes/short-carrera 1.1.avif", "imagenes/short-carrera 1.2.avif", "imagenes/short-carrera 1.3.avif"],
+      <!-- fin productos redbull oracle f1 -->
 
-      //productos redbull oracle
+      <!-- inicio accesorios -->
 
-      "oracle1": ["imagenes/chomba-max-1.1.avif", "imagenes/chomba-max-1.2.avif", "imagenes/chomba-max-1.3.avif"],
-      "oracle2": ["imagenes/remera-max 1.1.avif", "imagenes/remera-max 1.2.avif", "imagenes/remera-max 1.3.avif"],
-      "oracle3": ["imagenes/chomba-max-mujer-1.1.avif", "imagenes/chomba-max-mujer-1.2.avif", "imagenes/chomba-max-mujer-1.3.avif"],
-      "oracle4": ["imagenes/oracle-producto-4.1.avif", "imagenes/oracle-producto-4.2.avif", "imagenes/oracle-producto-4.3.avif"],
-      "oracle5": ["imagenes/oracle-producto-1.1.avif", "imagenes/oracle-producto-1.2.avif", "imagenes/oracle-producto-1.3.avif"],
-      "oracle6": ["imagenes/oracle-producto-2.1.avif", "imagenes/oracle-producto-2.2.avif", "imagenes/oracle-producto-2.3.avif"],
-      "oracle7": ["imagenes/oracle-producto-3.1.avif", "imagenes/oracle-producto-3.2.avif", "imagenes/oracle-producto-3.3.avif"],
-      "oracle8": ["imagenes/oracle-producto-4.1.avif", "imagenes/oracle-producto-4.2.avif", "imagenes/oracle-producto-4.3.avif"],
-      "oracle9": ["imagenes/oracle-producto-4.1.avif", "imagenes/oracle-producto-4.2.avif", "imagenes/oracle-producto-4.3.avif"],
-    };
+      <section class="accesorios">
+        <div class="texto-accesorios contenedor-margenes">
+          <h2>Accesorios</h2>
+        </div>
 
-    document.querySelectorAll('.producto').forEach((producto) => {
-      const id = producto.dataset.id;
-      let i = 0;
-      const img = producto.querySelector("img");
-      const prev = producto.querySelector(".prev");
-      const next = producto.querySelector(".next");
+        <div class="fila-accesorios contenedor-margenes">
+          <div class="productos-accesorios" data-id="cascos1">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/minicasco-verstappen 1.1.avif"
+                alt="mini casco accesorios oracle"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
 
-      prev.onclick = () => {
-        i = (i - 1 + imagenes[id].length) % imagenes[id].length;
-        img.src = imagenes[id][i];
+          <div class="productos-accesorios" data-id="cascos2">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/minicasco-verstappen-japones 1.1.avif"
+                alt="mini casco accesorio orracle japones oracle"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="cascos3">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/casco-bicycle 1.3.avif"
+                alt="casco bicicleta bora team"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="cascos4">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/redbull-mochila 1.1.avif"
+                alt="mochila redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+        </div>
+
+        <!-- mas accesorios -->
+
+        <div class="fila-accesorios contenedor-margenes">
+          <div class="productos-accesorios" data-id="accesorios1">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/paraguas-redbull 1.1.avif"
+                alt="paraguas redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="accesorios2">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/botella-redbull 1.1.avif"
+                alt="botella redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="accesorios3">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/bandolera-redbull-1.1.avif"
+                alt="bandolera redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="accesorios4">
+            <div class="imagen-accesorio">
+              <img src="imagenes/modelo-escala-1.1.avif" alt="auto a escala" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+        </div>
+
+        <div class="fila-accesorios contenedor-margenes">
+          <div class="productos-accesorios" data-id="accesorios5">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/tarjetero-redbull 1.1.avif"
+                alt="tarjetero redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="accesorios6">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/taza-redbull 1.1.avif"
+                alt="taza redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="accesorios7">
+            <div class="imagen-accesorio">
+              <img
+                src="imagenes/lapicera-redbull 1.1.avif"
+                alt="lapicera redbull"
+              />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+
+          <div class="productos-accesorios" data-id="accesorios8">
+            <div class="imagen-accesorio">
+              <img src="imagenes/pin-redbull 1.1.avif" alt="pin redbull" />
+              <button class="prev">‹</button>
+              <button class="next">›</button>
+            </div>
+            <p class="precios">1800</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- fin accesorios -->
+
+      <footer>
+        <div class="contenido-footer">
+          <img
+            src="imagenes/redbullcom-logo_double-with-text.svg"
+            alt="Red Bull Logo"
+            class="footer-logo"
+          />
+
+          <ul class="footer-links">
+            <li><a href="productos.html">nuestros productos</a></li>
+            <li><a href="#">Empleo</a></li>
+            <li><a href="#">Términos</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="contacto.html">Contactanos</a></li>
+          </ul>
+
+          <div class="footer-redes">
+            <a href="#"><img src="imagenes/instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+            <a href="#"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="imagenes/X.png" alt="X" /></a>
+          </div>
+
+          <p class="footer-copy">
+            © 2025 Red Bull Argentina. Todos los derechos reservados.
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const contenedor = document.getElementById("productos-scroll");
+      const flechaIzq = document.getElementById("flecha-izq");
+      const flechaDer = document.getElementById("flecha-der");
+
+      // Función para mostrar u ocultar flechas según el scroll
+      function actualizarFlechas() {
+        // Mostrar flecha izquierda solo si no estamos al inicio
+        flechaIzq.style.display = contenedor.scrollLeft > 10 ? "block" : "none";
+
+        // Mostrar flecha derecha solo si no estamos al final
+        const alFinal =
+          contenedor.scrollLeft + contenedor.clientWidth >=
+          contenedor.scrollWidth - 10;
+        flechaDer.style.display = alFinal ? "none" : "block";
+      }
+
+      // Inicialmente
+      actualizarFlechas();
+
+      // Cuando se hace scroll manual
+      contenedor.addEventListener("scroll", actualizarFlechas);
+
+      // Scroll con botones
+      flechaDer.onclick = () => {
+        contenedor.scrollBy({ left: 300, behavior: "smooth" });
+        setTimeout(actualizarFlechas, 350);
       };
 
-      next.onclick = () => {
-        i = (i + 1) % imagenes[id].length;
-        img.src = imagenes[id][i];
+      flechaIzq.onclick = () => {
+        contenedor.scrollBy({ left: -300, behavior: "smooth" });
+        setTimeout(actualizarFlechas, 350);
       };
-    });
 
+      // Carrusel interno de imágenes
+      const imagenes = {
+        //productos redbull bora
 
-    const contenedorOracle = document.getElementById("productos-scroll-oracle");
-    const flechaIzqOracle = document.getElementById("flecha-izq-oracle");
-    const flechaDerOracle = document.getElementById("flecha-der-oracle");
+        prod1: [
+          "imagenes/conjunto-redbull-riders-1.3.avif",
+          "imagenes/conjunto-redbull-riders-1.2.avif",
+          "imagenes/conjunto-redbull-riders-1.1.avif",
+        ],
+        prod2: [
+          "imagenes/camiseta-carrera 1.1.avif",
+          "imagenes/camiseta-carrera 1.2.avif",
+          "imagenes/camiseta-carrera 1.3.avif",
+        ],
+        prod3: [
+          "imagenes/camiseta-entrenamiento 1.1.avif",
+          "imagenes/camiseta-entrenamiento 1.2.avif",
+          "imagenes/camiseta-entrenamiento 1.3.avif",
+        ],
+        prod4: [
+          "imagenes/traje-carreras 1.1.avif",
+          "imagenes/traje-carreras 1.2.avif",
+          "imagenes/traje-carreras 1.3.avif",
+        ],
+        prod5: [
+          "imagenes/camiseta-carrera-especial 1.1.avif",
+          "imagenes/camiseta-carrera-especial 1.2.avif",
+          "imagenes/camiseta-carrera-especial 1.3.avif",
+        ],
+        prod6: [
+          "imagenes/short-termico 1.1.avif",
+          "imagenes/short-termico 1.2.avif",
+          "imagenes/short-termico 1.3.avif",
+        ],
+        prod7: [
+          "imagenes/camiseta-para-clima 1.1.avif",
+          "imagenes/camiseta-para-clima 1.2.avif",
+          "imagenes/camiseta-para-clima 1.3.avif",
+        ],
+        prod8: [
+          "imagenes/camiseta-larga 1.1.avif",
+          "imagenes/camiseta-larga 1.2.avif",
+          "imagenes/camiseta-larga 1.3.avif",
+        ],
+        prod9: [
+          "imagenes/short-carrera 1.1.avif",
+          "imagenes/short-carrera 1.2.avif",
+          "imagenes/short-carrera 1.3.avif",
+        ],
 
-    function actualizarFlechasOracle() {
-      flechaIzqOracle.style.display = contenedorOracle.scrollLeft > 10 ? "block" : "none";
-      const alFinal = contenedorOracle.scrollLeft + contenedorOracle.clientWidth >= contenedorOracle.scrollWidth - 10;
-      flechaDerOracle.style.display = alFinal ? "none" : "block";
-    }
+        //productos redbull oracle
 
-    actualizarFlechasOracle();
-    contenedorOracle.addEventListener("scroll", actualizarFlechasOracle);
+        oracle1: [
+          "imagenes/chomba-max-1.1.avif",
+          "imagenes/chomba-max-1.2.avif",
+          "imagenes/chomba-max-1.3.avif",
+        ],
+        oracle2: [
+          "imagenes/remera-max 1.1.avif",
+          "imagenes/remera-max 1.2.avif",
+          "imagenes/remera-max 1.3.avif",
+        ],
+        oracle3: [
+          "imagenes/chomba-max-mujer-1.1.avif",
+          "imagenes/chomba-max-mujer-1.2.avif",
+          "imagenes/chomba-max-mujer-1.3.avif",
+        ],
+        oracle4: [
+          "imagenes/remera-max-femenino 1.1.avif",
+          "imagenes/remera-max-femenino 1.2.avif",
+          "imagenes/remera-max-femenino 1.3.avif",
+        ],
+        oracle5: [
+          "imagenes/chaleco-oracle1.1.avif",
+          "imagenes/chaleco-oracle.1.2avif.avif",
+          "imagenes/chomba-max-mujer-1.3.avif",
+        ],
+        oracle6: [
+          "imagenes/campera-oracle 1.1.avif",
+          "imagenes/campera-oracle 1.2.avif",
+          "imagenes/campera-oracle 1.3.avif",
+        ],
+        oracle7: [
+          "imagenes/hoodie-oracle 1.1.avif",
+          "imagenes/hoodie-oracle 1.2.avif",
+          "imagenes/hoodie-oracle 1.3.avif",
+        ],
+        oracle8: [
+          "imagenes/campera-invierno-oracle 1.1.avif",
+          "imagenes/campera-invierno-oracle 1.2.avif",
+          "imagenes/campera-invierno-oracle 1.3.avif",
+        ],
+        oracle9: [
+          "imagenes/buzo-campera-oracle.avif",
+          "imagenes/buzo-campera-oracle.1.2avif.avif",
+          "imagenes/buzo-campera-oracle.1.3avif.avif",
+        ],
 
-    flechaDerOracle.onclick = () => {
-      contenedorOracle.scrollBy({ left: 300, behavior: 'smooth' });
-      setTimeout(actualizarFlechasOracle, 350);
-    };
+        //cascos accesorios
 
-    flechaIzqOracle.onclick = () => {
-      contenedorOracle.scrollBy({ left: -300, behavior: 'smooth' });
-      setTimeout(actualizarFlechasOracle, 350);
-    };
+        cascos1: [
+          "imagenes/minicasco-verstappen 1.1.avif",
+          "imagenes/minicasco-verstappen 1.2.avif",
+          "imagenes/minicasco-verstappen 1.3.avif",
+        ],
+        cascos2: [
+          "imagenes/minicasco-verstappen-japones 1.1.avif",
+          "imagenes/minicasco-verstappen-japones 1.2.avif",
+          "imagenes/minicasco-verstappen-japones 1.3.avif",
+        ],
+        cascos3: [
+          "imagenes/casco-bicycle 1.3.avif",
+          "imagenes/casco-bicycle 1.1.avif",
+          "imagenes/casco-bicycle 1.2.avif",
+        ],
+        cascos4: [
+          "imagenes/redbull-mochila 1.1.avif",
+          "imagenes/redbull-mochila 1.2.avif",
+          "imagenes/redbull-mochila 1.3.avif",
+        ],
 
+        //otros accesorios
 
+        accesorios1: [
+          "imagenes/paraguas-redbull 1.1.avif",
+          "imagenes/paraguas-redbull 1.2.avif",
+          "imagenes/paraguas-redbull 1.3.avif",
+        ],
+        accesorios2: [
+          "imagenes/botella-redbull 1.1.avif",
+          "imagenes/botella-redbull 1.2.avif",
+          "imagenes/botella-redbull 1.3.avif",
+        ],
+        accesorios3: [
+          "imagenes/bandolera-redbull-1.1.avif",
+          "imagenes/bandolera-redbull-1.2.avif",
+          "imagenes/bandolera-redbull-1.3.avif",
+        ],
+        accesorios4: [
+          "imagenes/modelo-escala-1.1.avif",
+          "imagenes/modelo-escala-1.2.avif",
+          "imagenes/modelo-escala-1.3.avif",
+        ],
+        accesorios5: [
+          "imagenes/tarjetero-redbull 1.1.avif",
+          "imagenes/tarjetero-redbull 1.2.avif",
+        ],
+        accesorios6: [
+          "imagenes/taza-redbull 1.1.avif",
+          "imagenes/taza-redbull 1.2.avif",
+        ],
+        accesorios7: [
+          "imagenes/lapicera-redbull 1.1.avif",
+          "imagenes/lapicera-redbull 1.2.avif",
+        ],
+        accesorios8: [
+          "imagenes/pin-redbull 1.1.avif",
+          "imagenes/pin-redbull 1.2.avif",
+        ],
+      };
 
+      document.querySelectorAll(".producto").forEach((producto) => {
+        const id = producto.dataset.id;
+        let i = 0;
+        const img = producto.querySelector("img");
+        const prev = producto.querySelector(".prev");
+        const next = producto.querySelector(".next");
 
+        prev.onclick = () => {
+          i = (i - 1 + imagenes[id].length) % imagenes[id].length;
+          img.src = imagenes[id][i];
+        };
 
-  </script>
+        next.onclick = () => {
+          i = (i + 1) % imagenes[id].length;
+          img.src = imagenes[id][i];
+        };
+      });
 
+      const contenedorOracle = document.getElementById(
+        "productos-scroll-oracle"
+      );
+      const flechaIzqOracle = document.getElementById("flecha-izq-oracle");
+      const flechaDerOracle = document.getElementById("flecha-der-oracle");
 
+      function actualizarFlechasOracle() {
+        flechaIzqOracle.style.display =
+          contenedorOracle.scrollLeft > 10 ? "block" : "none";
+        const alFinal =
+          contenedorOracle.scrollLeft + contenedorOracle.clientWidth >=
+          contenedorOracle.scrollWidth - 10;
+        flechaDerOracle.style.display = alFinal ? "none" : "block";
+      }
 
+      actualizarFlechasOracle();
+      contenedorOracle.addEventListener("scroll", actualizarFlechasOracle);
 
+      flechaDerOracle.onclick = () => {
+        contenedorOracle.scrollBy({ left: 300, behavior: "smooth" });
+        setTimeout(actualizarFlechasOracle, 350);
+      };
 
+      flechaIzqOracle.onclick = () => {
+        contenedorOracle.scrollBy({ left: -300, behavior: "smooth" });
+        setTimeout(actualizarFlechasOracle, 350);
+      };
 
-</body>
+      document.querySelectorAll(".productos-accesorios").forEach((producto) => {
+        const id = producto.dataset.id;
+        if (!imagenes[id]) return;
+        let i = 0;
+        const img = producto.querySelector("img");
+        const prev = producto.querySelector(".prev");
+        const next = producto.querySelector(".next");
 
+        if (prev && next) {
+          prev.onclick = () => {
+            i = (i - 1 + imagenes[id].length) % imagenes[id].length;
+            img.src = imagenes[id][i];
+          };
+
+          next.onclick = () => {
+            i = (i + 1) % imagenes[id].length;
+            img.src = imagenes[id][i];
+          };
+        }
+      });
+    </script>
+  </body>
 </html>

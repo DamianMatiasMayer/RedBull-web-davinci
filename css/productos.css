@@ -1,5 +1,6 @@
 body {
   background-color: #0d1b2a;
+  overflow-x: hidden;
 }
 
 .contenedor-margenes {
@@ -93,7 +94,7 @@ body {
   height: 450px;
   overflow: hidden;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .imagen-carrusel img {
@@ -159,7 +160,6 @@ body {
 .precio {
   margin-top: 15px;
   font-size: 1.3rem;
-  
   color: #fff;
   font-family: 'Oswald', sans-serif;
 }
@@ -203,7 +203,6 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-/* Carrusel flotando entre la imagen y el contenido siguiente */
 .oracle-carrusel {
   position: absolute;
   top: 80%; /* ajustá este valor según la altura de la imagen */
@@ -214,8 +213,89 @@ body {
 }
 
 
-
-
-
-
 /* fin Redbull oracle productos*/
+
+/* accesorios*/
+
+
+.accesorios{
+  background-color: white;
+  margin-top: 5%;
+}
+
+.texto-accesorios{
+  padding-top: 5%;
+  margin-bottom: 2%;
+  color: black;
+  font-family: 'Oswald', sans-serif;
+}
+
+.texto-accesorios h2{
+  font-size: 30px;
+}
+
+.fila-accesorios {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap; 
+  gap: 20px;
+}
+
+.productos-accesorios {
+  flex: 0 0 24.5%; 
+  max-width: 25%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.imagen-accesorio {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.imagen-accesorio .prev,
+.imagen-accesorio .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1.5rem;
+  color: black;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.imagen-accesorio .prev { left: 5px; }
+.imagen-accesorio .next { right: 5px; }
+
+.imagen-accesorio:hover .prev,
+.imagen-accesorio:hover .next {
+  background-color: #e63946;
+  color: white;
+}
+
+
+.productos-accesorios img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.productos-accesorios img:hover {
+  transform: scale(1.1);
+}
+
+
+.precios {
+  margin-bottom: 40px;
+  margin-top: 20px;
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  color: black;
+}
