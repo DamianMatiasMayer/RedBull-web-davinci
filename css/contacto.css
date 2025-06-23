@@ -1,13 +1,18 @@
-
 /* estilos header */
 
 header {
-    background-image: url('../imagenes/contacto.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    color: white;
-    position: relative;
+  background-image: url('../imagenes/contacto.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  color: white;
+  position: relative;
+}
+
+.contenedor-margenes {
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
 }
 
 /*  fin estilos header */
@@ -54,8 +59,8 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px; 
-  background-color: #c70000; 
+  height: 100px;
+  background-color: #c70000;
   clip-path: polygon(0 10px, 100% 0, 100% 9px, 0% 52%);
   z-index: -1;
 }
@@ -90,7 +95,7 @@ header {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  
+
 }
 
 .formulario-contacto input,
@@ -128,6 +133,17 @@ header {
   color: white;
 }
 
+.mensaje-exito {
+  display: none;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+
 
 /*informacion de contacto*/
 
@@ -136,6 +152,7 @@ header {
     opacity: 0;
     transform: translateY(40px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);

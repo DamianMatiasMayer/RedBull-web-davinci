@@ -6,6 +6,12 @@ body {
 }
 
 
+.contenedor-margenes {
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+}
+
 /* Header con logo y links */
 header {
     background-image: url('../imagenes/4OBXGLGPJZCNNMWBIYKQNBF5LQ.avif');
@@ -38,7 +44,8 @@ header {
     color: white;
     padding: 10px 80px;
     text-decoration: none;
-    transform: skew(-20deg) translateX(40%);/* paralelogramo */
+    transform: skew(-20deg) translateX(40%);
+    /* paralelogramo */
     border: none;
     font-weight: bold;
 
@@ -154,6 +161,7 @@ header {
 .contenido-inclinado p {
     font-size: 24px;
 }
+
 /* fin bloque inclinado*/
 
 /* Noticias */
@@ -263,5 +271,3 @@ header {
 }
 
 /*FIN botones */
-
-

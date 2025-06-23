@@ -54,17 +54,27 @@ body {
   height: auto;
 }
 
-.texto-logo  {
-  color: white; /* o el color que quieras */
+.texto-logo {
+  color: white;
+  /* o el color que quieras */
   font-size: 30px;
   margin-top: 5px;
-  font-family: 'Oswald', sans-serif; /* igual al resto si usás Oswald */
+  font-family: 'Oswald', sans-serif;
+  /* igual al resto si usás Oswald */
 }
 
 
 /* fin Redbull bora logo*/
 
 /*inicio productos*/
+
+
+.textos-ropa {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  margin-top: 10px;
+}
 
 .seccion-productos {
   display: flex;
@@ -113,7 +123,7 @@ body {
   width: 100px;
   height: 50px;
   background: rgba(255, 255, 255, 0.05);
-  border:none;
+  border: none;
   color: white;
   font-size: 1.6rem;
   border-radius: 50%;
@@ -129,7 +139,8 @@ body {
   transform: scale(1.1);
 }
 
-.prev, .next {
+.prev,
+.next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -149,16 +160,24 @@ body {
 
 .prev:hover,
 .next:hover {
-  background: #e63946; /* rojo brillante */
-  transform: translateY(-50%) scale(1.1); /* agrandamiento sutil */
+  background: #e63946;
+  /* rojo brillante */
+  transform: translateY(-50%) scale(1.1);
+  /* agrandamiento sutil */
   color: #fff;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
 
 .precio {
-  margin-top: 15px;
+  margin-bottom: 20px;
+  margin-top: 10px;
   font-size: 1.3rem;
   color: #fff;
   font-family: 'Oswald', sans-serif;
@@ -173,7 +192,8 @@ body {
   position: relative;
   width: 100%;
   overflow: visible;
-  padding-bottom: 200px; /* espacio para que el carrusel no se superponga con lo que sigue */
+  padding-bottom: 200px;
+  /* espacio para que el carrusel no se superponga con lo que sigue */
 }
 
 .oracle-contenido {
@@ -194,22 +214,31 @@ body {
   right: 5%;
   color: white;
   font-family: 'Oswald', sans-serif;
+  text-align: left;
   z-index: 2;
+}
+
+.oracle-texto img.logo-oracle {
+  width: 150px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .oracle-texto h2 {
   font-size: 30px;
   margin: 0;
-  font-family: 'Oswald', sans-serif;
 }
+
 
 .oracle-carrusel {
   position: absolute;
-  top: 80%; /* ajustá este valor según la altura de la imagen */
+  top: 80%;
+  /* ajustá este valor según la altura de la imagen */
   left: 0;
   width: 100%;
   z-index: 3;
-  transform: translateY(-50%); /* hace que la mitad esté sobre la imagen y mitad por debajo */
+  transform: translateY(-50%);
+  /* hace que la mitad esté sobre la imagen y mitad por debajo */
 }
 
 
@@ -218,31 +247,31 @@ body {
 /* accesorios*/
 
 
-.accesorios{
+.accesorios {
   background-color: white;
   margin-top: 5%;
 }
 
-.texto-accesorios{
+.texto-accesorios {
   padding-top: 5%;
   margin-bottom: 2%;
   color: black;
   font-family: 'Oswald', sans-serif;
 }
 
-.texto-accesorios h2{
+.texto-accesorios h2 {
   font-size: 30px;
 }
 
 .fila-accesorios {
   display: flex;
   justify-content: space-between;
-  flex-wrap: nowrap; 
+  flex-wrap: nowrap;
   gap: 20px;
 }
 
 .productos-accesorios {
-  flex: 0 0 24.5%; 
+  flex: 0 0 24.5%;
   max-width: 25%;
   text-align: center;
   overflow: hidden;
@@ -270,8 +299,13 @@ body {
   z-index: 2;
 }
 
-.imagen-accesorio .prev { left: 5px; }
-.imagen-accesorio .next { right: 5px; }
+.imagen-accesorio .prev {
+  left: 5px;
+}
+
+.imagen-accesorio .next {
+  right: 5px;
+}
 
 .imagen-accesorio:hover .prev,
 .imagen-accesorio:hover .next {
@@ -298,4 +332,12 @@ body {
   font-weight: bold;
   font-family: 'Oswald', sans-serif;
   color: black;
+  font-size: 1.3rem;
+}
+
+.textos-productos {
+  color: black;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  margin-top: 10px;
 }

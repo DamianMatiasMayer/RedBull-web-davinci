@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 
@@ -9,98 +9,98 @@
 /* Tamaño del logo */
 .logo img {
 
-    height: 40px;
+  height: 40px;
 
 }
 
 /* Barra de navegación (links) */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    background-color: #0d1b2a;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #0d1b2a;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
 }
 
 .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
 }
 
 
 nav ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Oswald', sans-serif;
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Oswald', sans-serif;
 
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    letter-spacing: 1px;
-    position: relative;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 1px;
+  position: relative;
+  transition: color 0.3s ease;
 
 }
 
 
 
 nav ul li a::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: #00bfff;
-    transition: width 0.3s ease;
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #00bfff;
+  transition: width 0.3s ease;
 }
 
 
 
 
 nav ul li a:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
 /*Fin de Barra de navegación (links) */
 
 /* Ícono del carrito */
 .icono-carrito {
-    height: 20px;
-    filter: invert(100%);
-    transition: transform 0.3s ease;
+  height: 20px;
+  filter: invert(100%);
+  transition: transform 0.3s ease;
 }
 
 .carrito-link {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .carrito-link::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: #00bfff;
-    transition: width 0.3s ease;
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #00bfff;
+  transition: width 0.3s ease;
 }
 
 .carrito-link:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
 /* fin Ícono del carrito */
@@ -164,3 +164,27 @@ footer {
 }
 
 /* FIN footer */
+
+/*inicio alerta de trabajo*/
+
+.aviso-trabajo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffc72c;
+  color: #002654;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 9999;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Oswald', sans-serif;
+  transition: opacity 0.4s ease;
+}
+
+.oculto {
+  display: none;
+}
+
+/*fin alerta de trabajo*/
