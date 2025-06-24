@@ -1,35 +1,66 @@
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const botonFiltro = document.getElementById("boton-filtro");
-    const contenedorFiltros = document.getElementById("filtros");
-    const botonesCategoria = document.querySelectorAll(".filtro-categoria");
-    const productos = document.querySelectorAll("[data-categoria]");
-    const botonLimpiar = document.getElementById("limpiar-filtros");
+const botonFiltro = document.getElementById("boton-filtro");
+const contenedorFiltros = document.getElementById("filtros");
+const botonesFiltro = document.querySelectorAll(".filtro-categoria");
+const limpiarBtn = document.getElementById("limpiar-filtros");
+const productos = document.querySelectorAll(".producto, .productos-accesorios");
+const chips = document.getElementById("chips-activos");
 
-    // Mostrar/Ocultar opciones de filtro
-    botonFiltro.addEventListener("click", () => {
-      contenedorFiltros.style.display =
-        contenedorFiltros.style.display === "none" ? "flex" : "none";
-    });
+let filtrosActivos = new Set();
 
-    // Aplicar filtros
-    botonesCategoria.forEach((boton) => {
-      boton.addEventListener("click", () => {
-        const categoriaSeleccionada = boton.getAttribute("data-filtro");
+botonFiltro.addEventListener("click", () => {
+  contenedorFiltros.style.display =
+    contenedorFiltros.style.display === "none" ? "flex" : "none";
+});
 
-        productos.forEach((producto) => {
-          const categoria = producto.getAttribute("data-categoria");
-          producto.style.display =
-            categoria === categoriaSeleccionada ? "block" : "none";
-        });
-      });
-    });
-
-    // Limpiar filtros
-    botonLimpiar.addEventListener("click", () => {
-      productos.forEach((producto) => {
-        producto.style.display = "block";
-      });
-    });
+botonesFiltro.forEach(boton => {
+  boton.addEventListener("click", () => {
+    const filtro = boton.dataset.filtro;
+    if (filtrosActivos.has(filtro)) {
+      filtrosActivos.delete(filtro);
+    } else {
+      filtrosActivos.add(filtro);
+    }
+    actualizarChips();
+    aplicarFiltros();
   });
+});
+
+limpiarBtn.addEventListener("click", () => {
+  filtrosActivos.clear();
+  actualizarChips();
+  aplicarFiltros();
+});
+
+function actualizarChips() {
+  chips.innerHTML = "";
+  filtrosActivos.forEach(filtro => {
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    chip.textContent = filtro.charAt(0).toUpperCase() + filtro.slice(1);
+
+    const close = document.createElement("span");
+    close.className = "close";
+    close.textContent = "×";
+    close.onclick = () => {
+      filtrosActivos.delete(filtro);
+      actualizarChips();
+      aplicarFiltros();
+    };
+
+    chip.appendChild(close);
+    chips.appendChild(chip);
+  });
+}
+
+function aplicarFiltros() {
+  productos.forEach(producto => {
+    const categoria = producto.dataset.categoria;
+    if (filtrosActivos.size === 0 || filtrosActivos.has(categoria)) {
+      producto.style.display = "";
+    } else {
+      producto.style.display = "none";
+    }
+  });
+}
 

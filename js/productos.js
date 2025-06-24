@@ -34,6 +34,7 @@ flechaIzq.onclick = () => {
 
 // Carrusel interno de imágenes
 const imagenes = {
+
     //productos redbull bora
 
     prod1: [
@@ -148,9 +149,22 @@ const imagenes = {
         "imagenes/casco-bicycle 1.2.avif",
     ],
     cascos4: [
+        "imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.1.avif",
+        "imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.2.avif",
+        "imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.3.avif",
+    ],
+
+    //mochilas 
+
+    mochilas1: [
         "imagenes/redbull-mochila 1.1.avif",
         "imagenes/redbull-mochila 1.2.avif",
         "imagenes/redbull-mochila 1.3.avif",
+    ],
+    mochilas2: [
+        "imagenes/bandolera-redbull-1.1.avif",
+        "imagenes/bandolera-redbull-1.2.avif",
+        "imagenes/bandolera-redbull-1.3.avif",
     ],
 
     //otros accesorios
@@ -165,11 +179,11 @@ const imagenes = {
         "imagenes/botella-redbull 1.2.avif",
         "imagenes/botella-redbull 1.3.avif",
     ],
-    accesorios3: [
-        "imagenes/bandolera-redbull-1.1.avif",
-        "imagenes/bandolera-redbull-1.2.avif",
-        "imagenes/bandolera-redbull-1.3.avif",
-    ],
+    //accesorios3: [
+        //"imagenes/bandolera-redbull-1.1.avif",
+        //"imagenes/bandolera-redbull-1.2.avif",
+        //"imagenes/bandolera-redbull-1.3.avif",
+    //],
     accesorios4: [
         "imagenes/modelo-escala-1.1.avif",
         "imagenes/modelo-escala-1.2.avif",
