@@ -244,12 +244,12 @@ body {
 
 /* fin Redbull oracle productos*/
 
-/* accesorios*/
+/* inicio estilos accesorios*/
 
 
 .accesorios {
   background-color: white;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 .texto-accesorios {
@@ -341,3 +341,60 @@ body {
   font-size: 20px;
   margin-top: 10px;
 }
+
+/* fin estilos accesorios*/
+
+/* inicio estilos boton de filtrado*/
+
+.filtro-wrapper {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.boton-filtrar {
+  background-color: #222;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.boton-filtrar:hover {
+  background-color: #444;
+}
+
+.filtros {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.filtro-categoria,
+.boton-limpiar {
+  padding: 8px 15px;
+  border: 1px solid #aaa;
+  background-color: #f9f9f9;
+  color: #222;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+}
+
+.filtro-categoria:hover,
+.boton-limpiar:hover {
+  background-color: #ddd;
+}
+
+/* fin estilos boton de filtrado*/
