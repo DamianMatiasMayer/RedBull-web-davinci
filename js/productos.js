@@ -144,17 +144,37 @@ const imagenes = {
         "imagenes/minicasco-verstappen-japones 1.3.avif",
     ],
     cascos3: [
-        "imagenes/casco-bicycle 1.3.avif",
-        "imagenes/casco-bicycle 1.1.avif",
-        "imagenes/casco-bicycle 1.2.avif",
+        "imagenes/1-2-Max-Verstappen-WC-2024-Mini-Helmet1.1.avif",
+        "imagenes/1-2-Max-Verstappen-WC-2024-Mini-Helmet1.2.avif",
+        "imagenes/1-2-Max-Verstappen-WC-2024-Mini-Helmet1.3.avif",
     ],
     cascos4: [
         "imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.1.avif",
         "imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.2.avif",
         "imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.3.avif",
     ],
+    cascos5: [
+        "imagenes/1-2-Checo-Perez-Mexico-GP-2024-Mini-Helm1.1.avif",
+        "imagenes/1-2-Checo-Perez-Mexico-GP-2024-Mini-Helm1.2.avif",
+        "imagenes/1-2-Checo-Perez-Mexico-GP-2024-Mini-Helm1.3.avif",
+    ],
+    cascos6: [
+        "imagenes/1-2-Checo-Perez-2024-Season-Mini-Helmet1.1.avif",
+        "imagenes/1-2-Checo-Perez-2024-Season-Mini-Helmet1.2.avif",
+        "imagenes/1-2-Checo-Perez-2024-Season-Mini-Helmet1.3.avif",
+    ],
+    cascos7: [
+        "imagenes/1-2-Max-Verstappen-2024-Orange-Tribute-Mini-Helmet1.1.avif",
+        "imagenes/1-2-Max-Verstappen-2024-Orange-Tribute-Mini-Helmet1.2.avif",
+        "imagenes/1-2-Max-Verstappen-2024-Orange-Tribute-Mini-Helmet1.3.avif",
+    ],
+    cascos8: [
+        "imagenes/1-2-Max-Verstappen-2024-Season-Mini-Helmet1.1.avif",
+        "imagenes/1-2-Max-Verstappen-2024-Season-Mini-Helmet1.2.avif",
+        "imagenes/1-2-Max-Verstappen-2024-Season-Mini-Helmet1.3.avif",
+    ],
 
-    //mochilas 
+    //mochilas   
 
     mochilas1: [
         "imagenes/redbull-mochila 1.1.avif",
@@ -162,48 +182,206 @@ const imagenes = {
         "imagenes/redbull-mochila 1.3.avif",
     ],
     mochilas2: [
+        "imagenes/redbull-dakar-1.1.avif",
+        "imagenes/redbull-dakar-1.2.avif",
+        "imagenes/redbull-dakar-1.3.avif",
+    ],
+    mochilas3: [
+        "imagenes/mochila-bora-1.1.avif",
+        "imagenes/mochila-bora-1.2.avif",
+        "imagenes/mochila-bora-1.3.avif",
+    ],
+    mochilas4: [
+        "imagenes/mochila-rampage-1.1.avif",
+        "imagenes/mochila-rampage-1.2.avif",
+        "imagenes/mochila-rampage-1.3.avif",
+    ],
+    mochilas5: [
         "imagenes/bandolera-redbull-1.1.avif",
         "imagenes/bandolera-redbull-1.2.avif",
         "imagenes/bandolera-redbull-1.3.avif",
     ],
+    mochilas6: [
+        "imagenes/bolsa-bici-1.1.avif",
+        "imagenes/bolsa-bici-1.2.avif",
+        "imagenes/bolsa-bici-1.3.avif",
+    ],
+    mochilas7: [
+        "imagenes/bandolera-redbull-azul-1.1.avif",
+        "imagenes/bandolera-redbull-azul-1.2.avif",
+        "imagenes/bandolera-redbull-azul-1.3.avif",
+    ],
+    mochilas8: [
+        "imagenes/bolso-bora-1.1.avif",
+        "imagenes/bolso-bora-1.2.avif",
+        "imagenes/bolso-bora-1.3.avif",
+    ],
 
-    //otros accesorios
+    //paraguas
 
-    accesorios1: [
-        "imagenes/paraguas-redbull 1.1.avif",
-        "imagenes/paraguas-redbull 1.2.avif",
-        "imagenes/paraguas-redbull 1.3.avif",
+    paragua1: [
+        "imagenes/paragua-redbull-rojo1.1.avif",
+        "imagenes/paragua-redbull-rojo1.2.avif",
+        "imagenes/paragua-redbull-rojo1.3.avif",
     ],
-    accesorios2: [
-        "imagenes/botella-redbull 1.1.avif",
-        "imagenes/botella-redbull 1.2.avif",
-        "imagenes/botella-redbull 1.3.avif",
+    paragua2: [
+        "imagenes/paragua-redbull-bora1.1.avif",
+        "imagenes/paragua-redbull-bora1.2.avif",
+        "imagenes/paragua-redbull-bora1.3.avif",
     ],
-    //accesorios3: [
-        //"imagenes/bandolera-redbull-1.1.avif",
-        //"imagenes/bandolera-redbull-1.2.avif",
-        //"imagenes/bandolera-redbull-1.3.avif",
-    //],
-    accesorios4: [
-        "imagenes/modelo-escala-1.1.avif",
-        "imagenes/modelo-escala-1.2.avif",
-        "imagenes/modelo-escala-1.3.avif",
+    paragua3: [
+        "imagenes/Grid-Pocket-Umbrella1.1.avif",
+        "imagenes/Grid-Pocket-Umbrella1.2.avif",
+        "imagenes/Grid-Pocket-Umbrella1.3.avif",
     ],
-    accesorios5: [
-        "imagenes/tarjetero-redbull 1.1.avif",
-        "imagenes/tarjetero-redbull 1.2.avif",
+    paragua4: [
+        "imagenes/ECM-Rink-Umbrella1.1.avif",
+        "imagenes/ECM-Rink-Umbrella1.2.avif",
+        "imagenes/ECM-Rink-Umbrella1.3.avif",
     ],
-    accesorios6: [
-        "imagenes/taza-redbull 1.1.avif",
-        "imagenes/taza-redbull 1.2.avif",
+    paragua5: [
+        "imagenes/RBL-Pocket-Umbrella1.1.avif",
+        "imagenes/RBL-Pocket-Umbrella1.2.avif",
+        "imagenes/RBL-Pocket-Umbrella1.3.avif",
     ],
-    accesorios7: [
-        "imagenes/lapicera-redbull 1.1.avif",
-        "imagenes/lapicera-redbull 1.2.avif",
+    paragua6: [
+        "imagenes/Dive-Umbrella1.1.avif",
+        "imagenes/Dive-Umbrella1.2.avif",
+        "imagenes/Dive-Umbrella1.3.avif",
     ],
-    accesorios8: [
-        "imagenes/pin-redbull 1.1.avif",
-        "imagenes/pin-redbull 1.2.avif",
+    paragua7: [
+        "imagenes/Adrenaline-Umbrella1.1.avif",
+        "imagenes/Adrenaline-Umbrella1.2.avif",
+        "imagenes/Adrenaline-Umbrella1.3.avif",
+    ],
+    paragua8: [
+        "imagenes/The-Flying-Bulls-Mono-Umbrella1.1.avif",
+        "imagenes/The-Flying-Bulls-Mono-Umbrella1.2.avif",
+        "imagenes/The-Flying-Bulls-Mono-Umbrella1.3.avif",
+    ],
+
+    //fin paraguas
+
+    //botellas
+
+    botellas1: [
+        "imagenes/Urban-Bottle1.1.avif",
+        "imagenes/Urban-Bottle1.2.avif",
+        "imagenes/Urban-Bottle1.3.avif",
+    ],
+    botellas2: [
+        "imagenes/Frost-Bottle1.1.avif",
+        "imagenes/Frost-Bottle1.2.avif",
+    ],
+    botellas3: [
+        "imagenes/botella-rampage1.1.avif",
+        "imagenes/botella-rampage1.2.avif",
+        "imagenes/botella-rampage1.3.avif",
+    ],
+    botellas4: [
+        "imagenes/Blaze-Water-Bottle1.1.avif",
+        "imagenes/Blaze-Water-Bottle1.2.avif",
+        "imagenes/Blaze-Water-Bottle1.3.avif",
+    ],
+    botellas5: [
+        "imagenes/Grid-Water-Bottle1.1.avif",
+        "imagenes/Grid-Water-Bottle1.2.avif",
+    ],
+    botellas6: [
+        "imagenes/RBL-Rubin-Bottle1.1.avif",
+        "imagenes/RBL-Rubin-Bottle1.2.avif",
+    ],
+    botellas7: [
+        "imagenes/RBL-Dynamic-Bottle1.1.avif",
+        "imagenes/RBL-Dynamic-Bottle1.2.avif",
+    ],
+    botellas8: [
+        "imagenes/ECS-Ice-Bottle1.1.avif",
+        "imagenes/ECS-Ice-Bottle1.2.avif",
+    ],
+
+
+    //fin botellas
+    
+    //guantes
+
+    guante1: [
+        "imagenes/guantes-bora1.1.avif",
+        "imagenes/guantes-bora1.2.avif",
+    ],
+    guante2: [
+        "imagenes/RBL-guante-reflectivo-niño1.1.avif",
+        "imagenes/RBL-guante-reflectivo-niño1.2.avif",
+    ],
+    guante3: [
+        "imagenes/RBL-guante-reflectivo-adulto1.1.avif",
+        "imagenes/RBL-guante-reflectivo-adulto1.2.avif",
+    ],
+    guante4: [
+        "imagenes/RBL-PUMA-colab-guantes1.1.avif",
+        "imagenes/RBL-PUMA-colab-guantes1.2.avif",
+    ],
+    guante5: [
+        "imagenes/RBS-Puma-colab-jugador1.1.avif",
+        "imagenes/RBS-Puma-colab-jugador1.2.avif",
+    ],
+    guante6: [
+        "imagenes/Pulse-Gloves1.1.avif",
+        "imagenes/Pulse-Gloves1.2.avif",
+        "imagenes/Pulse-Gloves1.3.avif",
+    ],
+    guante7: [
+        "imagenes/RBL-Dawn-Gloves1.1.avif",
+        "imagenes/RBL-Dawn-Gloves1.2.avif",
+    ],
+    guante8: [
+        "imagenes/RBS-Winter-Gloves1.1.avif",
+        "imagenes/RBS-Winter-Gloves1.2.avif",
+    ],
+
+    //fin guantes
+
+    //anteojos
+
+    anteojos1: [
+        "imagenes/Red-Bull-anteojos-ski1.1.avif",
+        "imagenes/Red-Bull-anteojos-ski1.2.avif",
+        "imagenes/Red-Bull-anteojos-ski1.3.avif",
+    ],
+    anteojos2: [
+        "imagenes/Red-Bull-anteojos-ski-rojo1.1.avif",
+        "imagenes/Red-Bull-anteojos-ski-rojo1.2.avif",
+        "imagenes/Red-Bull-anteojos-ski-rojo1.3.avif",
+    ],
+    anteojos3: [
+        "imagenes/Red-Bull-anteojos-ski-blancos1.1.avif",
+        "imagenes/Red-Bull-anteojos-ski-blancos1.2.avif",
+        "imagenes/Red-Bull-anteojos-ski-blancos1.3.avif",
+    ],
+    anteojos4: [
+        "imagenes/Red-Bull-anteojos-ski-negros1.1.avif",
+        "imagenes/Red-Bull-anteojos-ski-negros1.2.avif",
+        "imagenes/Red-Bull-anteojos-ski-negros1.3.avif",
+    ],
+    anteojos5: [
+        "imagenes/anteojos-sol-blanco1.1.avif",
+        "imagenes/anteojos-sol-blanco1.2.avif",
+        "imagenes/anteojos-sol-blanco1.3.avif",  
+    ],
+    anteojos6: [
+        "imagenes/anteojos-sol-negro1.1.avif",
+        "imagenes/anteojos-sol-negro1.2.avif",
+        "imagenes/anteojos-sol-negro1.3.avif",
+    ],
+    anteojos7: [
+        "imagenes/anteojos-sol-azul1.1.avif",
+        "imagenes/anteojos-sol-azul1.2.avif",
+        "imagenes/anteojos-sol-azul1.3.avif",
+    ],
+    anteojos8: [
+        "imagenes/anteojos-sol-blancoyazul1.1.avif",
+        "imagenes/anteojos-sol-blancoyazul1.2.avif",
+        "imagenes/anteojos-sol-blancoyazul1.3.avif",
     ],
 };
 
