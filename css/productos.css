@@ -423,3 +423,22 @@ body {
 }
 
 /* fin estilos boton de filtrado*/
+
+.boton-cargar-mas {
+   margin: 40px auto;
+  display: block;
+  padding: 12px 24px;
+  background-color: #0d1b2a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton-cargar-mas:hover {
+  background-color: #e63946;
+  transform: scale(1.05);
+}

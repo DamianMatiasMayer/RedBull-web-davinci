@@ -54,13 +54,40 @@ function actualizarChips() {
 }
 
 function aplicarFiltros() {
+  const filas = document.querySelectorAll(".fila-accesorios");
+  const botonCargarMas = document.getElementById("cargar-mas");
+
+  if (filtrosActivos.size > 0) {
+    // Mostrar todas las filas para aplicar filtro completo
+    filas.forEach(fila => {
+      fila.style.display = "flex";
+      fila.classList.add("visible");
+    });
+    botonCargarMas.style.display = "none";
+  } else {
+    // Mostrar solo las primeras 4 filas (16 productos)
+    filas.forEach((fila, index) => {
+      if (index < 4) {
+        fila.style.display = "flex";
+        fila.classList.add("visible");
+      } else {
+        fila.style.display = "none";
+        fila.classList.remove("visible");
+      }
+    });
+
+    // Mostrar botón si quedan filas por mostrar
+    if (filas.length > 4) {
+      botonCargarMas.style.display = "block";
+    } else {
+      botonCargarMas.style.display = "none";
+    }
+  }
+
+  // Mostrar u ocultar productos según los filtros activos
   productos.forEach(producto => {
     const categoria = producto.dataset.categoria;
-    if (filtrosActivos.size === 0 || filtrosActivos.has(categoria)) {
-      producto.style.display = "";
-    } else {
-      producto.style.display = "none";
-    }
+    const mostrar = filtrosActivos.size === 0 || filtrosActivos.has(categoria);
+    producto.style.display = mostrar ? "block" : "none";
   });
 }
-
