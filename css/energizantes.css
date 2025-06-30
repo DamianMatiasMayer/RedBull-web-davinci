@@ -29,7 +29,7 @@ header {
 .texto-sobre-imagen h1 {
   font-size: 60px;
   font-weight: 700;
-  
+
 }
 
 .texto-descripcion {
@@ -152,6 +152,10 @@ header {
   background-color: white;
 }
 
+.lata.normal p {
+  color: black;
+}
+
 .lata.verano {
   background-color: #f47920;
 }
@@ -179,7 +183,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 60px;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .texto-descriptivo {
@@ -209,3 +213,206 @@ header {
 /* fin seccion imagen descriptiva */
 
 
+/*  Responsive hasta 1024px */
+
+@media (max-width: 1024px) {
+  .texto-sobre-imagen h1 {
+    font-size: 44px;
+    margin-top: 30px;
+  }
+
+  .texto-descripcion {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  /* Galería de productos */
+  .galeria-productos {
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .producto {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .producto img {
+    width: 180px;
+  }
+
+  .producto .info h3 {
+    font-size: 22px;
+  }
+
+  .producto .info p {
+    font-size: 15px;
+  }
+
+  /* Latas */
+  .latas {
+    padding: 30px;
+    gap: 15px;
+  }
+
+  .contenedor-lata {
+    width: 170px;
+  }
+
+  .lata p {
+    font-size: 17px;
+  }
+
+  /* Sección descriptiva */
+  .seccion-descripcion {
+    flex-direction: column-reverse;
+    padding: 40px;
+  }
+
+  .texto-descriptivo {
+    font-size: 26px;
+    text-align: center;
+    margin: 20px 0 0 0;
+    margin-right: 0;
+  }
+
+  .imagen-deportes {
+    margin: 0 auto;
+  }
+
+  .imagen-deportes img {
+    transform: scale(1.1);
+    margin: 0;
+  }
+}
+
+/*  Responsive hasta 768px */
+
+@media (max-width: 768px) {
+  .texto-sobre-imagen h1 {
+    font-size: 36px;
+    margin-top: 20px;
+  }
+
+  .texto-descripcion {
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .galeria-productos {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .producto {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .producto img {
+    width: 150px;
+  }
+
+  .producto .info h3 {
+    font-size: 20px;
+  }
+
+  .producto .info p {
+    font-size: 14px;
+  }
+
+  .latas {
+    padding: 20px;
+  }
+
+  .contenedor-lata {
+    width: 150px;
+  }
+
+  .lata p {
+    font-size: 16px;
+  }
+
+  .seccion-descripcion {
+    flex-direction: column-reverse;
+    padding: 30px;
+  }
+
+  .texto-descriptivo {
+    font-size: 22px;
+    margin: 20px 0 0 0;
+    text-align: center;
+    margin-right: 0;
+  }
+
+  .imagen-deportes {
+    margin: 0 auto;
+  }
+
+  .imagen-deportes img {
+    margin: 0;
+    transform: scale(1);
+  }
+}
+
+/*  Responsive hasta 480px */
+
+@media (max-width: 480px) {
+  .texto-sobre-imagen h1 {
+    font-size: 28px;
+    margin-top: 10px;
+  }
+
+  .texto-descripcion {
+    font-size: 16px;
+    padding: 10px;
+    margin: 20px 0;
+  }
+
+  .galeria-productos {
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .producto {
+    padding: 10px;
+  }
+
+  .producto img {
+    width: 120px;
+  }
+
+  .producto .info h3 {
+    font-size: 18px;
+  }
+
+  .producto .info p {
+    font-size: 13px;
+  }
+
+  .contenedor-lata {
+    width: 130px;
+  }
+
+  .lata p {
+    font-size: 14px;
+  }
+
+  .seccion-descripcion {
+    padding: 20px;
+  }
+
+  .texto-descriptivo {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .imagen-deportes img {
+    transform: scale(1);
+    margin: 0;
+  }
+}

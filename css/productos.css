@@ -56,11 +56,9 @@ body {
 
 .texto-logo {
   color: white;
-  /* o el color que quieras */
   font-size: 30px;
   margin-top: 5px;
   font-family: 'Oswald', sans-serif;
-  /* igual al resto si usás Oswald */
 }
 
 
@@ -233,7 +231,8 @@ body {
   left: 0;
   width: 100%;
   z-index: 3;
-  transform: translateY(-50%);/* hace que la mitad esté sobre la imagen y mitad por debajo */
+  transform: translateY(-50%);
+  /* hace que la mitad esté sobre la imagen y mitad por debajo */
 }
 
 
@@ -266,7 +265,7 @@ body {
 }
 
 .productos-accesorios {
-  width: calc(25% - 15px); /* 4 por fila con espacio entre ellos */
+  width: calc(25% - 15px);
   box-sizing: border-box;
   text-align: center;
   overflow: hidden;
@@ -420,7 +419,7 @@ body {
 /* fin estilos boton de filtrado*/
 
 .boton-cargar-mas {
-   margin: 40px auto;
+  margin: 40px auto;
   display: block;
   padding: 12px 24px;
   background-color: #0d1b2a;
@@ -436,4 +435,141 @@ body {
 .boton-cargar-mas:hover {
   background-color: #e63946;
   transform: scale(1.05);
+}
+
+
+
+/* media responsive */
+
+/*  Responsive hasta 1024px */
+@media (max-width: 1024px) {
+  .texto-sobre-video h1 {
+    font-size: 36px;
+  }
+
+  .producto {
+    min-width: 300px;
+    margin-top: 10%;
+  }
+
+  .productos-accesorios {
+    width: calc(33.33% - 15px);
+  }
+
+  .oracle-texto h2 {
+    font-size: 24px;
+  }
+
+  .accesorios {
+    margin-top: 20%;
+  }
+}
+
+/* Responsive hasta 768px */
+
+@media (max-width: 768px) {
+
+  .texto-sobre-video {
+    top: 55%;
+    padding: 0 20px;
+  }
+
+  .texto-sobre-video h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .productos-accesorios {
+    width: calc(50% - 15px);
+  }
+
+  .oracle-texto {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    right: 5%;
+    text-align: left;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .oracle-texto h2 {
+    font-size: 20px;
+  }
+
+  .oracle-texto img.logo-oracle {
+    width: 100px;
+  }
+
+  .flecha {
+    width: 80px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .imagen-carrusel {
+    height: 350px;
+  }
+
+  .logo-redbull-bora h2 {
+    font-size: 20px;
+  }
+}
+
+/*  Responsive hasta 480px */
+@media (max-width: 480px) {
+  .video-nav {
+    height: 300px;
+  }
+
+  .producto {
+    min-width: 150px;
+  }
+
+  .textos-ropa {
+    font-size: 100%;
+  }
+
+  .textos-productos {
+    font-size: 100%;
+  }
+
+  .precio {
+    font-size: 100%;
+  }
+
+  .precios {
+    font-size: 100%;
+  }
+
+  .productos-accesorios {
+    width: 40%;
+  }
+
+  /* Ocultar flechas para móviles */
+  .flecha,
+  .prev,
+  .next {
+    display: none;
+  }
+
+  .boton-filtrar,
+  .filtro-categoria,
+  .boton-limpiar,
+  .boton-cargar-mas {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .chip {
+    font-size: 14px;
+  }
+
+  .oracle-texto h2 {
+    font-size: 18px;
+  }
+
+  .imagen-carrusel {
+    height: 220px;
+  }
 }

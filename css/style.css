@@ -45,14 +45,16 @@ header {
     color: white;
     padding: 10px 80px;
     text-decoration: none;
-    transform: skew(-20deg) translateX(40%);/* paralelogramo */
+    transform: skew(-20deg) translateX(40%);
+    /* paralelogramo */
     border: none;
     font-weight: bold;
 }
 
 .btn-leer-mas span {
     display: inline-block;
-    transform: skew(20deg); /* Corrige la inclinación del texto interno para que se vea recto.*/
+    transform: skew(20deg);
+    /* Corrige la inclinación del texto interno para que se vea recto.*/
 }
 
 
@@ -91,7 +93,8 @@ header {
 }
 
 .Lata img:hover {
-    transform: translateY(-50px);/* La imagen sube en hover para dar efecto de “flotación”.*/
+    transform: translateY(-50px);
+    /* La imagen sube en hover para dar efecto de “flotación”.*/
 }
 
 .texto-lata h1 {
@@ -136,7 +139,8 @@ header {
 }
 
 .btn-productos:hover span {
-    transform: skew(20deg) translateX(10%); /*Corrige la inclinación del texto y lo anima hacia la derecha al hacer hover.*/
+    transform: skew(20deg) translateX(10%);
+    /*Corrige la inclinación del texto y lo anima hacia la derecha al hacer hover.*/
 }
 
 /*sección con parte superior inclinada (clip-path) y fondo azul oscuro.*/
@@ -272,3 +276,136 @@ header {
 }
 
 /*FIN botones */
+
+/*media responsive 1024 */
+
+@media (max-width: 1024px) {
+    .texto-lata h1 {
+        font-size: 40px;
+    }
+
+    .texto-lata p {
+        font-size: 20px;
+    }
+
+    .btn-productos {
+        font-size: 22px;
+        padding: 10px 60px;
+    }
+
+    .cartel {
+        width: 90%;
+        bottom: 100px;
+    }
+}
+
+/*media responsive 768 */
+
+@media (max-width: 768px) {
+    .Lata {
+        flex-direction: column;
+        padding: 10px;
+        max-width: 50%;
+        margin-left: 30%;
+        scale: 0.95;
+    }
+
+    .texto-lata {
+        padding: 20px 0;
+        align-items: center;
+        text-align: center;
+        margin-right: 30%;
+    }
+
+    .texto-lata h1 {
+        font-size: 32px;
+    }
+
+    .texto-lata p {
+        font-size: 18px;
+    }
+
+    .btn-productos {
+        padding: 10px 40px;
+        font-size: 20px;
+    }
+
+    .cartel {
+        flex-direction: column;
+        gap: 15px;
+        width: 95%;
+        bottom: 50px;
+        padding: 20px;
+    }
+
+    .carta-noticia {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .imagen-carta {
+        width: 100%;
+        height: 200px;
+    }
+
+    .contenido-carta {
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+
+/*media responsive 480 */
+
+@media (max-width: 480px) {
+    .Lata {
+        flex-direction: column;
+        padding: 10px;
+        max-width: 100%;
+        margin-left: 20%;
+        scale: 0.95;
+    }
+
+    .texto-lata {
+        padding: 20px 0;
+        align-items: center;
+        text-align: center;
+        margin-right: 30%;
+    }
+
+    .texto-lata h1 {
+        font-size: 32px;
+    }
+
+    .texto-lata p {
+        font-size: 18px;
+    }
+
+    .btn-productos {
+        padding: 10px 40px;
+        font-size: 20px;
+    }
+
+    .cartel {
+        flex-direction: column;
+        gap: 15px;
+        width: 95%;
+        bottom: 50px;
+        padding: 20px;
+    }
+
+    .carta-noticia {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .imagen-carta {
+        width: 100%;
+        height: 200px;
+    }
+
+    .contenido-carta {
+        width: 100%;
+        padding: 20px;
+    }
+}

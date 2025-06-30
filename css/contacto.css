@@ -2,9 +2,9 @@
 
 header {
   background-image: url('../imagenes/contacto.jpg');
-  background-size: cover; /*la imgen cubre todo el fondo*/
-  background-position: center; /* Centra la imagen */
-  height: 100vh;              /* Ocupa toda la altura de la pantalla */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   color: white;
   position: relative;
 }
@@ -150,6 +150,7 @@ se superpone 50px hacia arriba del header*/
   text-align: center;
   font-family: 'Oswald', sans-serif;
 }
+
 /*fin formulario */
 
 /*informacion de contacto*/
@@ -200,3 +201,39 @@ se superpone 50px hacia arriba del header*/
 
 
 /* fin formulario e informacion de contacto*/
+
+/*media responsive 1024 */
+
+@media (max-width: 1024px) {
+  .texto-sobre-imagen {
+    bottom: 150px;
+  }
+
+  .texto-sobre-imagen h1 {
+    font-size: 300%;
+  }
+}
+
+/*media responsive 768 */
+
+@media (max-width: 768px) {
+  .texto-sobre-imagen {
+    bottom: 100px;
+  }
+
+  .texto-sobre-imagen h1 {
+    font-size: 220%;
+  }
+}
+
+/*media responsive 480 */
+
+@media (max-width: 480px) {
+  .texto-sobre-imagen {
+    bottom: 80px;
+  }
+
+  .texto-sobre-imagen h1 {
+    font-size: 220%;
+  }
+}

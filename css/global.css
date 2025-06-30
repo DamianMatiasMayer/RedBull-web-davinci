@@ -34,7 +34,7 @@ nav {
 
 
 nav ul {
-  display: flex;
+  display: none;
   list-style: none;
   gap: 30px;
   position: absolute;
@@ -178,7 +178,7 @@ footer {
   border-radius: 8px;
   font-weight: bold;
   z-index: 9999;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: 'Oswald', sans-serif;
   transition: opacity 0.4s ease;
 }
@@ -188,3 +188,86 @@ footer {
 }
 
 /*fin alerta de trabajo*/
+
+/*boton hamburguesa*/
+
+.hamburguesa {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Modo responsive hasta 1024px (tablets y móviles) */
+@media (max-width: 1024px) {
+  .hamburguesa {
+    display: block;
+    margin-left: 60%;
+    margin-bottom: 1%;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    transform: none;
+    width: 100%;
+    background-color: #0d1b2a;
+    padding: 20px 0;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+  }
+
+  nav ul.mostrar {
+    display: flex;
+  }
+
+  nav ul li a {
+    font-size: 18px;
+  }
+}
+
+/* modo responsive hasta 768 (móviles chicos) */
+@media (max-width: 768px) {
+  .hamburguesa {
+    margin-left: 50%;
+    margin-bottom: 1%;
+  }
+
+  nav ul {
+    padding: 20px 0;
+    gap: 20px;
+  }
+}
+
+/* modo responsive hasta 480 (móviles chicos) */
+@media (max-width: 480px) {
+  .hamburguesa {
+    margin-left: 25%;
+  }
+
+  nav ul {
+    padding: 15px 0;
+    gap: 15px;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+  }
+}
+
+/* Modo escritorio (a partir de 1025px en adelante) */
+@media (min-width: 1025px) {
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif;
+  }
+}

@@ -11,3 +11,13 @@ function mostrarAviso(e) {
 }
 
 //Al hacer clic en un link que tiene onclick="mostrarAviso(event)", aparece el mensaje por 3 segundos y luego desaparece.
+
+
+//boton hamburguesa
+
+  const hamburguesa = document.getElementById('hamburguesa');
+  const menu = document.querySelector('nav ul');
+
+  hamburguesa.addEventListener('click', () => {
+    menu.classList.toggle('mostrar');
+  });
