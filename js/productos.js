@@ -1,4 +1,4 @@
-
+//apuntan a elementos del DOM para controlar productos que se pueden desplazar horizontalmente
 const contenedor = document.getElementById("productos-scroll");
 const flechaIzq = document.getElementById("flecha-izq");
 const flechaDer = document.getElementById("flecha-der");
@@ -32,7 +32,7 @@ flechaIzq.onclick = () => {
     setTimeout(actualizarFlechas, 350);
 };
 
-// Carrusel interno de imágenes
+// Carrusel interno de imágenes, contiene arrays de rutas de imagen por ID de producto
 const imagenes = {
 
     //productos redbull bora
@@ -302,7 +302,7 @@ const imagenes = {
 
 
     //fin botellas
-    
+
     //guantes
 
     guante1: [
@@ -366,7 +366,7 @@ const imagenes = {
     anteojos5: [
         "imagenes/anteojos-sol-blanco1.1.avif",
         "imagenes/anteojos-sol-blanco1.2.avif",
-        "imagenes/anteojos-sol-blanco1.3.avif",  
+        "imagenes/anteojos-sol-blanco1.3.avif",
     ],
     anteojos6: [
         "imagenes/anteojos-sol-negro1.1.avif",
@@ -385,19 +385,19 @@ const imagenes = {
     ],
 };
 
-document.querySelectorAll(".producto").forEach((producto) => {
-    const id = producto.dataset.id;
+document.querySelectorAll(".producto").forEach((producto) => {  //Busca todos los elementos con la clase producto y recorre cada uno.
+    const id = producto.dataset.id; //obtiene el valor del atributo id para identificar que conjunto de imagenes debe usar
     let i = 0;
     const img = producto.querySelector("img");
     const prev = producto.querySelector(".prev");
     const next = producto.querySelector(".next");
 
-    prev.onclick = () => {
+    prev.onclick = () => { //Cuando se hace clic en el botón anterior, retrocede en el array de imágenes
         i = (i - 1 + imagenes[id].length) % imagenes[id].length;
         img.src = imagenes[id][i];
     };
 
-    next.onclick = () => {
+    next.onclick = () => { //Cuando se hace clic en el botón siguiente, avanza en el array de imágenes del producto actual.
         i = (i + 1) % imagenes[id].length;
         img.src = imagenes[id][i];
     };
@@ -409,9 +409,9 @@ const contenedorOracle = document.getElementById(
 const flechaIzqOracle = document.getElementById("flecha-izq-oracle");
 const flechaDerOracle = document.getElementById("flecha-der-oracle");
 
-function actualizarFlechasOracle() {
+function actualizarFlechasOracle() { //Función que muestra u oculta las flechas dependiendo de cuánto se haya desplazado el scroll.
     flechaIzqOracle.style.display =
-        contenedorOracle.scrollLeft > 10 ? "block" : "none";
+        contenedorOracle.scrollLeft > 10 ? "block" : "none"; //Muestra la flecha izquierda solo si no estamos al principio del scroll.
     const alFinal =
         contenedorOracle.scrollLeft + contenedorOracle.clientWidth >=
         contenedorOracle.scrollWidth - 10;
@@ -421,18 +421,18 @@ function actualizarFlechasOracle() {
 actualizarFlechasOracle();
 contenedorOracle.addEventListener("scroll", actualizarFlechasOracle);
 
-flechaDerOracle.onclick = () => {
-    contenedorOracle.scrollBy({ left: 300, behavior: "smooth" });
+flechaDerOracle.onclick = () => { // si estamos al final, oculta la flecha derecha;si no, la muestra
+    contenedorOracle.scrollBy({ left: 300, behavior: "smooth" }); //Cuando se hace clic en la flecha derecha, se mueve 300px hacia la derecha
     setTimeout(actualizarFlechasOracle, 350);
 };
 
-flechaIzqOracle.onclick = () => {
+flechaIzqOracle.onclick = () => { //lo mismo pero hacia la izquierda
     contenedorOracle.scrollBy({ left: -300, behavior: "smooth" });
     setTimeout(actualizarFlechasOracle, 350);
 };
 
-document.querySelectorAll(".productos-accesorios").forEach((producto) => {
-    const id = producto.dataset.id;
+document.querySelectorAll(".productos-accesorios").forEach((producto) => {//recorre todos los prodcutos en la seccion accesorios
+    const id = producto.dataset.id; //Verifica si hay imágenes para ese ID en el objeto imagenes.
     if (!imagenes[id]) return;
     let i = 0;
     const img = producto.querySelector("img");

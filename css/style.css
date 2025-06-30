@@ -22,6 +22,7 @@ header {
     position: relative;
 }
 
+/*fin Header con logo y links */
 
 
 /* Cartel sobre la imagen */
@@ -44,18 +45,18 @@ header {
     color: white;
     padding: 10px 80px;
     text-decoration: none;
-    transform: skew(-20deg) translateX(40%);
-    /* paralelogramo */
+    transform: skew(-20deg) translateX(40%);/* paralelogramo */
     border: none;
     font-weight: bold;
-
 }
 
 .btn-leer-mas span {
     display: inline-block;
-    transform: skew(20deg);
+    transform: skew(20deg); /* Corrige la inclinación del texto interno para que se vea recto.*/
 }
 
+
+/*bloque blanco superpuesto con bordes redondeados en la parte superior.*/
 .bloque-con-borde {
     background-color: white;
     margin-top: -40px;
@@ -90,7 +91,7 @@ header {
 }
 
 .Lata img:hover {
-    transform: translateY(-50px);
+    transform: translateY(-50px);/* La imagen sube en hover para dar efecto de “flotación”.*/
 }
 
 .texto-lata h1 {
@@ -108,7 +109,7 @@ header {
     font-family: 'Oswald', sans-serif;
 }
 
-/* Botón debajo del texto */
+/* Botón debajo del texto fondo amarillo, grande e inclinado.*/
 .btn-productos {
     background: rgb(255, 199, 44);
     color: white;
@@ -135,10 +136,10 @@ header {
 }
 
 .btn-productos:hover span {
-    transform: skew(20deg) translateX(10%);
+    transform: skew(20deg) translateX(10%); /*Corrige la inclinación del texto y lo anima hacia la derecha al hacer hover.*/
 }
 
-/*bloque inclinado*/
+/*sección con parte superior inclinada (clip-path) y fondo azul oscuro.*/
 .bloque-inclinado {
     background-color: #002654;
     clip-path: polygon(0 50px, 100% 0, 100% 100%, 0% 100%);

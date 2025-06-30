@@ -8,30 +8,35 @@ const chips = document.getElementById("chips-activos");
 
 let filtrosActivos = new Set();
 
+//Mostrar/Ocultar filtros
 botonFiltro.addEventListener("click", () => {
   contenedorFiltros.style.display =
     contenedorFiltros.style.display === "none" ? "flex" : "none";
 });
 
+// Activar o desactivar filtros
 botonesFiltro.forEach(boton => {
   boton.addEventListener("click", () => {
     const filtro = boton.dataset.filtro;
     if (filtrosActivos.has(filtro)) {
-      filtrosActivos.delete(filtro);
+      filtrosActivos.delete(filtro); //Activar o desactivar filtros
     } else {
-      filtrosActivos.add(filtro);
+      filtrosActivos.add(filtro);//Si no está activo, se activa
     }
     actualizarChips();
     aplicarFiltros();
   });
 });
 
+// Limpiar todos los filtros
 limpiarBtn.addEventListener("click", () => {
   filtrosActivos.clear();
   actualizarChips();
   aplicarFiltros();
 });
 
+
+//actualizar chips activos
 function actualizarChips() {
   chips.innerHTML = "";
   filtrosActivos.forEach(filtro => {

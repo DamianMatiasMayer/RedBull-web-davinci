@@ -161,9 +161,7 @@ body {
 .prev:hover,
 .next:hover {
   background: #e63946;
-  /* rojo brillante */
   transform: translateY(-50%) scale(1.1);
-  /* agrandamiento sutil */
   color: #fff;
 }
 
@@ -193,7 +191,6 @@ body {
   width: 100%;
   overflow: visible;
   padding-bottom: 200px;
-  /* espacio para que el carrusel no se superponga con lo que sigue */
 }
 
 .oracle-contenido {
@@ -233,12 +230,10 @@ body {
 .oracle-carrusel {
   position: absolute;
   top: 80%;
-  /* ajustá este valor según la altura de la imagen */
   left: 0;
   width: 100%;
   z-index: 3;
-  transform: translateY(-50%);
-  /* hace que la mitad esté sobre la imagen y mitad por debajo */
+  transform: translateY(-50%);/* hace que la mitad esté sobre la imagen y mitad por debajo */
 }
 
 
