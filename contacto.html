@@ -1,132 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RedBull</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/contacto.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/contacto.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <!-- fontawesome para los iconos -->
+  </head>
 
+  <script src="js/contacto.js"></script>
 
-</head>
-
-<script src="js/contacto.js"></script>
-
-<body>
-
-
+  <body>
     <!-- logo y  navegacion -->
 
     <header>
-        <nav>
-            <div class="nav-container contenedor-margenes">
-                <a href="index.html" class="logo">
-                    <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" />
-                </a>
+      <nav>
+        <div class="nav-container contenedor-margenes">
+          <a href="index.html" class="logo">
+            <img
+              src="imagenes/redbullcom-logo_double-with-text.svg"
+              alt="Red Bull Logo"
+            />
+          </a>
 
-                <ul>
-                    <li><a href="energizantes.html">Energizantes</a></li>
-                    <li><a href="productos.html">Productos</a></li>
-                    <li><a href="#" onclick="mostrarAviso(event)">Eventos y Deportes</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-                <a href="#" onclick="mostrarAviso(event)" class="carrito-link">
-                    <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
-                </a>
-            </div>
-        </nav>
-
-        <!-- mensaje sobre imagen -->
-
-        <div class="texto-sobre-imagen">
-            <h1>¿en qué podemos ayudarte?</h1>
+          <ul>
+            <li><a href="energizantes.html">Energizantes</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li>
+              <a href="#" onclick="mostrarAviso(event)">Eventos y Deportes</a>
+            </li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+          <a href="#" onclick="mostrarAviso(event)" class="carrito-link">
+            <img
+              src="imagenes/shopping-cart.png"
+              alt="Carrito"
+              class="icono-carrito"
+            />
+          </a>
         </div>
+      </nav>
 
-        <!-- FIN mensaje sobre imagen -->
+      <!-- mensaje sobre imagen -->
+
+      <div class="texto-sobre-imagen">
+        <h1>¿en qué podemos ayudarte?</h1>
+      </div>
+
+      <!-- FIN mensaje sobre imagen -->
     </header>
 
     <!--fin logo y  navegacion -->
 
-
     <main>
-        <!--seccion formulario -->
+      <!--seccion de contacto con formulario -->
 
+      <section class="bloque-inclinado-contacto">
+        <div class="contenido-inclinado">
+          <h2>Estamos para ayudarte</h2>
 
-        <section class="bloque-inclinado-contacto">
-            <div class="contenido-inclinado">
+          <p>
+            Completá el formulario o encontrá información útil para resolver tus
+            dudas.
+          </p>
 
-                <h2>Estamos para ayudarte</h2>
+          <form action="#" method="post" class="formulario-contacto">
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre completo"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              required
+            />
+            <input type="text" name="asunto" placeholder="Asunto" required />
+            <textarea
+              name="mensaje"
+              rows="5"
+              placeholder="Escribí tu mensaje..."
+              required
+            ></textarea>
+            <button type="submit"><span>Enviar</span></button>
+          </form>
 
-                <p>Completá el formulario o encontrá información útil para resolver tus dudas.</p>
+          <div id="mensaje-exito" class="mensaje-exito"></div>
 
-                <form action="#" method="post" class="formulario-contacto">
-                    <input type="text" name="nombre" placeholder="Nombre completo" required>
-                    <input type="email" name="email" placeholder="Correo electrónico" required>
-                    <input type="text" name="asunto" placeholder="Asunto" required>
-                    <textarea name="mensaje" rows="5" placeholder="Escribí tu mensaje..." required></textarea>
-                    <button type="submit"><span>Enviar</span></button>
-                </form>
+          <div class="info-contacto">
+            <h3>
+              <i class="fas fa-envelope-open-text"></i> CONTACTAR A RedBull
+            </h3>
+            <p><i class="fas fa-location-dot"></i> RedBull Argentina</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Av. del Libertador 7208,
+              C1429 Cdad. Autónoma de Buenos Aires
+            </p>
+            <p><i class="fas fa-clock"></i> Lunes a Viernes: 8 AM - 5 PM PST</p>
+            <p><i class="fas fa-phone"></i> 11 4137-3330</p>
+            <p><i class="fas fa-phone"></i> 11 4267-7890</p>
+          </div>
+        </div>
+      </section>
 
-                <div id="mensaje-exito" class="mensaje-exito"></div>
-
-                <div class="info-contacto">
-                    <h3><i class="fas fa-envelope-open-text"></i> CONTACTAR A RedBull</h3>
-                    <p><i class="fas fa-location-dot"></i> RedBull Argentina</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. del Libertador 7208, C1429 Cdad. Autónoma de Buenos
-                        Aires</p>
-                    <p><i class="fas fa-clock"></i> Lunes a Viernes: 8 AM - 5 PM PST</p>
-                    <p><i class="fas fa-phone"></i> 11 4137-3330</p>
-                    <p><i class="fas fa-phone"></i> 11 4267-7890</p>
-                </div>
-
-
-
-            </div>
-        </section>
-
-        <!--fin seccion formulario -->
-
+      <!--fin seccion formulario -->
     </main>
     <!-- Footer   -->
 
     <footer>
+      <div class="contenido-footer">
+        <img
+          src="imagenes/redbullcom-logo_double-with-text.svg"
+          alt="Red Bull Logo"
+          class="footer-logo"
+        />
 
-        <div class="contenido-footer">
+        <ul class="footer-links">
+          <li><a href="productos.html">nuestros productos</a></li>
+          <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
+          <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
+          <li>
+            <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
+          </li>
+          <li><a href="contacto.html">Contactanos</a></li>
+        </ul>
 
-            <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" class="footer-logo">
-
-            <ul class="footer-links">
-                <li><a href="productos.html">nuestros productos</a></li>
-                <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
-                <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
-                <li><a href="#" onclick="mostrarAviso(event)">Política de privacidad</a></li>
-                <li><a href="contacto.html">Contactanos</a></li>
-            </ul>
-
-            <div class="footer-redes">
-                <a href="#"><img src="imagenes/instagram.png" alt="Instagram"></a>
-                <a href="#"><img src="imagenes/youtube.png" alt="YouTube"></a>
-                <a href="#"><img src="imagenes/facebook.png" alt="Facebook"></a>
-                <a href="#"><img src="imagenes/X.png" alt="X"></a>
-            </div>
-
-            <p class="footer-copy">© 2025 Red Bull Argentina. Todos los derechos reservados.</p>
-
+        <div class="footer-redes">
+          <a href="#"><img src="imagenes/instagram.png" alt="Instagram" /></a>
+          <a href="#"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+          <a href="#"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+          <a href="#"><img src="imagenes/X.png" alt="X" /></a>
         </div>
 
+        <p class="footer-copy">
+          © 2025 Red Bull Argentina. Todos los derechos reservados.
+        </p>
+      </div>
     </footer>
 
     <!-- Fin Footer   -->
 
+    <!-- Aviso emergente en trabajo  -->
+
     <div id="aviso-trabajo" class="aviso-trabajo oculto">
-        🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
+      🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
     </div>
+    <!-- Fin Aviso   -->
 
+    <!-- Scripts -->
     <script src="js/global.js"></script>
-</body>
-
+  </body>
 </html>

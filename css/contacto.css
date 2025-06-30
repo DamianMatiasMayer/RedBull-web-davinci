@@ -2,13 +2,14 @@
 
 header {
   background-image: url('../imagenes/contacto.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+  background-size: cover; /*la imgen cubre todo el fondo*/
+  background-position: center; /* Centra la imagen */
+  height: 100vh;              /* Ocupa toda la altura de la pantalla */
   color: white;
   position: relative;
 }
 
+/*  Esto agrega márgenes internos laterales del 5% y asegura que el padding se incluya en el tamaño total del elemento. */
 .contenedor-margenes {
   padding-left: 5%;
   padding-right: 5%;
@@ -20,6 +21,7 @@ header {
 
 /* estilo texto sobre imagen */
 
+/* Posiciona el texto centrado horizontalmente, a 150px del borde inferior de la imagen.*/
 .texto-sobre-imagen {
   position: absolute;
   bottom: 150px;
@@ -31,6 +33,8 @@ header {
   padding: 20px;
 }
 
+
+/* Aplica un tamaño grande al título y una sombra oscura para que se lea bien sobre el fondo.*/
 .texto-sobre-imagen h1 {
   font-size: 60px;
   font-weight: 700;
@@ -40,6 +44,9 @@ header {
 /* fin estilo texto sobre imagen */
 
 /* bloque inclinado */
+
+/*para crear bloque inclinado usando clip-path, con fondo oscuro y texto blanco.
+se superpone 50px hacia arriba del header*/
 
 .bloque-inclinado-contacto {
   position: relative;
@@ -53,6 +60,7 @@ header {
   margin-top: -50px;
 }
 
+/* franja roja decorativa inclinada */
 .bloque-inclinado-contacto::before {
   content: "";
   position: absolute;
@@ -142,8 +150,7 @@ header {
   text-align: center;
   font-family: 'Oswald', sans-serif;
 }
-
-
+/*fin formulario */
 
 /*informacion de contacto*/
 

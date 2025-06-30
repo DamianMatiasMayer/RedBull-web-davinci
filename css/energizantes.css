@@ -43,6 +43,64 @@ header {
 
 /* fin Texto superior */
 
+/*contenedor descriptivo de la lata clasica*/
+
+.galeria-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+  align-items: center;
+}
+
+.producto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(0, 0, 0);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  overflow: hidden;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all 0.9s ease;
+}
+
+.producto.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.producto img {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+}
+
+.producto .info {
+  flex: 1;
+  font-family: 'Oswald', sans-serif;
+}
+
+.producto .info h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #da1a30;
+}
+
+.producto .info p {
+  font-size: 16px;
+  margin-bottom: 10px;
+
+}
+
+/*fin contenedor descriptivo de la lata clasica*/
+
 /* Latas */
 .latas {
   display: flex;
@@ -113,72 +171,41 @@ header {
 /* fin Colores de fondo de las latas */
 
 
-.imagen-trabajo {
+
+/* seccion imagen descriptiva */
+
+.seccion-descripcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px;
+  flex-wrap: wrap; 
+}
+
+.texto-descriptivo {
+  flex: 1;
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px;
+  color: #0d1b2a;
+  margin-top: 20%;
+  margin-right: 10%;
+}
+
+.imagen-deportes {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
-
 }
 
-.imagen-trabajo img {
-  max-width: 500px;
+.imagen-deportes img {
+  max-width: 100%;
   height: auto;
+  margin-right: 400px;
+  transform: scale(1.2);
+  margin-top: 10%;
 }
 
+/* fin seccion imagen descriptiva */
 
 
-
-.galeria-productos {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 40px;
-  align-items: center;
-}
-
-.producto {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  color: rgb(0, 0, 0);
-  border-radius: 20px;
-  width: 90%;
-  max-width: 800px;
-  overflow: hidden;
-  padding: 20px;
-  gap: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  transform: translateY(60px);
-  opacity: 0;
-  transition: all 0.9s ease;
-}
-
-.producto.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.producto img {
-  width: 200px;
-  height: auto;
-  border-radius: 12px;
-}
-
-.producto .info {
-  flex: 1;
-  font-family: 'Oswald', sans-serif;
-}
-
-.producto .info h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #da1a30;
-}
-
-.producto .info p {
-  font-size: 16px;
-  margin-bottom: 10px;
-
-}

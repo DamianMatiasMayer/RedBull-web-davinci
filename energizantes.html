@@ -1,153 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RedBull</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/energizantes.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/energizantes.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
+  <body>
     <!-- inicio header -->
     <header>
-        <nav>
-            <div class="nav-container contenedor-margenes">
-                <a href="index.html" class="logo">
-                    <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" />
-                </a>
+      <nav>
+        <div class="nav-container contenedor-margenes">
+          <a href="index.html" class="logo">
+            <img
+              src="imagenes/redbullcom-logo_double-with-text.svg"
+              alt="Red Bull Logo"
+            />
+          </a>
 
-                <ul>
-                    <li><a href="energizantes.html">Energizantes</a></li>
-                    <li><a href="productos.html">Productos</a></li>
-                    <li><a href="#">Eventos y Deportes</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-                <a href="#" class="carrito-link">
-                    <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
-                </a>
-            </div>
-        </nav>
-
+          <ul>
+            <li><a href="energizantes.html">Energizantes</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li>
+              <a href="#" onclick="mostrarAviso(event)">Eventos y Deportes</a>
+            </li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+          <a href="#" onclick="mostrarAviso(event)" class="carrito-link">
+            <img
+              src="imagenes/shopping-cart.png"
+              alt="Carrito"
+              class="icono-carrito"
+            />
+          </a>
+        </div>
+      </nav>
     </header>
 
     <!-- fin header -->
 
-
     <main>
+      <section>
+        <div class="texto-sobre-imagen">
+          <h1>Te da aaalas®</h1>
+        </div>
 
-        <section>
-            <div class="texto-sobre-imagen">
-                <h1>Te da aaalas®</h1>
-            </div>
-
-            <div class="texto-descripcion">
-                <h2>
-                    Ideal para días intensos, Red Bull combina cafeína, vitaminas y taurina para ayudarte a mantener el
-                    foco y el rendimiento. <br>Probá nuestras ediciones clásicas y de temporada: energía para cada
-                    momento.
-                </h2>
-            </div>
-        </section>
-
-
-        <section class="galeria-productos">
-            <div class="producto animar">
-                <div class="info">
-                    <h3>Red Bull edición clásica</h3>
-                    <p>Red Bull Energizante Clásica ofrece un sabor distintivo y ligeramente dulce con un toque cítrico,
-                        equilibrado por una leve acidez. Su perfil único combina suavidad y energía, pensado para ser
-                        refrescante y revitalizante en cada sorbo.</p>
-                </div>
-                <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="Red Bull Clásica">
-            </div>
-        </section>
+        <div class="texto-descripcion">
+          <h2>
+            Ideal para días intensos, Red Bull combina cafeína, vitaminas y
+            taurina para ayudarte a mantener el foco y el rendimiento.
+            <br />Probá nuestras ediciones clásicas y de temporada: energía para
+            cada momento.
+          </h2>
+        </div>
+      </section>
 
 
-        <!-- productos energizantes -->
+      <!-- descripcion energizante clasico -->
+      <section class="galeria-productos">
+        <div class="producto animar">
+          <div class="info">
+            <h3>Red Bull edición clásica</h3>
+            <p>
+              Red Bull Energizante Clásica ofrece un sabor distintivo y
+              ligeramente dulce con un toque cítrico, equilibrado por una leve
+              acidez. Su perfil único combina suavidad y energía, pensado para
+              ser refrescante y revitalizante en cada sorbo.
+            </p>
+          </div>
+          <img
+            src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp"
+            alt="Red Bull Clásica"
+          />
+        </div>
+      </section>
+      <!--fin descripcion energizante clasico -->
 
-        <section class="latas">
-            <!-- Lata 1 -->
-            <div class="contenedor-lata">
-                <div class="lata normal">
-                    <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="energizante RedBull">
-                    <p>Red Bull energizante</p>
-                </div>
-            </div>
+      <!-- productos energizantes -->
 
-            <!-- Lata 2 -->
-            <div class="contenedor-lata">
-                <div class="lata libreazucar">
-                    <img src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp"
-                        alt="redbull libre de azucar">
-                    <p>Red Bull libre de azucar</p>
-                </div>
-            </div>
+      <section class="latas">
+        <!-- Lata 1 -->
+        <div class="contenedor-lata">
+          <div class="lata normal">
+            <img
+              src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp"
+              alt="energizante RedBull"
+            />
+            <p>Red Bull energizante</p>
+          </div>
+        </div>
 
-            <!-- Lata 3 -->
-            <div class="contenedor-lata">
-                <div class="lata tropical">
-                    <img src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp"
-                        alt="redbull Tropical Edition">
-                    <p>Red Bull edicion tropical</p>
-                </div>
-            </div>
+        <!-- Lata 2 -->
+        <div class="contenedor-lata">
+          <div class="lata libreazucar">
+            <img
+              src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp"
+              alt="redbull libre de azucar"
+            />
+            <p>Red Bull libre de azucar</p>
+          </div>
+        </div>
 
-            <!-- Lata 4 -->
-            <div class="contenedor-lata">
-                <div class="lata roja">
-                    <img src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp"
-                        alt="Redbull Edicion melon">
-                    <p>Red Bull edicion melon</p>
-                </div>
-            </div>
+        <!-- Lata 3 -->
+        <div class="contenedor-lata">
+          <div class="lata tropical">
+            <img
+              src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp"
+              alt="redbull Tropical Edition"
+            />
+            <p>Red Bull edicion tropical</p>
+          </div>
+        </div>
 
-            <!-- Lata 5 -->
-            <div class="contenedor-lata">
-                <div class="lata verano">
-                    <img src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp"
-                        alt="redbull edicion verano">
-                    <p>Red Bull edicion verano</p>
-                </div>
-            </div>
-        </section>
+        <!-- Lata 4 -->
+        <div class="contenedor-lata">
+          <div class="lata roja">
+            <img
+              src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp"
+              alt="Redbull Edicion melon"
+            />
+            <p>Red Bull edicion melon</p>
+          </div>
+        </div>
 
-        <!-- fin productos energizantes -->
+        <!-- Lata 5 -->
+        <div class="contenedor-lata">
+          <div class="lata verano">
+            <img
+              src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp"
+              alt="redbull edicion verano"
+            />
+            <p>Red Bull edicion verano</p>
+          </div>
+        </div>
+      </section>
 
-        <section>
-            <div class="imagen-trabajo">
-                <img src="./imagenes/riding-through-your-workday.avif" alt="redbull en jornada laboral">
-            </div>
+      <!-- fin productos energizantes -->
+      
+      
+      <!-- seccion descipccion -->   
+        
+      <section class="seccion-descripcion">
+        <div class="texto-descriptivo contenedor-margenes">
+          <h3>Volar por la vida es más sencillo cuando tienes aaalas.</h3>
+        </div>
 
-            <div class="texto-descripcion">
-                <h3>Red Bull te acompaña en tu jornada laboral cuando más lo necesitás: impulsa tu concentración,
-                    combate el cansancio y mantiene tu energía al máximo</h3>
-            </div>
-        </section>
-
-
-
+        <div class="imagen-deportes">
+          <img
+            src="./imagenes/red-bull-energydrink.avif"
+            alt="redbull en jornada laboral"
+          />
+        </div>
+      </section>
     </main>
+    <!--fin seccion descipccion -->   
 
+    <!-- Footer -->
 
-    <script>
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+    <footer>
+      <div class="contenido-footer">
+        <img
+          src="imagenes/redbullcom-logo_double-with-text.svg"
+          alt="Red Bull Logo"
+          class="footer-logo"
+        />
 
-        document.querySelectorAll('.animar').forEach(el => observer.observe(el));
-    </script>
+        <ul class="footer-links">
+          <li><a href="productos.html">nuestros productos</a></li>
+          <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
+          <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
+          <li>
+            <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
+          </li>
+          <li><a href="contacto.html">Contactanos</a></li>
+        </ul>
 
+        <div class="footer-redes">
+          <a href="#"><img src="imagenes/instagram.png" alt="Instagram" /></a>
+          <a href="#"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+          <a href="#"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+          <a href="#"><img src="imagenes/X.png" alt="X" /></a>
+        </div>
 
+        <p class="footer-copy">
+          © 2025 Red Bull Argentina. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
 
+    <!--fin Footer -->
 
-</body>
+    <!-- Aviso emergente en trabajo  -->
 
+    <div id="aviso-trabajo" class="aviso-trabajo oculto">
+      🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
+    </div>
+
+    <!-- fin Aviso emergente en trabajo  -->
+
+    <!-- Scritps -->
+
+    <script src="js/energizantes.js"></script>
+    <script src="js/global.js"></script>
+  </body>
 </html>
