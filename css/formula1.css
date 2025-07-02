@@ -1,0 +1,53 @@
+.evento-principal {
+  width: 60%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+
+
+
+.bloque-redbull {
+  background: linear-gradient(to bottom, #3a8ddb, #003e8c, #002047);
+  padding: 40px 5%;
+  text-align: center;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+}
+
+.auto-redbull {
+  max-width: 100%;
+  height: auto;
+}
+
+.titulo-redbull {
+  font-size: 36px;
+  margin-top: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.pilotos-redbull {
+  margin-top: 10px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.separador {
+  
+  font-size: 20px;
+  color: white;
+}
+
+.logo-oracle {
+  width: 40px;     /* tamaño pequeño */
+  height: auto;
+  margin: 10px auto 0;
+  display: block;
+  margin-left: calc(50% + 10px); /* corre 20px hacia la derecha desde el centro */
+  transform: translateX(-50%);
+}
+
