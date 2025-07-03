@@ -25,4 +25,19 @@ function animar() {//funcion que se encarga de mover los autos
   requestAnimationFrame(animar);
 }
 
-animar(); //llamado de la
+animar();
+
+
+
+//carrousel
+const carrusel = document.querySelector('.carrusel-eventos');
+const btnIzq = document.querySelector('.flecha.izquierda');
+const btnDer = document.querySelector('.flecha.derecha');
+
+btnIzq.addEventListener('click', () => {
+  carrusel.scrollBy({ left: -300, behavior: 'smooth' });
+});
+
+btnDer.addEventListener('click', () => {
+  carrusel.scrollBy({ left: 300, behavior: 'smooth' });
+});
