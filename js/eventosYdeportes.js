@@ -30,14 +30,18 @@ animar();
 
 
 //carrousel
-const carrusel = document.querySelector('.carrusel-eventos');
-const btnIzq = document.querySelector('.flecha.izquierda');
-const btnDer = document.querySelector('.flecha.derecha');
+document.querySelectorAll('.contenedor-eventos, .contenedor-carrousel').forEach((contenedor) => {
+  const carrusel = contenedor.querySelector('.carrusel-eventos, .carrusel-productos');
+  const btnIzq = contenedor.querySelector('.flecha.izquierda');
+  const btnDer = contenedor.querySelector('.flecha.derecha');
 
-btnIzq.addEventListener('click', () => {
-  carrusel.scrollBy({ left: -300, behavior: 'smooth' });
-});
+  if (carrusel && btnIzq && btnDer) {
+    btnIzq.addEventListener('click', () => {
+      carrusel.scrollBy({ left: -1500, behavior: 'smooth' });
+    });
 
-btnDer.addEventListener('click', () => {
-  carrusel.scrollBy({ left: 300, behavior: 'smooth' });
+    btnDer.addEventListener('click', () => {
+      carrusel.scrollBy({ left: 1280, behavior: 'smooth' });
+    });
+  }
 });

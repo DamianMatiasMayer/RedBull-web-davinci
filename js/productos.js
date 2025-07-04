@@ -23,12 +23,12 @@ contenedor.addEventListener("scroll", actualizarFlechas);
 
 // Scroll con botones
 flechaDer.onclick = () => {
-    contenedor.scrollBy({ left: 300, behavior: "smooth" });
+    contenedor.scrollBy({ left: 1100, behavior: "smooth" });
     setTimeout(actualizarFlechas, 350);
 };
 
 flechaIzq.onclick = () => {
-    contenedor.scrollBy({ left: -300, behavior: "smooth" });
+    contenedor.scrollBy({ left: -1100, behavior: "smooth" });
     setTimeout(actualizarFlechas, 350);
 };
 
@@ -422,12 +422,12 @@ actualizarFlechasOracle();
 contenedorOracle.addEventListener("scroll", actualizarFlechasOracle);
 
 flechaDerOracle.onclick = () => { // si estamos al final, oculta la flecha derecha;si no, la muestra
-    contenedorOracle.scrollBy({ left: 300, behavior: "smooth" }); //Cuando se hace clic en la flecha derecha, se mueve 300px hacia la derecha
+    contenedorOracle.scrollBy({ left: 1100, behavior: "smooth" }); //Cuando se hace clic en la flecha derecha, se mueve 300px hacia la derecha
     setTimeout(actualizarFlechasOracle, 350);
 };
 
 flechaIzqOracle.onclick = () => { //lo mismo pero hacia la izquierda
-    contenedorOracle.scrollBy({ left: -300, behavior: "smooth" });
+    contenedorOracle.scrollBy({ left: -1100, behavior: "smooth" });
     setTimeout(actualizarFlechasOracle, 350);
 };
 
