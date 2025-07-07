@@ -1,0 +1,239 @@
+.oculto {
+    display: none !important;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-producto {
+    display: flex;
+    background: #fff;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.modal-izq {
+    display: flex;
+    gap: 10px;
+    width: 50%;
+    padding: 20px;
+    align-items: center;
+}
+
+.galeria-miniaturas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80px;
+    height: 100%;
+    max-height: 400px;
+}
+
+.galeria-miniaturas img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    flex: 1;
+}
+
+.galeria-miniaturas img:hover {
+    border-color: black;
+}
+
+.imagen-grande {
+    flex: 1;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-der {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.modal-precio {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.boton-agregar {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ----- CARRITO LATERAL ESTILO NIKE ----- */
+.carrito {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 350px;
+    max-width: 100%;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+}
+
+.carrito:not(.oculto) {
+    transform: translateX(0);
+}
+
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.cerrar-carrito {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.contenido-carrito {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.contenido-carrito li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.contenido-carrito img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.contenido-carrito div {
+    flex: 1;
+}
+
+.contenido-carrito p {
+    margin: 5px 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+}
+
+.cantidad-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cantidad-control button {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.carrito-total {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+    margin-top: 15px;
+}
+
+.boton-finalizar {
+    background: #00205B;
+    /* azul Red Bull */
+    color: white;
+    padding: 12px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carrito-vacio {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.carrito-link {
+    position: relative;
+}
+
+.contador-carrito {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: white;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    border: 1px solid black;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.icono-tacho {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.carrito button {
+    cursor: pointer;
+}

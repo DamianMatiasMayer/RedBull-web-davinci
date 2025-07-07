@@ -1,6 +1,4 @@
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
 
   //selecciona el formulario con clase .formulario-contacto

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/eventosYdeportes.css" />
+    <link rel="stylesheet" href="css/modal-carrito.css" />
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="icon" href="imagenes/favicon.redbull.jpg" /><!-- icono pestaña navegador -->
     <title>RedBull Deportes</title>
@@ -30,8 +31,9 @@
                     <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
                 </ul>
-                <a href="#" onclick="mostrarAviso(event)" class="carrito-link">
+                <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
                     <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
+                    <span id="contador-carrito" class="contador-carrito oculto">0</span>
                 </a>
             </div>
         </nav>
@@ -356,6 +358,40 @@
             </div>
         </section>
 
+
+
+        <!-- MODAL DE DETALLE DE PRODUCTO -->
+        <div id="modal-detalle" class="modal oculto">
+            <div class="modal-producto">
+                <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+                <div class="modal-izq">
+                    <div class="galeria-miniaturas" id="miniaturas"></div>
+                    <img id="modal-imagen" class="imagen-grande" src="" alt="Imagen principal del producto">
+                </div>
+                <div class="modal-der">
+                    <h2 id="modal-nombre"></h2>
+                    <p id="modal-descripcion" class="modal-descripcion"></p>
+                    <p id="modal-precio" class="modal-precio"></p>
+                    <button onclick="agregarAlCarrito()" class="boton-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- CARRITO LATERAL -->
+        <div id="carrito-container" class="carrito oculto">
+            <div class="carrito-header">
+                <h3>Tu Carrito</h3>
+                <button class="cerrar-carrito" onclick="toggleCarrito(event)">X</button>
+            </div>
+            <div id="lista-carrito" class="contenido-carrito"></div>
+            <p id="carrito-vacio" class="carrito-vacio oculto">TU CARRITO ESTÁ VACÍO</p>
+            <p id="total-carrito" class="carrito-total"></p>
+            <button id="boton-finalizar" class="boton-finalizar oculto" onclick="finalizarCompra()">Finalizar
+                compra</button>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -389,18 +425,10 @@
 
     <!--fin Footer -->
 
-
-
-
-
-
-
-
-
-
     <!-- Scritps -->
 
     <script src="js/eventosYdeportes.js"></script>
+    <script src="js/modal-carrito.js"></script>
 </body>
 
 </html>
