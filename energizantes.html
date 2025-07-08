@@ -167,6 +167,15 @@
       <button id="boton-finalizar" class="boton-finalizar oculto" onclick="finalizarCompra()">Finalizar compra</button>
     </div>
 
+    <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
+    <div id="mensaje-compra" class="modal-compra oculto">
+      <div class="modal-compra-contenido">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu pedido fue procesado con éxito.</p>
+        <button onclick="cerrarMensajeCompra()">Cerrar</button>
+      </div>
+    </div>
+
   </main>
   <!--fin seccion descipccion -->
 
@@ -187,14 +196,14 @@
       </ul>
 
       <div class="footer-redes">
-        <a href="#"><img src="imagenes/instagram.png" alt="Instagram" /></a>
-        <a href="#"><img src="imagenes/youtube.png" alt="YouTube" /></a>
-        <a href="#"><img src="imagenes/facebook.png" alt="Facebook" /></a>
-        <a href="#"><img src="imagenes/X.png" alt="X" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/instagram.png" alt="Instagram" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/X.png" alt="X" /></a>
       </div>
 
       <p class="footer-copy">
-        © 2025 Red Bull Argentina. Todos los derechos reservados.
+        © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer Escuela Davinci
       </p>
     </div>
   </footer>

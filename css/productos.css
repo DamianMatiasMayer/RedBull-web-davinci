@@ -269,6 +269,7 @@ body {
   box-sizing: border-box;
   text-align: center;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .imagen-accesorio {

@@ -392,6 +392,15 @@
                 compra</button>
         </div>
 
+        <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
+        <div id="mensaje-compra" class="modal-compra oculto">
+            <div class="modal-compra-contenido">
+                <h2>¡Gracias por tu compra!</h2>
+                <p>Tu pedido fue procesado con éxito.</p>
+                <button onclick="cerrarMensajeCompra()">Cerrar</button>
+            </div>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -411,22 +420,28 @@
             </ul>
 
             <div class="footer-redes">
-                <a href="#"><img src="imagenes/instagram.png" alt="Instagram" /></a>
-                <a href="#"><img src="imagenes/youtube.png" alt="YouTube" /></a>
-                <a href="#"><img src="imagenes/facebook.png" alt="Facebook" /></a>
-                <a href="#"><img src="imagenes/X.png" alt="X" /></a>
+                <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/instagram.png" alt="Instagram" /></a>
+                <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+                <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+                <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/X.png" alt="X" /></a>
             </div>
 
             <p class="footer-copy">
-                © 2025 Red Bull Argentina. Todos los derechos reservados.
+                © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer Escuela Davinci
             </p>
         </div>
     </footer>
 
     <!--fin Footer -->
 
-    <!-- Scritps -->
+    <!-- Aviso emergente en trabajo  -->
 
+    <div id="aviso-trabajo" class="aviso-trabajo oculto">
+        🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
+    </div>
+
+    <!-- Scritps -->
+    <script src="js/global.js"></script>
     <script src="js/eventosYdeportes.js"></script>
     <script src="js/modal-carrito.js"></script>
 </body>

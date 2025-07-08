@@ -237,3 +237,282 @@
 .carrito button {
     cursor: pointer;
 }
+
+
+/*MODAL PARA COMPRA REALIZADA CON EXITO*/
+
+.modal-compra {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.modal-compra-contenido {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  font-family: 'Oswald', sans-serif;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-compra-contenido h2 {
+  color: #0033a0; /* Azul Red Bull */
+  margin-bottom: 10px;
+}
+
+.modal-compra-contenido p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal-compra-contenido button {
+  background-color: #0033a0; /* Azul Red Bull */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-compra-contenido button:hover {
+  background-color: #00277a;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.oculto {
+  display: none;
+}
+
+
+
+
+
+/*responsive 1024*/
+
+@media (max-width: 1024px) {
+  .modal-producto {
+    flex-direction: column;
+    width: 95%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-izq,
+  .modal-der {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .modal-izq {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .galeria-miniaturas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .galeria-miniaturas img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .imagen-grande {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .modal-precio {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .boton-agregar {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .cerrar {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+
+/*responsive 768*/
+@media (max-width: 768px) {
+  .modal-producto {
+    padding: 10px;
+  }
+
+  .modal-izq {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .galeria-miniaturas {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .galeria-miniaturas img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .imagen-grande {
+    max-height: 250px;
+    max-width: 90%;
+  }
+
+  .boton-agregar,
+  .modal-precio {
+    font-size: 18px;
+  }
+
+  .modal-compra-contenido {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .modal-compra-contenido h2 {
+    font-size: 22px;
+  }
+
+  .modal-compra-contenido p {
+    font-size: 15px;
+  }
+
+  .modal-compra-contenido button {
+    font-size: 16px;
+  }
+
+  .carrito-total {
+    font-size: 16px;
+  }
+
+  .boton-finalizar {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .icono-tacho {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .contador-carrito {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}
+
+
+/*responsive 480*/
+@media (max-width: 480px) {
+  .modal-producto {
+    flex-direction: column;
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .galeria-miniaturas img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .imagen-grande {
+    max-height: 250px;
+    max-width: 90%;
+  }
+
+  .modal-der {
+    padding: 15px;
+  }
+
+  .modal-precio {
+    font-size: 16px;
+  }
+
+  .boton-agregar {
+    font-size: 16px;
+  }
+
+  .modal-compra-contenido h2 {
+    font-size: 20px;
+  }
+
+  .modal-compra-contenido p {
+    font-size: 14px;
+  }
+
+  .modal-compra-contenido button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .carrito {
+    padding: 15px;
+  }
+
+  .carrito-header h3 {
+    font-size: 18px;
+  }
+
+  .cerrar-carrito {
+    font-size: 18px;
+  }
+
+  .contenido-carrito img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contenido-carrito p {
+    font-size: 12px;
+  }
+
+  .carrito-total {
+    font-size: 15px;
+  }
+
+  .boton-finalizar {
+    font-size: 16px;
+  }
+
+  .contador-carrito {
+    font-size: 10px;
+    top: -4px;
+    right: -4px;
+    padding: 2px 4px;
+  }
+}

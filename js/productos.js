@@ -1,4 +1,4 @@
-//apuntan a elementos del DOM para controlar productos que se pueden desplazar horizontalmente
+//elementos del DOM para controlar productos que se pueden desplazar horizontalmente
 const contenedor = document.getElementById("productos-scroll");
 const flechaIzq = document.getElementById("flecha-izq");
 const flechaDer = document.getElementById("flecha-der");
@@ -22,11 +22,12 @@ actualizarFlechas();
 contenedor.addEventListener("scroll", actualizarFlechas);
 
 // Scroll con botones
+//flecha derecha
 flechaDer.onclick = () => {
     contenedor.scrollBy({ left: 1100, behavior: "smooth" });
     setTimeout(actualizarFlechas, 350);
 };
-
+//flecha izquierda
 flechaIzq.onclick = () => {
     contenedor.scrollBy({ left: -1100, behavior: "smooth" });
     setTimeout(actualizarFlechas, 350);
@@ -385,6 +386,7 @@ const imagenes = {
     ],
 };
 
+//galeria de imagenes por producto
 document.querySelectorAll(".producto").forEach((producto) => {  //Busca todos los elementos con la clase producto y recorre cada uno.
     const id = producto.dataset.id; //obtiene el valor del atributo id para identificar que conjunto de imagenes debe usar
     let i = 0;
@@ -403,9 +405,9 @@ document.querySelectorAll(".producto").forEach((producto) => {  //Busca todos lo
     };
 });
 
-const contenedorOracle = document.getElementById(
-    "productos-scroll-oracle"
-);
+
+// Scroll horizontal para sección Oracle
+const contenedorOracle = document.getElementById("productos-scroll-oracle");
 const flechaIzqOracle = document.getElementById("flecha-izq-oracle");
 const flechaDerOracle = document.getElementById("flecha-der-oracle");
 
@@ -421,32 +423,36 @@ function actualizarFlechasOracle() { //Función que muestra u oculta las flechas
 actualizarFlechasOracle();
 contenedorOracle.addEventListener("scroll", actualizarFlechasOracle);
 
+// Desplazamiento con flechas
+//flecha derecha
 flechaDerOracle.onclick = () => { // si estamos al final, oculta la flecha derecha;si no, la muestra
     contenedorOracle.scrollBy({ left: 1100, behavior: "smooth" }); //Cuando se hace clic en la flecha derecha, se mueve 300px hacia la derecha
     setTimeout(actualizarFlechasOracle, 350);
 };
-
+//flecha izquierda
 flechaIzqOracle.onclick = () => { //lo mismo pero hacia la izquierda
     contenedorOracle.scrollBy({ left: -1100, behavior: "smooth" });
     setTimeout(actualizarFlechasOracle, 350);
 };
 
+
+//Carrusel de productos en sección Accesorios
 document.querySelectorAll(".productos-accesorios").forEach((producto) => {//recorre todos los prodcutos en la seccion accesorios
-    const id = producto.dataset.id; //Verifica si hay imágenes para ese ID en el objeto imagenes.
-    if (!imagenes[id]) return;
-    let i = 0;
+    const id = producto.dataset.id; 
+    if (!imagenes[id]) return;//Verifica si hay imágenes para ese ID en el objeto imagenes.
+    let i = 0; //variable en 0 para controlar el indice de la imagen actual
     const img = producto.querySelector("img");
     const prev = producto.querySelector(".prev");
     const next = producto.querySelector(".next");
 
     if (prev && next) {
         prev.onclick = () => {
-            i = (i - 1 + imagenes[id].length) % imagenes[id].length;
-            img.src = imagenes[id][i];
+            i = (i - 1 + imagenes[id].length) % imagenes[id].length; //Resta uno a i, asegurándose de que no quede en negativo
+            img.src = imagenes[id][i];//Cambia el src de la imagen al nuevo índice de imagen correspondiente en el array.
         };
 
         next.onclick = () => {
-            i = (i + 1) % imagenes[id].length;
+            i = (i + 1) % imagenes[id].length;//Suma uno a i, y si llega al final del array, vuelve al inicio
             img.src = imagenes[id][i];
         };
     }

@@ -368,3 +368,186 @@ body, html {
   margin-top: 100px;
 }
 
+
+
+/*responsive 1024*/
+
+@media (max-width: 1024px) {
+  .titulo-eventos {
+    font-size: 42px;
+  }
+
+  .descripcion-eventos {
+    font-size: 17px;
+    padding: 0 20px;
+  }
+
+  .bloque-imagen-texto,
+  .fila-freestyle {
+    gap: 30px;
+  }
+
+  .imagen-lateral,
+  .freestyle-imagen-principal {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .texto-lateral,
+  .freestyle-texto {
+    width: 100%;
+  }
+
+  .freestyle-imagen-secundaria {
+    width: 50%;
+    margin-left: 0;
+    margin: 20px auto 0;
+  }
+
+  .tarjeta-evento {
+    min-width: 280px;
+    max-width: 280px;
+  }
+
+  .tarjeta-deporte {
+    width: 290px;
+    height: 390px;
+  }
+
+  .logo-equipo {
+    width: 150px;
+  }
+
+  .nombre-deporte {
+    font-size: 16px;
+    margin-top: 90px;
+  }
+}
+
+
+/*responsive 768*/
+
+@media (max-width: 768px) {
+  .titulo-eventos {
+    font-size: 36px;
+  }
+
+  .descripcion-eventos {
+    font-size: 16px;
+    padding: 0 15px;
+  }
+
+  .bloque-imagen-texto {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .imagen-lateral,
+  .freestyle-imagen-principal {
+    width: 100%;
+    max-width: none;
+  }
+
+  .texto-lateral,
+  .freestyle-texto {
+    width: 100%;
+  }
+
+  .freestyle-imagen-secundaria {
+    width: 80%;
+    margin-left: 0;
+    margin: 0 auto;
+  }
+
+  .fila-freestyle {
+    justify-content: center;
+  }
+
+  .tarjeta-evento {
+    min-width: 270px;
+    max-width: 270px;
+  }
+
+  .tarjeta-deporte {
+    width: 280px;
+    height: 380px;
+  }
+
+  .logo-equipo {
+    width: 140px;
+  }
+
+  .nombre-deporte {
+    font-size: 15px;
+    margin-top: 80px;
+  }
+}
+
+
+/*responsive 480*/
+
+@media (max-width: 480px) {
+  .titulo-eventos {
+    font-size: 28px;
+  }
+
+  .descripcion-eventos {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .bloque-imagen-texto {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .imagen-lateral,
+  .freestyle-imagen-principal {
+    width: 100%;
+    max-width: none;
+    outline-offset: 4px;
+  }
+
+  .texto-lateral,
+  .freestyle-texto {
+    width: 100%;
+  }
+
+  .freestyle-imagen-secundaria {
+    display: none;
+  }
+
+  .fila-freestyle {
+    justify-content: center;
+  }
+
+  .tarjeta-evento {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .carrusel-eventos,
+  .carrusel-productos {
+    gap: 12px;
+    padding: 0 3%;
+  }
+
+  .tarjeta-deporte {
+    width: 250px;
+    height: 360px;
+  }
+
+  .logo-equipo {
+    width: 120px;
+  }
+
+  .nombre-deporte {
+    font-size: 14px;
+    margin-top: 60px;
+  }
+
+  .titulo-mas-eventos {
+    font-size: 22px;
+    padding-left: 5%;
+  }
+}

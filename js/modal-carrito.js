@@ -187,8 +187,16 @@ function finalizarCompra() {
     guardarCarrito();
     actualizarVistaCarrito();
     actualizarContadorCarrito();
-    alert("¡Gracias por tu compra!");
+
+    // Mostrar modal de compra realizada
+    document.getElementById("mensaje-compra").classList.remove("oculto");
 }
+
+function cerrarMensajeCompra() {
+    document.getElementById("mensaje-compra").classList.add("oculto");
+}
+
+
 
 // Si el usuario hace clic fuera del carrito, se cierra
 document.addEventListener("mousedown", function (event) {

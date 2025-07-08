@@ -43,7 +43,7 @@
         Precisión, velocidad y control absoluto: el arte del aerobatic flying
         llevado al límite.
       </h2>
-      <a href="#" onclick="mostrarAviso(event)" class="btn-leer-mas"><span>Leer más</span></a>
+      <a href="eventosYdeportes.html" class="btn-leer-mas"><span>Leer más</span></a>
     </div>
 
     <!-- fin Cartel sobre la imagen -->
@@ -99,7 +99,7 @@
                 de semana, mientras Oracle Red Bull Racing celebra una
                 colaboración icónica con una decoración especial.
               </h3>
-              <a href="#" onclick="mostrarAviso(event)" class="boton-leer-mas-noticia">Leer más</a>
+              <a href="eventosYdeportes.html" class="boton-leer-mas-noticia">Leer más</a>
             </div>
           </article>
 
@@ -113,7 +113,7 @@
                 Nacional en un año de celebración de los 20 años de rimas.
                 ¿Quién representará al país en la Final Internacional de 2026?
               </h3>
-              <a href="#" onclick="mostrarAviso(event)" class="boton-leer-mas-noticia">Leer más</a>
+              <a href="eventosYdeportes.html"  class="boton-leer-mas-noticia">Leer más</a>
             </div>
           </article>
 
@@ -129,7 +129,7 @@
                 empezar La serie se reinventa una vez más y ofrece un soplo de
                 aire fresco con la ambientación japonesa.
               </h3>
-              <a href="#" onclick="mostrarAviso(event)" class="boton-leer-mas-noticia">Leer más</a>
+              <a href="eventosYdeportes.html" class="boton-leer-mas-noticia">Leer más</a>
             </div>
           </article>
         </div>
@@ -170,6 +170,15 @@
       <button id="boton-finalizar" class="boton-finalizar oculto" onclick="finalizarCompra()">Finalizar compra</button>
     </div>
 
+    <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
+    <div id="mensaje-compra" class="modal-compra oculto">
+      <div class="modal-compra-contenido">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu pedido fue procesado con éxito.</p>
+        <button onclick="cerrarMensajeCompra()">Cerrar</button>
+      </div>
+    </div>
+
   </main>
 
   <!-- Footer   -->
@@ -189,14 +198,14 @@
       </ul>
 
       <div class="footer-redes">
-        <a href="#"><img src="imagenes/instagram.png" alt="Instagram" /></a>
-        <a href="#"><img src="imagenes/youtube.png" alt="YouTube" /></a>
-        <a href="#"><img src="imagenes/facebook.png" alt="Facebook" /></a>
-        <a href="#"><img src="imagenes/X.png" alt="X" /></a>
+        <a href="#" onclick="mostrarAviso(event)"> <img src="imagenes/instagram.png" alt="Instagram" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/X.png" alt="X" /></a>
       </div>
 
       <p class="footer-copy">
-        © 2025 Red Bull Argentina. Todos los derechos reservados.
+        © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer Escuela Davinci
       </p>
     </div>
   </footer>
