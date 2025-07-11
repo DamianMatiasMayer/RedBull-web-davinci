@@ -69,10 +69,15 @@
     font-family: 'Oswald', sans-serif;
 }
 
+.modal-der h2{
+  margin-bottom: 20px;
+}
+
 .modal-precio {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .boton-agregar {
@@ -93,7 +98,7 @@
     cursor: pointer;
 }
 
-/* ----- CARRITO LATERAL ESTILO NIKE ----- */
+/* carrito lateral */
 .carrito {
     position: fixed;
     top: 0;
