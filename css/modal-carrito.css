@@ -267,7 +267,7 @@
 }
 
 .modal-compra-contenido h2 {
-  color: #0033a0; /* Azul Red Bull */
+  color: #0033a0; 
   margin-bottom: 10px;
 }
 
@@ -278,7 +278,7 @@
 }
 
 .modal-compra-contenido button {
-  background-color: #0033a0; /* Azul Red Bull */
+  background-color: #0033a0; 
   color: white;
   padding: 10px 20px;
   border: none;
@@ -302,9 +302,9 @@
 
 
 
+/* media responsive */
 
-
-/*responsive 1024*/
+/* responsive 1024px (tablets y celulares) */
 
 @media (max-width: 1024px) {
   .modal-producto {
@@ -372,7 +372,8 @@
 }
 
 
-/*responsive 768*/
+/*  responsive 768 (celulares chicos) */
+
 @media (max-width: 768px) {
   .modal-producto {
     padding: 10px;
@@ -442,7 +443,8 @@
 }
 
 
-/*responsive 480*/
+/* responsive  480 (celulares chicos) */
+
 @media (max-width: 480px) {
   .modal-producto {
     flex-direction: column;

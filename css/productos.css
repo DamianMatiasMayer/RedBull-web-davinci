@@ -231,8 +231,7 @@ body {
   left: 0;
   width: 100%;
   z-index: 3;
-  transform: translateY(-50%);
-  /* hace que la mitad esté sobre la imagen y mitad por debajo */
+  transform: translateY(-50%);/* hace que la mitad esté sobre la imagen y mitad por debajo */
 }
 
 
@@ -442,7 +441,8 @@ body {
 
 /* media responsive */
 
-/*  Responsive hasta 1024px */
+/* responsive 1024px (tablets y celulares) */
+
 @media (max-width: 1024px) {
   .texto-sobre-video h1 {
     font-size: 36px;
@@ -466,7 +466,7 @@ body {
   }
 }
 
-/* Responsive hasta 768px */
+/*  responsive 768 (celulares chicos) */
 
 @media (max-width: 768px) {
 
@@ -517,7 +517,8 @@ body {
   }
 }
 
-/*  Responsive hasta 480px */
+/* responsive  480 (celulares chicos) */
+
 @media (max-width: 480px) {
   .video-nav {
     height: 300px;

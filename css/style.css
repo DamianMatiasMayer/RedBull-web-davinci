@@ -94,7 +94,7 @@ header {
 
 .Lata img:hover {
     transform: translateY(-50px);
-    /* La imagen sube en hover para dar efecto de “flotación”.*/
+    /* La imagen sube en hover para dar efecto de "flotación".*/
 }
 
 .texto-lata h1 {
@@ -277,7 +277,9 @@ header {
 
 /*FIN botones */
 
-/*media responsive 1024 */
+/* media responsive */
+
+/* responsive 1024px (tablets y celulares) */
 
 @media (max-width: 1024px) {
     .texto-lata h1 {
@@ -299,7 +301,7 @@ header {
     }
 }
 
-/*media responsive 768 */
+/*  responsive 768 (celulares chicos) */
 
 @media (max-width: 768px) {
     .Lata {
@@ -355,7 +357,7 @@ header {
 }
 
 
-/*media responsive 480 */
+/* responsive  480 (celulares chicos) */
 
 @media (max-width: 480px) {
     .Lata {

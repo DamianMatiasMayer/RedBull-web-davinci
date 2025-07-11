@@ -198,7 +198,10 @@ footer {
   cursor: pointer;
 }
 
-/* Modo responsive hasta 1024px (tablets y móviles) */
+/* media responsive */
+
+/* responsive 1024px (tablets y celulares) */
+
 @media (max-width: 1024px) {
   .hamburguesa {
     display: block;
@@ -230,7 +233,8 @@ footer {
   }
 }
 
-/* modo responsive hasta 768 (móviles chicos) */
+/*  responsive 768 (celulares chicos) */
+
 @media (max-width: 768px) {
   .hamburguesa {
     margin-left: 50%;
@@ -243,7 +247,8 @@ footer {
   }
 }
 
-/* modo responsive hasta 480 (móviles chicos) */
+/* responsive  480 (celulares chicos) */
+
 @media (max-width: 480px) {
   .hamburguesa {
     margin-left: 25%;

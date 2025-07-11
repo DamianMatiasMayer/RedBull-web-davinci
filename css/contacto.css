@@ -9,7 +9,7 @@ header {
   position: relative;
 }
 
-/*  Esto agrega márgenes internos laterales del 5% y asegura que el padding se incluya en el tamaño total del elemento. */
+
 .contenedor-margenes {
   padding-left: 5%;
   padding-right: 5%;
@@ -21,7 +21,7 @@ header {
 
 /* estilo texto sobre imagen */
 
-/* Posiciona el texto centrado horizontalmente, a 150px del borde inferior de la imagen.*/
+
 .texto-sobre-imagen {
   position: absolute;
   bottom: 150px;
@@ -34,7 +34,7 @@ header {
 }
 
 
-/* Aplica un tamaño grande al título y una sombra oscura para que se lea bien sobre el fondo.*/
+
 .texto-sobre-imagen h1 {
   font-size: 60px;
   font-weight: 700;
@@ -198,11 +198,11 @@ se superpone 50px hacia arriba del header*/
   color: #00bfff;
 }
 
-
-
 /* fin formulario e informacion de contacto*/
 
-/*media responsive 1024 */
+/* media responsive */
+
+/* responsive 1024px (tablets y celulares) */
 
 @media (max-width: 1024px) {
   .texto-sobre-imagen {
@@ -214,7 +214,7 @@ se superpone 50px hacia arriba del header*/
   }
 }
 
-/*media responsive 768 */
+/*  responsive 768 (celulares chicos) */
 
 @media (max-width: 768px) {
   .texto-sobre-imagen {
@@ -226,7 +226,7 @@ se superpone 50px hacia arriba del header*/
   }
 }
 
-/*media responsive 480 */
+/* responsive  480 (celulares chicos) */
 
 @media (max-width: 480px) {
   .texto-sobre-imagen {

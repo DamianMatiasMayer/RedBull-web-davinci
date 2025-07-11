@@ -3,11 +3,11 @@ body, html {
   padding: 0;
   height: 100%;
   overflow-x: hidden;
-  background-image: url('../imagenes/fondo-rugoso.png'); /* o el nombre real */
+  background-image: url('../imagenes/fondo-rugoso.png'); 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed; /* hace que el fondo no se mueva al scrollear */
+  background-attachment: fixed; 
 }
 
 .contenedor-margenes {
@@ -15,7 +15,7 @@ body, html {
   padding-right: 5%;
   box-sizing: border-box;
 }
-/*imagen con autos por encima*/
+
 .fondo {
   position: relative;
   width: 100%;
@@ -58,7 +58,7 @@ body, html {
 .linea-divisoria {
   border: none;
   height: 2px;
-  background-color: #9a9a9a; /* gris, podés cambiarlo por otro tono  #9a9a9a;*/
+  background-color: #9a9a9a; 
   margin-top: 20px;
   margin-bottom: 30px;
 }
@@ -120,7 +120,7 @@ body, html {
 
 .fila-freestyle {
   display: flex;
-  justify-content: flex-end; /* Alinea todo el contenido al margen derecho */
+  justify-content: flex-end; 
   align-items: flex-start;
   gap: 40px;
   flex-wrap: wrap;
@@ -196,10 +196,8 @@ body, html {
 }
 
 
-  
-
 .carrusel-eventos::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none; 
 }
 
 .tarjeta-evento {
@@ -208,7 +206,7 @@ body, html {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden; /* importante para que el hover no se desborde */
+  overflow: hidden; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,7 +223,7 @@ body, html {
   width: 100%;
   height: 300px;
   object-fit: cover;
-  transition: transform 0.3s ease-in-out; /* suaviza la animación */
+  transition: transform 0.3s ease-in-out; 
 }
 
 .tarjeta-evento:hover .imagen-contenedor img {
@@ -257,13 +255,13 @@ body, html {
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   opacity: 0;
-  pointer-events: none; /* evita clics cuando están ocultas */
+  pointer-events: none; 
   transition: opacity 0.3s ease;
 }
 
 .contenedor-eventos:hover .flecha {
   opacity: 1;
-  pointer-events: auto; /* vuelve a permitir clics */
+  pointer-events: auto; 
 }
 
 .flecha.izquierda {
@@ -277,13 +275,7 @@ body, html {
 }
 
 
-
-
-
-
-
-
-
+/*deportes*/
 
 .contenedor-carrousel {
   position: relative;
@@ -368,9 +360,9 @@ body, html {
   margin-top: 100px;
 }
 
+/* media responsive */
 
-
-/*responsive 1024*/
+/* responsive 1024px (tablets y celulares) */
 
 @media (max-width: 1024px) {
   .titulo-eventos {
@@ -425,7 +417,7 @@ body, html {
 }
 
 
-/*responsive 768*/
+/*  responsive 768 (celulares chicos) */
 
 @media (max-width: 768px) {
   .titulo-eventos {
@@ -484,7 +476,7 @@ body, html {
 }
 
 
-/*responsive 480*/
+/* responsive  480 (celulares chicos) */
 
 @media (max-width: 480px) {
   .titulo-eventos {

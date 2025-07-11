@@ -102,6 +102,7 @@ header {
 /*fin contenedor descriptivo de la lata clasica*/
 
 /* Latas */
+
 .latas {
   display: flex;
   justify-content: center;
@@ -148,6 +149,7 @@ header {
 
 
 /* Colores de fondo de las latas */
+
 .lata.normal {
   background-color: white;
 }
@@ -213,7 +215,9 @@ header {
 /* fin seccion imagen descriptiva */
 
 
-/*  Responsive hasta 1024px */
+/* media responsive */
+
+/* responsive 1024px (tablets y celulares) */
 
 @media (max-width: 1024px) {
   .texto-sobre-imagen h1 {
@@ -227,7 +231,7 @@ header {
     margin-bottom: 40px;
   }
 
-  /* Galería de productos */
+  
   .galeria-productos {
     padding: 30px;
     gap: 30px;
@@ -251,7 +255,7 @@ header {
     font-size: 15px;
   }
 
-  /* Latas */
+  
   .latas {
     padding: 30px;
     gap: 15px;
@@ -265,7 +269,7 @@ header {
     font-size: 17px;
   }
 
-  /* Sección descriptiva */
+
   .seccion-descripcion {
     flex-direction: column-reverse;
     padding: 40px;
@@ -288,7 +292,8 @@ header {
   }
 }
 
-/*  Responsive hasta 768px */
+/*  responsive 768 (celulares chicos) */
+
 
 @media (max-width: 768px) {
   .texto-sobre-imagen h1 {
@@ -359,7 +364,7 @@ header {
   }
 }
 
-/*  Responsive hasta 480px */
+/* responsive  480 (celulares chicos) */
 
 @media (max-width: 480px) {
   .texto-sobre-imagen h1 {
