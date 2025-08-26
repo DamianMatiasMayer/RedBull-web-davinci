@@ -1,182 +1,249 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RedBull Contacto</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/contacto.css" />
+    <link rel="stylesheet" href="css/modal-carrito.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- fontawesome para los iconos -->
+    <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
+    <!-- icono pestaña navegador -->
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RedBull Contacto</title>
-  <link rel="stylesheet" href="css/global.css" />
-  <link rel="stylesheet" href="css/contacto.css" />
-  <link rel="stylesheet" href="css/modal-carrito.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- fontawesome para los iconos -->
-  <link rel="icon" href="imagenes/favicon.redbull.jpg.png" /><!-- icono pestaña navegador -->
-</head>
+  <script src="js/contacto.js"></script>
 
-<script src="js/contacto.js"></script>
+  <body>
+    <!-- logo y  navegacion -->
 
-<body>
-  <!-- logo y  navegacion -->
+    <header>
+      <nav>
+        <div class="nav-container contenedor-margenes">
+          <a href="index.html" class="logo">
+            <img
+              src="imagenes/redbullcom-logo_double-with-text.svg"
+              alt="Red Bull Logo"
+            />
+          </a>
 
-  <header>
-    <nav>
-      <div class="nav-container contenedor-margenes">
-        <a href="index.html" class="logo">
-          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" />
-        </a>
+          <div class="hamburguesa" id="hamburguesa">☰</div>
 
-        <div class="hamburguesa" id="hamburguesa"> ☰</div>
+          <ul>
+            <li><a href="energizantes.html">Energizantes</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
 
-        <ul>
-          <li><a href="energizantes.html">Energizantes</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-        <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
-          <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
-          <span id="contador-carrito" class="contador-carrito oculto">0</span>
-        </a>
+          <!-- Carrito -->
+          <div class="nav-icons">
+            <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
+              <img
+                src="imagenes/shopping-cart.png"
+                alt="Carrito"
+                class="icono-carrito"
+              />
+              <span id="contador-carrito" class="contador-carrito oculto"
+                >0</span
+              >
+            </a>
+
+            <a href="registro.html" class="link-usuario">
+              <i class="fa-solid fa-user"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- mensaje sobre imagen -->
+
+      <div class="texto-sobre-imagen">
+        <h1>¿en qué podemos ayudarte?</h1>
       </div>
-    </nav>
 
-    <!-- mensaje sobre imagen -->
+      <!-- FIN mensaje sobre imagen -->
+    </header>
 
-    <div class="texto-sobre-imagen">
-      <h1>¿en qué podemos ayudarte?</h1>
-    </div>
+    <!--fin logo y  navegacion -->
 
-    <!-- FIN mensaje sobre imagen -->
-  </header>
+    <main>
+      <!--seccion de contacto con formulario -->
 
-  <!--fin logo y  navegacion -->
+      <section class="bloque-inclinado-contacto">
+        <div class="contenido-inclinado">
+          <h2>Estamos para ayudarte</h2>
 
-  <main>
-    <!--seccion de contacto con formulario -->
-
-    <section class="bloque-inclinado-contacto">
-      <div class="contenido-inclinado">
-        <h2>Estamos para ayudarte</h2>
-
-        <p>
-          Completá el formulario o encontrá información útil para resolver tus
-          dudas.
-        </p>
-
-        <form action="#" method="post" class="formulario-contacto">
-          <input type="text" name="nombre" placeholder="Nombre completo" required />
-          <input type="email" name="email" placeholder="Correo electrónico" required />
-          <input type="text" name="asunto" placeholder="Asunto" required />
-          <textarea name="mensaje" rows="5" placeholder="Escribí tu mensaje..." required></textarea>
-          <button type="submit"><span>Enviar</span></button>
-        </form>
-
-        <div id="mensaje-exito" class="mensaje-exito"></div>
-
-        <div class="info-contacto">
-          <h3>
-            <i class="fas fa-envelope-open-text"></i> CONTACTAR A RedBull
-          </h3>
-          <p><i class="fas fa-location-dot"></i> RedBull Argentina</p>
           <p>
-            <i class="fas fa-map-marker-alt"></i> Av. del Libertador 7208,
-            C1429 Cdad. Autónoma de Buenos Aires
+            Completá el formulario o encontrá información útil para resolver tus
+            dudas.
           </p>
-          <p><i class="fas fa-clock"></i> Lunes a Viernes: 8 AM - 5 PM PST</p>
-          <p><i class="fas fa-phone"></i> 11 4137-3330</p>
-          <p><i class="fas fa-phone"></i> 11 4267-7890</p>
+
+          <form action="#" method="post" class="formulario-contacto">
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre completo"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              required
+            />
+            <input type="text" name="asunto" placeholder="Asunto" required />
+            <textarea
+              name="mensaje"
+              rows="5"
+              placeholder="Escribí tu mensaje..."
+              required
+            ></textarea>
+            <button type="submit"><span>Enviar</span></button>
+          </form>
+
+          <div id="mensaje-exito" class="mensaje-exito"></div>
+
+          <div class="info-contacto">
+            <h3>
+              <i class="fas fa-envelope-open-text"></i> CONTACTAR A RedBull
+            </h3>
+            <p><i class="fas fa-location-dot"></i> RedBull Argentina</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Av. del Libertador 7208,
+              C1429 Cdad. Autónoma de Buenos Aires
+            </p>
+            <p><i class="fas fa-clock"></i> Lunes a Viernes: 8 AM - 5 PM PST</p>
+            <p><i class="fas fa-phone"></i> 11 4137-3330</p>
+            <p><i class="fas fa-phone"></i> 11 4267-7890</p>
+          </div>
+        </div>
+      </section>
+
+      <!--fin seccion formulario -->
+
+      <!-- MODAL DE DETALLE DE PRODUCTO -->
+      <div id="modal-detalle" class="modal oculto">
+        <div class="modal-producto">
+          <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+          <div class="modal-izq">
+            <div class="galeria-miniaturas" id="miniaturas"></div>
+            <img
+              id="modal-imagen"
+              class="imagen-grande"
+              src=""
+              alt="Imagen principal del producto"
+            />
+          </div>
+          <div class="modal-der">
+            <h2 id="modal-nombre"></h2>
+            <p id="modal-descripcion" class="modal-descripcion"></p>
+            <p id="modal-precio" class="modal-precio"></p>
+            <button onclick="agregarAlCarrito()" class="boton-agregar">
+              Agregar al carrito
+            </button>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!--fin seccion formulario -->
-
-    <!-- MODAL DE DETALLE DE PRODUCTO -->
-    <div id="modal-detalle" class="modal oculto">
-      <div class="modal-producto">
-        <span class="cerrar" onclick="cerrarModal()">&times;</span>
-
-        <div class="modal-izq">
-          <div class="galeria-miniaturas" id="miniaturas"></div>
-          <img id="modal-imagen" class="imagen-grande" src="" alt="Imagen principal del producto">
+      <!-- CARRITO LATERAL -->
+      <div id="carrito-container" class="carrito oculto">
+        <div class="carrito-header">
+          <h3>Tu Carrito</h3>
+          <button class="cerrar-carrito" onclick="toggleCarrito(event)">
+            X
+          </button>
         </div>
-        <div class="modal-der">
-          <h2 id="modal-nombre"></h2>
-          <p id="modal-descripcion" class="modal-descripcion"></p>
-          <p id="modal-precio" class="modal-precio"></p>
-          <button onclick="agregarAlCarrito()" class="boton-agregar">Agregar al carrito</button>
+        <div id="lista-carrito" class="contenido-carrito"></div>
+        <p id="carrito-vacio" class="carrito-vacio oculto">
+          TU CARRITO ESTÁ VACÍO
+        </p>
+        <p id="total-carrito" class="carrito-total"></p>
+        <button
+          id="boton-finalizar"
+          class="boton-finalizar oculto"
+          onclick="finalizarCompra()"
+        >
+          Finalizar compra
+        </button>
+      </div>
+
+      <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
+      <div id="mensaje-compra" class="modal-compra oculto">
+        <div class="modal-compra-contenido">
+          <h2>¡Gracias por tu compra!</h2>
+          <p>Tu pedido fue procesado con éxito.</p>
+          <button onclick="cerrarMensajeCompra()">Cerrar</button>
         </div>
       </div>
-    </div>
+    </main>
 
+    <!-- Footer   -->
 
-    <!-- CARRITO LATERAL -->
-    <div id="carrito-container" class="carrito oculto">
-      <div class="carrito-header">
-        <h3>Tu Carrito</h3>
-        <button class="cerrar-carrito" onclick="toggleCarrito(event)">X</button>
+    <footer>
+      <div class="contenido-footer">
+        <img
+          src="imagenes/redbullcom-logo_double-with-text.svg"
+          alt="Red Bull Logo"
+          class="footer-logo"
+        />
+
+        <ul class="footer-links">
+          <li><a href="productos.html">nuestros productos</a></li>
+          <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
+          <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
+          <li>
+            <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
+          </li>
+          <li><a href="contacto.html">Contactanos</a></li>
+        </ul>
+
+        <div class="footer-redes">
+          <a href="#" onclick="mostrarAviso(event)"
+            ><img src="imagenes/instagram.png" alt="Instagram"
+          /></a>
+          <a href="#" onclick="mostrarAviso(event)"
+            ><img src="imagenes/youtube.png" alt="YouTube"
+          /></a>
+          <a href="#" onclick="mostrarAviso(event)"
+            ><img src="imagenes/facebook.png" alt="Facebook"
+          /></a>
+          <a href="#" onclick="mostrarAviso(event)"
+            ><img src="imagenes/X.png" alt="X"
+          /></a>
+        </div>
+
+        <p class="footer-copy">
+          © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer
+          Escuela Davinci
+        </p>
       </div>
-      <div id="lista-carrito" class="contenido-carrito"></div>
-      <p id="carrito-vacio" class="carrito-vacio oculto">TU CARRITO ESTÁ VACÍO</p>
-      <p id="total-carrito" class="carrito-total"></p>
-      <button id="boton-finalizar" class="boton-finalizar oculto" onclick="finalizarCompra()">Finalizar compra</button>
+    </footer>
+
+    <!-- Fin Footer   -->
+
+    <!-- Aviso emergente en trabajo  -->
+
+    <div id="aviso-trabajo" class="aviso-trabajo oculto">
+      🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
     </div>
+    <!-- Fin Aviso   -->
 
-    <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
-    <div id="mensaje-compra" class="modal-compra oculto">
-      <div class="modal-compra-contenido">
-        <h2>¡Gracias por tu compra!</h2>
-        <p>Tu pedido fue procesado con éxito.</p>
-        <button onclick="cerrarMensajeCompra()">Cerrar</button>
-      </div>
-    </div>
-
-  </main>
-
-
-  <!-- Footer   -->
-
-  <footer>
-    <div class="contenido-footer">
-      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" class="footer-logo" />
-
-      <ul class="footer-links">
-        <li><a href="productos.html">nuestros productos</a></li>
-        <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
-        <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
-        <li>
-          <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
-        </li>
-        <li><a href="contacto.html">Contactanos</a></li>
-      </ul>
-
-      <div class="footer-redes">
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/instagram.png" alt="Instagram" /></a>
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/youtube.png" alt="YouTube" /></a>
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/facebook.png" alt="Facebook" /></a>
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/X.png" alt="X" /></a>
-      </div>
-
-      <p class="footer-copy">
-        © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer Escuela Davinci
-      </p>
-    </div>
-  </footer>
-
-
-  <!-- Fin Footer   -->
-
-  <!-- Aviso emergente en trabajo  -->
-
-  <div id="aviso-trabajo" class="aviso-trabajo oculto">
-    🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
-  </div>
-  <!-- Fin Aviso   -->
-
-  <!-- Scripts -->
-  <script src="js/global.js"></script>
-  <script src="js/modal-carrito.js"></script>
-</body>
-
+    <!-- Scripts -->
+    <script src="js/global.js"></script>
+    <script src="js/modal-carrito.js"></script>
+  </body>
 </html>

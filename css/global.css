@@ -198,6 +198,53 @@ footer {
   cursor: pointer;
 }
 
+
+/*usuario*/
+
+
+/* Contenedor carrito + usuario a la derecha */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;        /* separa carrito y usuario */
+  margin-left: auto; /* los manda a la derecha */
+}
+
+/* Estilos del ícono usuario */
+.link-usuario i {
+  font-size: 20px;
+  color: white;
+  transition: transform 0.3s ease, color 0.3s ease;
+  vertical-align: middle;
+}
+
+.link-usuario {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.link-usuario::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #00bfff;
+  transition: width 0.3s ease;
+}
+
+.link-usuario:hover::after {
+  width: 100%;
+}
+
+.link-usuario:hover i {
+  transform: scale(1.1);
+  
+}
+/*fin usuario */
+
 /* media responsive */
 
 /* responsive 1024px (tablets y celulares) */
