@@ -1,294 +1,286 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RedBull Energizantes</title>
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/energizantes.css" />
-    <link rel="stylesheet" href="css/modal-carrito.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
-    <!-- icono pestaña navegador -->
-  </head>
 
-  <body>
-    <!-- inicio header -->
-    <header>
-      <nav>
-        <div class="nav-container contenedor-margenes">
-          <a href="index.html" class="logo">
-            <img
-              src="imagenes/redbullcom-logo_double-with-text.svg"
-              alt="Red Bull Logo"
-            />
-          </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RedBull Energizantes</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/energizantes.css" />
+  <link rel="stylesheet" href="css/modal-carrito.css" />
+  <link rel="stylesheet" href="css/modal-login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
+  <!-- icono pestaña navegador -->
+</head>
 
-          <div class="hamburguesa" id="hamburguesa">☰</div>
+<body>
+  <!-- inicio header -->
+  <header>
+    <nav>
+      <div class="nav-container contenedor-margenes">
+        <a href="index.html" class="logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" />
+        </a>
 
-          <ul>
-            <li><a href="energizantes.html">Energizantes</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-          </ul>
+        <div class="hamburguesa" id="hamburguesa">☰</div>
 
-          <!-- Carrito -->
-          <div class="nav-icons">
-            <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
-              <img
-                src="imagenes/shopping-cart.png"
-                alt="Carrito"
-                class="icono-carrito"
-              />
-              <span id="contador-carrito" class="contador-carrito oculto"
-                >0</span
-              >
-            </a>
-
-            <a href="registro.html" class="link-usuario">
-              <i class="fa-solid fa-user"></i>
-            </a>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <!-- fin header -->
-
-    <main>
-      <section>
-        <div class="texto-sobre-imagen">
-          <h1>Te da aaalas®</h1>
-        </div>
-
-        <div class="texto-descripcion">
-          <h2>
-            Ideal para días intensos, Red Bull combina cafeína, vitaminas y
-            taurina para ayudarte a mantener el foco y el rendimiento.
-            <br />Probá nuestras ediciones clásicas y de temporada: energía para
-            cada momento.
-          </h2>
-        </div>
-      </section>
-
-      <!-- descripcion energizante clasico -->
-      <section class="galeria-productos">
-        <div class="producto animar">
-          <div class="info">
-            <h3>Red Bull edición clásica</h3>
-            <p>
-              Red Bull Energizante Clásica ofrece un sabor distintivo y
-              ligeramente dulce con un toque cítrico, equilibrado por una leve
-              acidez. Su perfil único combina suavidad y energía, pensado para
-              ser refrescante y revitalizante en cada sorbo.
-            </p>
-          </div>
-          <img
-            src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp"
-            alt="Red Bull Clásica"
-          />
-        </div>
-      </section>
-      <!--fin descripcion energizante clasico -->
-
-      <!-- productos energizantes -->
-
-      <section class="latas">
-        <!-- Lata 1 -->
-        <div class="contenedor-lata">
-          <div class="lata normal">
-            <img
-              src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp"
-              alt="energizante RedBull"
-            />
-            <p>Red Bull energizante</p>
-          </div>
-        </div>
-
-        <!-- Lata 2 -->
-        <div class="contenedor-lata">
-          <div class="lata libreazucar">
-            <img
-              src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp"
-              alt="redbull libre de azucar"
-            />
-            <p>Red Bull libre de azucar</p>
-          </div>
-        </div>
-
-        <!-- Lata 3 -->
-        <div class="contenedor-lata">
-          <div class="lata tropical">
-            <img
-              src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp"
-              alt="redbull Tropical Edition"
-            />
-            <p>Red Bull edicion tropical</p>
-          </div>
-        </div>
-
-        <!-- Lata 4 -->
-        <div class="contenedor-lata">
-          <div class="lata roja">
-            <img
-              src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp"
-              alt="Redbull Edicion melon"
-            />
-            <p>Red Bull edicion melon</p>
-          </div>
-        </div>
-
-        <!-- Lata 5 -->
-        <div class="contenedor-lata">
-          <div class="lata verano">
-            <img
-              src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp"
-              alt="redbull edicion verano"
-            />
-            <p>Red Bull edicion verano</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- fin productos energizantes -->
-
-      <!-- seccion descipccion -->
-
-      <section class="seccion-descripcion">
-        <div class="texto-descriptivo contenedor-margenes">
-          <h3>Volar por la vida es más sencillo cuando tienes aaalas.</h3>
-        </div>
-
-        <div class="imagen-deportes">
-          <img
-            src="./imagenes/red-bull-energydrink.avif"
-            alt="redbull en jornada laboral"
-          />
-        </div>
-      </section>
-
-      <!-- MODAL DE DETALLE DE PRODUCTO -->
-      <div id="modal-detalle" class="modal oculto">
-        <div class="modal-producto">
-          <span class="cerrar" onclick="cerrarModal()">&times;</span>
-
-          <div class="modal-izq">
-            <div class="galeria-miniaturas" id="miniaturas"></div>
-            <img
-              id="modal-imagen"
-              class="imagen-grande"
-              src=""
-              alt="Imagen principal del producto"
-            />
-          </div>
-          <div class="modal-der">
-            <h2 id="modal-nombre"></h2>
-            <p id="modal-descripcion" class="modal-descripcion"></p>
-            <p id="modal-precio" class="modal-precio"></p>
-            <button onclick="agregarAlCarrito()" class="boton-agregar">
-              Agregar al carrito
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARRITO LATERAL -->
-      <div id="carrito-container" class="carrito oculto">
-        <div class="carrito-header">
-          <h3>Tu Carrito</h3>
-          <button class="cerrar-carrito" onclick="toggleCarrito(event)">
-            X
-          </button>
-        </div>
-        <div id="lista-carrito" class="contenido-carrito"></div>
-        <p id="carrito-vacio" class="carrito-vacio oculto">
-          TU CARRITO ESTÁ VACÍO
-        </p>
-        <p id="total-carrito" class="carrito-total"></p>
-        <button
-          id="boton-finalizar"
-          class="boton-finalizar oculto"
-          onclick="finalizarCompra()"
-        >
-          Finalizar compra
-        </button>
-      </div>
-
-      <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
-      <div id="mensaje-compra" class="modal-compra oculto">
-        <div class="modal-compra-contenido">
-          <h2>¡Gracias por tu compra!</h2>
-          <p>Tu pedido fue procesado con éxito.</p>
-          <button onclick="cerrarMensajeCompra()">Cerrar</button>
-        </div>
-      </div>
-    </main>
-    <!--fin seccion descipccion -->
-
-    <!-- Footer -->
-
-    <footer>
-      <div class="contenido-footer">
-        <img
-          src="imagenes/redbullcom-logo_double-with-text.svg"
-          alt="Red Bull Logo"
-          class="footer-logo"
-        />
-
-        <ul class="footer-links">
-          <li><a href="productos.html">nuestros productos</a></li>
-          <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
-          <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
-          <li>
-            <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
-          </li>
-          <li><a href="contacto.html">Contactanos</a></li>
+        <ul>
+          <li><a href="energizantes.html">Energizantes</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
         </ul>
 
-        <div class="footer-redes">
-          <a href="#" onclick="mostrarAviso(event)"
-            ><img src="imagenes/instagram.png" alt="Instagram"
-          /></a>
-          <a href="#" onclick="mostrarAviso(event)"
-            ><img src="imagenes/youtube.png" alt="YouTube"
-          /></a>
-          <a href="#" onclick="mostrarAviso(event)"
-            ><img src="imagenes/facebook.png" alt="Facebook"
-          /></a>
-          <a href="#" onclick="mostrarAviso(event)"
-            ><img src="imagenes/X.png" alt="X"
-          /></a>
+        <!-- Carrito -->
+        <div class="nav-icons">
+          <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
+            <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
+            <span id="contador-carrito" class="contador-carrito oculto">0</span>
+          </a>
+
+          <a href="registro.html" class="link-usuario">
+            <i class="fa-solid fa-user"></i>
+          </a>
         </div>
-
-        <p class="footer-copy">
-          © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer
-          Escuela Davinci
-        </p>
       </div>
-    </footer>
+    </nav>
+  </header>
 
-    <!--fin Footer -->
+  <!-- fin header -->
 
-    <!-- Aviso emergente en trabajo  -->
+  <main>
+    <section>
+      <div class="texto-sobre-imagen">
+        <h1>Te da aaalas®</h1>
+      </div>
 
-    <div id="aviso-trabajo" class="aviso-trabajo oculto">
-      🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
+      <div class="texto-descripcion">
+        <h2>
+          Ideal para días intensos, Red Bull combina cafeína, vitaminas y
+          taurina para ayudarte a mantener el foco y el rendimiento.
+          <br />Probá nuestras ediciones clásicas y de temporada: energía para
+          cada momento.
+        </h2>
+      </div>
+    </section>
+
+    <!-- descripcion energizante clasico -->
+    <section class="galeria-productos">
+      <div class="producto animar">
+        <div class="info">
+          <h3>Red Bull edición clásica</h3>
+          <p>
+            Red Bull Energizante Clásica ofrece un sabor distintivo y
+            ligeramente dulce con un toque cítrico, equilibrado por una leve
+            acidez. Su perfil único combina suavidad y energía, pensado para
+            ser refrescante y revitalizante en cada sorbo.
+          </p>
+        </div>
+        <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="Red Bull Clásica" />
+      </div>
+    </section>
+    <!--fin descripcion energizante clasico -->
+
+    <!-- productos energizantes -->
+
+    <section class="latas">
+      <!-- Lata 1 -->
+      <div class="contenedor-lata">
+        <div class="lata normal">
+          <img src="./imagenes/DRES_AR_ED-250ml_ambient_front_redbullcom.webp" alt="energizante RedBull" />
+          <p>Red Bull energizante</p>
+        </div>
+      </div>
+
+      <!-- Lata 2 -->
+      <div class="contenedor-lata">
+        <div class="lata libreazucar">
+          <img src="./imagenes/DRES_AR_SUGARFREE-250ml_ambient_front_redbullcom.webp" alt="redbull libre de azucar" />
+          <p>Red Bull libre de azucar</p>
+        </div>
+      </div>
+
+      <!-- Lata 3 -->
+      <div class="contenedor-lata">
+        <div class="lata tropical">
+          <img src="./imagenes/DRES_AR_TROPICAL-250ml_ambient_front_redbullcom.webp" alt="redbull Tropical Edition" />
+          <p>Red Bull edicion tropical</p>
+        </div>
+      </div>
+
+      <!-- Lata 4 -->
+      <div class="contenedor-lata">
+        <div class="lata roja">
+          <img src="./imagenes/DRES_AR_RED-Watermelon-250ml_ambient_front_redbullcom.webp"
+            alt="Redbull Edicion melon" />
+          <p>Red Bull edicion melon</p>
+        </div>
+      </div>
+
+      <!-- Lata 5 -->
+      <div class="contenedor-lata">
+        <div class="lata verano">
+          <img src="./imagenes/AR_AS_250ml_The_Summer_Edition_COUNTRY_RGB__Ambient_Closed_Front_COM_FULL.webp"
+            alt="redbull edicion verano" />
+          <p>Red Bull edicion verano</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- fin productos energizantes -->
+
+    <!-- seccion descipccion -->
+
+    <section class="seccion-descripcion">
+      <div class="texto-descriptivo contenedor-margenes">
+        <h3>Volar por la vida es más sencillo cuando tienes aaalas.</h3>
+      </div>
+
+      <div class="imagen-deportes">
+        <img src="./imagenes/red-bull-energydrink.avif" alt="redbull en jornada laboral" />
+      </div>
+    </section>
+
+    <!-- MODAL DE DETALLE DE PRODUCTO -->
+    <div id="modal-detalle" class="modal oculto">
+      <div class="modal-producto">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+        <div class="modal-izq">
+          <div class="galeria-miniaturas" id="miniaturas"></div>
+          <img id="modal-imagen" class="imagen-grande" src="" alt="Imagen principal del producto" />
+        </div>
+        <div class="modal-der">
+          <h2 id="modal-nombre"></h2>
+          <p id="modal-descripcion" class="modal-descripcion"></p>
+          <p id="modal-precio" class="modal-precio"></p>
+          <button onclick="agregarAlCarrito()" class="boton-agregar">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- fin Aviso emergente en trabajo  -->
+    <!-- CARRITO LATERAL -->
+    <div id="carrito-container" class="carrito oculto">
+      <div class="carrito-header">
+        <h3>Tu Carrito</h3>
+        <button class="cerrar-carrito" onclick="toggleCarrito(event)">
+          X
+        </button>
+      </div>
+      <div id="lista-carrito" class="contenido-carrito"></div>
+      <p id="carrito-vacio" class="carrito-vacio oculto">
+        TU CARRITO ESTÁ VACÍO
+      </p>
+      <p id="total-carrito" class="carrito-total"></p>
+      <button id="boton-finalizar" class="boton-finalizar oculto" onclick="finalizarCompra()">
+        Finalizar compra
+      </button>
+    </div>
 
-    <!-- Scritps -->
+    <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
+    <div id="mensaje-compra" class="modal-compra oculto">
+      <div class="modal-compra-contenido">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu pedido fue procesado con éxito.</p>
+        <button onclick="cerrarMensajeCompra()">Cerrar</button>
+      </div>
+    </div>
+  </main>
+  <!--fin seccion descipccion -->
 
-    <script src="js/energizantes.js"></script>
-    <script src="js/global.js"></script>
-    <script src="js/modal-carrito.js"></script>
-  </body>
+  <!-- Footer -->
+
+  <footer>
+    <div class="contenido-footer">
+      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" class="footer-logo" />
+
+      <ul class="footer-links">
+        <li><a href="productos.html">nuestros productos</a></li>
+        <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
+        <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
+        <li>
+          <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
+        </li>
+        <li><a href="contacto.html">Contactanos</a></li>
+      </ul>
+
+      <div class="footer-redes">
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/instagram.png" alt="Instagram" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/youtube.png" alt="YouTube" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/facebook.png" alt="Facebook" /></a>
+        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/X.png" alt="X" /></a>
+      </div>
+
+      <p class="footer-copy">
+        © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer
+        Escuela Davinci
+      </p>
+    </div>
+  </footer>
+
+  <!--fin Footer -->
+
+  <!-- Modal de inicio de sesion/registro   -->
+
+  <!-- Overlay oscuro -->
+  <div id="overlay-login" class="overlay oculto"></div>
+
+  <!-- Modal de Login -->
+  <div id="modal-login" class="modal-login oculto">
+    <div class="modal-contenido">
+      <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
+
+      <div class="modal-logo">
+        <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+      </div>
+      <form action="/login" method="post" class="form-login">
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required placeholder="tu@email.com">
+        </label>
+        <label>
+          <span>Contraseña</span>
+          <input type="password" name="password" required placeholder="********">
+        </label>
+        <button type="submit" class="btn-login">Ingresar</button>
+      </form>
+
+      
+      <p class="modal-footer">
+        ¿No tenés cuenta?
+        <a href="registro.html">Registrate</a>
+      </p>
+    </div>
+  </div>
+
+  <!--Fin Modal de inicio de sesion/registro   -->
+
+  <!-- Aviso emergente en trabajo  -->
+
+  <div id="aviso-trabajo" class="aviso-trabajo oculto">
+    🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
+  </div>
+
+  <!-- fin Aviso emergente en trabajo  -->
+
+  <!-- GSAP -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- ScrollTrigger (para animar con el scroll) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+
+
+  <!-- Scritps -->
+
+  <script defer src="js/energizantes.js"></script>
+  <script defer src="js/global.js"></script>
+  <script defer src="js/modal-carrito.js"></script>
+  <script defer src="js/gsap-nav.js"></script>
+  <script defer src="js/login.js"></script>
+</body>
+
 </html>
