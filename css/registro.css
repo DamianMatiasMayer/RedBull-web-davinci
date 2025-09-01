@@ -1,0 +1,97 @@
+body {
+  font-family: 'Oswald', sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  
+}
+
+.contenedor-margenes {
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+}
+
+.registro-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  margin-top: 80px; 
+}
+
+
+.registro-box {
+  background: #fff;
+  padding: 30px 24px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  width: min(420px, 92vw);
+  text-align: center;
+}
+
+.logo-registro img {
+  max-width: 220px;
+  margin-bottom: 20px;
+}
+
+.form-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.form-registro label {
+  font-size: 14px;
+  color: #333;
+}
+
+.form-registro input {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.btn-registrarse {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  background: #d0021b;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.btn-registrarse:hover {
+  filter: brightness(.95);
+}
+
+.registro-footer {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.registro-footer a {
+  color: #0d1b2a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.registro-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Alinea carrito y usuario al centro SOLO en registro.html */
+nav .nav-icons a{
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+nav .nav-icons img,
+nav .nav-icons i{
+  display: block; /* evita el desfase por baseline */
+}

@@ -1,25 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnUsuario = document.querySelector(".link-usuario");
-  const overlay = document.getElementById("overlay-login");
-  const modal = document.getElementById("modal-login");
-  const btnCerrar = modal.querySelector(".cerrar-modal");
+  const btnsAbrirLogin = document.querySelectorAll(".link-usuario, .registro-footer a");
+  const overlay = document.getElementById("overlay-login"); //fondo oscuro detrás del modal.
+  const modal = document.getElementById("modal-login"); //la ventana de login.
+  const btnCerrar = modal.querySelector(".cerrar-modal"); //el botón de la X para cerrar.
 
-  if (btnUsuario) {
-    btnUsuario.addEventListener("click", (e) => {
-      e.preventDefault(); // que no intente navegar
-      overlay.classList.remove("oculto");
-      modal.classList.remove("oculto");
-      // foco en el primer input
-      const firstInput = modal.querySelector("input");
-      if (firstInput) firstInput.focus();
-    });
-  }
+ btnsAbrirLogin.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault(); // evita que navegue a otra página
+    overlay.classList.remove("oculto");// muestra el fondo oscuro
+    modal.classList.remove("oculto");// muestra el modal
+    const firstInput = modal.querySelector("input");
+    if (firstInput) firstInput.focus();// pone el cursor en el primer campo
+  });
+});
 
-  function cerrar() {
+  function cerrar() { // función para cerrar el modal
     overlay.classList.add("oculto");
     modal.classList.add("oculto");
   }
 
+  // Cerrar con click en el fondo o en la X
   overlay.addEventListener("click", cerrar);
   btnCerrar.addEventListener("click", cerrar);
 
