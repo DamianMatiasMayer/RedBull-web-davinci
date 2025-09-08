@@ -174,29 +174,34 @@
     <div id="overlay-login" class="overlay oculto"></div>
 
     <!-- Modal de Login -->
-    <div id="modal-login" class="modal-login oculto">
-        <div class="modal-contenido">
-            <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
 
-            <div class="modal-logo">
-                <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
-            </div>
-            <form action="/login" method="post" class="form-login">
-                <label for="email">Email</label>
-                <input id="email" type="email" name="email" required placeholder="tu@email.com">
+  <div id="modal-login" class="modal-login oculto">
+    <div class="modal-contenido">
+      <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
 
-                <label for="password">Contraseña</label>
-                <input id="password" type="password" name="password" required placeholder="********">
-                <button type="submit" class="btn-login">Ingresar</button>
-            </form>
+      <div class="modal-logo">
+        <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+      </div>
+      <form action="/login" method="post" class="form-login">
 
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required placeholder="tu@email.com">
 
-            <p class="modal-footer">
-                ¿No tenés cuenta?
-                <a href="registro.html">Registrate</a>
-            </p>
+        <label for="password">Contraseña</label>
+        <div class="campo-password">
+          <input id="login-password" type="password" name="password" required placeholder="********">
+          <i class="fa-solid fa-eye" id="togglePassword"></i>
         </div>
+        <button type="submit" class="btn-login">Ingresar</button>
+      </form>
+
+
+      <p class="modal-footer">
+        ¿No tenés cuenta?
+        <a href="registro.html">Registrate</a>
+      </p>
     </div>
+  </div>
 
     <!--Fin Modal de inicio de sesion/registro   -->
 
@@ -216,6 +221,7 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!--  scripts -->
+    <script defer src="js/mostrar-ocultar.js"></script>
     <script defer src="js/global.js"></script>
     <script defer src="js/modal-carrito.js"></script>
     <script defer src="js/gsap-nav.js"></script>

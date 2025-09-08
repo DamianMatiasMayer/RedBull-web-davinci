@@ -27,7 +27,7 @@
     //redireccionar a la página de inicio 
     header('Location: index.html');
 
-
+    
 
 
 

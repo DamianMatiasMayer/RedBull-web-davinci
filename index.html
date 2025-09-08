@@ -233,9 +233,11 @@
   <!-- Modal de inicio de sesion/registro   -->
 
   <!-- Overlay oscuro -->
+
   <div id="overlay-login" class="overlay oculto"></div>
 
   <!-- Modal de Login -->
+
   <div id="modal-login" class="modal-login oculto">
     <div class="modal-contenido">
       <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
@@ -249,7 +251,10 @@
         <input id="email" type="email" name="email" required placeholder="tu@email.com">
 
         <label for="password">Contraseña</label>
-        <input id="password" type="password" name="password" required placeholder="********">
+        <div class="campo-password">
+          <input id="login-password" type="password" name="password" required placeholder="********">
+          <i class="fa-solid fa-eye" id="togglePassword"></i>
+        </div>
         <button type="submit" class="btn-login">Ingresar</button>
       </form>
 

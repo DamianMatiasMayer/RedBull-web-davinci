@@ -58,3 +58,27 @@
   max-width: 250px; 
   height: auto;
 }
+
+/*estilos mostrar/ocultar*/
+
+.campo-password {
+  position: relative;
+  width: 100%; /* el input ocupa todo el ancho disponible */
+}
+
+.campo-password input {
+  width: 100%;
+  padding-right: 40px;   /* deja espacio dentro del input para el ojito */
+  box-sizing: border-box;
+}
+
+.campo-password i {
+  position: absolute;
+  right: 12px;          /* pegado al borde derecho */
+  top: 50%;
+  transform: translateY(-50%); /* centrado vertical */
+  cursor: pointer;
+  color: #555;
+  font-size: 1rem;
+}
+

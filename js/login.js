@@ -28,3 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && !modal.classList.contains("oculto")) cerrar();
   });
 });
+
+ //mostrar/ocultar
+const togglePassword = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("login-password");
+
+togglePassword.addEventListener("click", () => {
+  const type = passwordInput.type === "password" ? "text" : "password";
+  passwordInput.type = type;
+
+  togglePassword.classList.toggle("fa-eye");
+  togglePassword.classList.toggle("fa-eye-slash");
+});
+
