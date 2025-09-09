@@ -16,6 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "power2.out",
     delay: 0.3             // empieza después del contenedor
   });
+
+  gsap.from(".form-registro .campo-password i", {
+  duration: 0.6,
+  opacity: 0,
+  scale: 0,
+  rotation: 180,
+  ease: "back.out(1.7)",
+  delay: 1,
+  stagger: 0.2
+});
+
 });
 
 

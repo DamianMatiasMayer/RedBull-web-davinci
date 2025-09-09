@@ -95,3 +95,23 @@ nav .nav-icons img,
 nav .nav-icons i{
   display: block; /* evita el desfase por baseline */
 }
+
+/*estilo mostrar/ocultar*/
+
+.campo-password { position: relative; width: 100%; }
+.campo-password input {
+  width: 100%;
+  padding-right: 40px; /* espacio para el ojito dentro */
+  box-sizing: border-box;
+}
+.campo-password i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1;
+}
+
