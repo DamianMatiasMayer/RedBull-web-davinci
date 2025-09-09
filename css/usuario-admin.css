@@ -1,0 +1,93 @@
+.admin-usuarios {
+  max-width: 1000px;
+  margin: 40px auto;
+  font-family: 'Oswald', sans-serif;
+  color: #fff;
+}
+
+.admin-usuarios h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #d0021b; /* rojo Red Bull */
+  font-weight: 700;
+}
+
+.tabla-redbull {
+  width: 100%;
+  border-collapse: collapse;
+  background: #0d1b2a; /* azul oscuro */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.tabla-redbull thead {
+  background: #d0021b; /* rojo Red Bull */
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.tabla-redbull th,
+.tabla-redbull td {
+  padding: 14px 18px;
+  text-align: center;
+}
+
+.tabla-redbull tbody tr:nth-child(even) {
+  background: #1b263b;
+}
+
+
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.badge.activo {
+  background: #4caf50;
+  color: #fff;
+}
+
+.badge.inactivo {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.acciones .accion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.acciones .accion.desactivar {
+  background: #e67e22; /* naranja */
+}
+
+.acciones .accion.editar {
+  background: #007bff; /* azul */
+}
+
+.acciones .accion.password {
+  background: #6c3483; /* violeta */
+}
+
+.acciones .accion:hover {
+  filter: brightness(1.2);
+  transform: scale(1.1);
+}

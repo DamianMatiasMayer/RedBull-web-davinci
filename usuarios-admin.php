@@ -1,3 +1,14 @@
+<?php
+    
+    $conexion = mysqli_connect("localhost", "root", "", "redbull-web");
+
+    $sql = "Select * from usuarios";
+
+    $resultado = $conexion->query($sql);
+
+    $resultado->fetch_all(MYSQLI_ASSOC)//Buscar y traer, en un array asociativo
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,11 +18,11 @@
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/modal-carrito.css" />
     <link rel="stylesheet" href="css/modal-login.css">
-    <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="css/usuario-admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
-    <title>Registro</title>
+    <title>Administrador de usuarios</title>
 </head>
 
 <body>
@@ -52,44 +63,43 @@
 
     <main>
 
-        <div class="registro-page">
-            <div class="registro-box">
-                
-                <h2>Crear cuenta</h2>
-
-                <form action="registro.php" method="post" class="form-registro">
-                    <!-- Nombre -->
-                    <label for="registro-nombre">Nombre</label>
-                    <input id="registro-nombre" type="text" name="nombre" required placeholder="Tu nombre">
-
-                    <!-- Email -->
-                    <label for="registro-email">Email</label>
-                    <input id="registro-email" type="email" name="email" required placeholder="tu@email.com">
-
-                    <!-- Contraseña -->
-                    <label for="registro-password">Contraseña</label>
-                    <div class="campo-password">
-                        <input id="registro-password" type="password" name="password" required placeholder="********">
-                        <i class="fa-solid fa-eye" id="togglePasswordRegistro"></i>
-                    </div>
-
-                    <!-- Confirmar contraseña -->
-                    <label for="registro-confirm-password">Confirmar contraseña</label>
-                    <div class="campo-password">
-                        <input id="registro-confirm-password" type="password" name="confirm-password" required placeholder="********">
-                        <i class="fa-solid fa-eye" id="toggleConfirmPasswordRegistro"></i>
-                    </div>
-
-                    <!-- Botón -->
-                    <button type="submit" class="btn-registrarse">Registrarse</button>
-                </form>
-
-                <p class="registro-footer">
-                    ¿Ya tenés cuenta?
-                    <a href="#">Iniciá sesión</a>
-                </p>
-            </div>
-        </div>
+        <section class="admin-usuarios">
+            <h2>Administrador de Usuarios</h2>
+            <table class="tabla-redbull">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Mail</th>
+                        <th>Status</th>
+                        <th>Is Admin</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($resultado as $usuario): ?>
+                    <tr>
+                        <td><?= $usuario['id']?></td>
+                        <td><?= $usuario['nombre']?></td>
+                        <td><?= $usuario['mail']?></td>
+                        <td><span class="badge activo"><?= $usuario['activo']?></span></td>
+                        <td><?= $usuario['admin']?></td>
+                        <td class="acciones">
+                        <a href="desactivar.php?id=1" class="accion desactivar" title="Desactivar">
+                            <i class="fa-solid fa-ban"></i>
+                        </a>
+                        <a href="editar.php?id=1" class="accion editar" title="Editar">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <a href="password.php?id=1" class="accion password" title="Cambiar contraseña">
+                            <i class="fa-solid fa-lock"></i>
+                        </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
 
 
         <!-- MODAL DE DETALLE DE PRODUCTO -->
@@ -207,6 +217,7 @@
       </p>
     </div>
   </div>
+
     <!--Fin Modal de inicio de sesion/registro   -->
 
 
@@ -225,13 +236,11 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!--  scripts -->
-    <script defer src="js/registro.js"></script>
     <script defer src="js/mostrar-ocultar.js"></script>
     <script defer src="js/global.js"></script>
     <script defer src="js/modal-carrito.js"></script>
     <script defer src="js/gsap-nav.js"></script>
     <script defer src="js/login.js"></script>
-    <script defer src="js/gsap-registro.js"></script>
 </body>
 
 </html>
