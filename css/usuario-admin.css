@@ -1,93 +1,211 @@
+/* ====== Layout general ====== */
+:root { --nav-h: 80px; }                /* altura aprox. de la nav */
+body { padding-top: var(--nav-h); }      /* evita que la nav tape el contenido */
+
+/* ====== Sección admin ====== */
 .admin-usuarios {
   max-width: 1000px;
   margin: 40px auto;
+  padding-inline: 16px;                  /* respiro lateral en mobile */
   font-family: 'Oswald', sans-serif;
   color: #fff;
 }
 
-.admin-usuarios h2 {
-  text-align: center;
+.encabezado-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
   margin-bottom: 20px;
-  color: #d0021b; /* rojo Red Bull */
-  font-weight: 700;
 }
 
+.encabezado-admin h2 {
+  margin: 0;
+  color: #d0021b;
+  font-weight: 700;
+  line-height: 1.1;
+  
+}
+
+.btn-nuevo {
+  background: #d0021b;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .15s ease, filter .15s ease;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(208,2,27,0.25);
+}
+.btn-nuevo:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+/* ====== Tabla ====== */
 .tabla-redbull {
   width: 100%;
   border-collapse: collapse;
-  background: #0d1b2a; /* azul oscuro */
+  background: #0d1b2a;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
 .tabla-redbull thead {
-  background: #d0021b; /* rojo Red Bull */
+  background: #d0021b;
   color: #fff;
   text-transform: uppercase;
+  letter-spacing: .5px;
 }
 
 .tabla-redbull th,
 .tabla-redbull td {
-  padding: 14px 18px;
+  padding: 14px 16px;
   text-align: center;
 }
 
-.tabla-redbull tbody tr:nth-child(even) {
-  background: #1b263b;
+.tabla-redbull tbody tr { border-top: 1px solid rgba(255,255,255,0.06); }
+.tabla-redbull tbody tr:nth-child(even) { background: #1b263b; }
+
+/* Tabla responsive: permite desplazamiento horizontal en pantallas chicas */
+@media (max-width: 768px) {
+  .tabla-redbull { display: block; overflow-x: auto; white-space: nowrap; }
+  .tabla-redbull thead th { position: sticky; top: 0; z-index: 1; }
 }
 
-
-
+/* ====== Badges ====== */
 .badge {
   padding: 4px 10px;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 0.9em;
-  font-weight: 600;
+  font-weight: 700;
 }
+.badge.activo { background: #4caf50; color: #fff; }
+.badge.inactivo { background: #e74c3c; color: #fff; }
 
-.badge.activo {
-  background: #4caf50;
-  color: #fff;
-}
-
-.badge.inactivo {
-  background: #e74c3c;
-  color: #fff;
-}
-
+/* ====== Acciones ====== */
 .acciones {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
-
 .acciones .accion {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
+  width: 36px; height: 36px;
+  border-radius: 8px;
   color: #fff;
   text-decoration: none;
   font-size: 16px;
-  transition: 0.2s;
+  transition: transform .15s ease, filter .15s ease;
+}
+.acciones .accion:hover { filter: brightness(1.2); transform: scale(1.06); }
+
+.acciones .accion.desactivar { background: #e67e22; }
+.acciones .accion.editar     { background: #007bff; }
+.acciones .accion.password   { background: #6c3483; }
+
+/* ====== Overlay + Modal NUEVO ====== */
+/* Usamos clases genéricas para que aplique a todos los modales */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 3000;
+  display: none;                 /* cerrado por defecto */
 }
 
-.acciones .accion.desactivar {
-  background: #e67e22; /* naranja */
+.modal-login {
+  font-family: 'Oswald', sans-serif;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 3001;
+  display: none;                 /* cerrado por defecto */
+  width: min(92vw, 480px);
+  background: #fff;
+  color: #333;
+  border-radius: 14px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.45);
 }
 
-.acciones .accion.editar {
-  background: #007bff; /* azul */
+/* Mostrar cuando se quita .oculto */
+.overlay:not(.oculto) { display: block; }
+.modal-login:not(.oculto) { display: block; }
+
+/* Contenido del modal */
+.modal-contenido {
+  position: relative;
+  padding: 26px 24px 24px;
+}
+.cerrar-modal {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: none; border: 0;
+  font-size: 26px; cursor: pointer; color: #d0021b;
 }
 
-.acciones .accion.password {
-  background: #6c3483; /* violeta */
+/* Form del modal (newUser_form.php) */
+.form-registro label {
+  display: block;
+  margin-top: 14px;
+  font-weight: 600;
+  color: #222;
+}
+.form-registro input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  outline: none;
+}
+.form-registro input:focus {
+  border-color: #d0021b;
+  box-shadow: 0 0 0 3px rgba(208,2,27,0.15);
 }
 
-.acciones .accion:hover {
-  filter: brightness(1.2);
-  transform: scale(1.1);
+.campo-password {
+  position: relative;
 }
+.campo-password i.fa-eye,
+.campo-password i.fa-eye-slash {
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
+.btn-registrarse, .btn-login {
+  width: 100%;
+  background: #d0021b;
+  color: #fff;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: filter .15s ease, transform .15s ease;
+  box-shadow: 0 10px 24px rgba(208,2,27,0.25);
+}
+.btn-registrarse:hover, .btn-login:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* Evitar scroll de fondo cuando el modal esté abierto */
+body.no-scroll { overflow: hidden; }
+
+/* ====== Detalles visuales menores ====== */
+.footer-logo { max-height: 40px; }
+.footer-links a { text-transform: capitalize; }
+
+/* ====== Ajustes extra en pantallas chicas ====== */
+@media (max-width: 480px) {
+  .btn-nuevo { padding: 9px 14px; }
+  .modal-contenido { padding: 22px 18px 18px; }
+}
+
+.overlay:not(.oculto), .modal-login:not(.oculto) { display: block; }

@@ -19,34 +19,9 @@
   <!-- inicio header -->
 
   <header>
-    <nav>
-      <div class="nav-container contenedor-margenes">
-        <a href="index.html" class="logo">
-          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" />
-        </a>
-
-        <div class="hamburguesa" id="hamburguesa">☰</div>
-
-        <ul>
-          <li><a href="energizantes.html">Energizantes</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-
-        <!-- Carrito -->
-        <div class="nav-icons">
-          <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
-            <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
-            <span id="contador-carrito" class="contador-carrito oculto">0</span>
-          </a>
-
-          <a href="registro.html" class="link-usuario">
-            <i class="fa-solid fa-user"></i>
-          </a>
-        </div>
-      </div>
-    </nav>
+    <?php
+        include 'nav.php';
+    ?>
   </header>
 
   <!-- fin header -->
@@ -454,7 +429,7 @@
 
       <p class="modal-footer">
         ¿No tenés cuenta?
-        <a href="registro.html">Registrate</a>
+        <a href="registro.php">Registrate</a>
       </p>
     </div>
   </div>

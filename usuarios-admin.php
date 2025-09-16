@@ -1,12 +1,14 @@
 <?php
     
-    $conexion = mysqli_connect("localhost", "root", "", "redbull-web");
+    
+    require 'db_conn.php';
+    
 
     $sql = "Select * from usuarios";
 
     $resultado = $conexion->query($sql);
 
-    $resultado->fetch_all(MYSQLI_ASSOC)//Buscar y traer, en un array asociativo
+    $resultado->fetch_all(MYSQLI_ASSOC);//Buscar y traer, en un array asociativo
 ?>
 
 <!DOCTYPE html>
@@ -29,34 +31,9 @@
 
     <!-- inicio header -->
     <header>
-        <nav>
-            <div class="nav-container contenedor-margenes">
-                <a href="index.html" class="logo">
-                    <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" />
-                </a>
-
-                <div class="hamburguesa" id="hamburguesa">☰</div>
-
-                <ul>
-                    <li><a href="energizantes.html">Energizantes</a></li>
-                    <li><a href="productos.html">Productos</a></li>
-                    <li><a href="eventosYdeportes.html">Eventos y Deportes</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-
-                <!-- Carrito -->
-                <div class="nav-icons">
-                    <a href="#" onclick="toggleCarrito(event)" class="carrito-link">
-                        <img src="imagenes/shopping-cart.png" alt="Carrito" class="icono-carrito" />
-                        <span id="contador-carrito" class="contador-carrito oculto">0</span>
-                    </a>
-
-                    <a href="registro.html" class="link-usuario">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
+        <?php
+            include 'nav.php';
+        ?>
     </header>
 
     <!-- fin header -->
@@ -64,7 +41,10 @@
     <main>
 
         <section class="admin-usuarios">
-            <h2>Administrador de Usuarios</h2>
+            <div class="encabezado-admin">
+                <h2>Administrador de Usuarios</h2>
+                 <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo</a>
+            </div>
             <table class="tabla-redbull">
                 <thead>
                     <tr>
@@ -85,16 +65,26 @@
                         <td><span class="badge activo"><?= $usuario['activo']?></span></td>
                         <td><?= $usuario['admin']?></td>
                         <td class="acciones">
-                        <a href="desactivar.php?id=1" class="accion desactivar" title="Desactivar">
-                            <i class="fa-solid fa-ban"></i>
-                        </a>
-                        <a href="editar.php?id=1" class="accion editar" title="Editar">
-                            <i class="fa-solid fa-pen"></i>
-                        </a>
-                        <a href="password.php?id=1" class="accion password" title="Cambiar contraseña">
-                            <i class="fa-solid fa-lock"></i>
-                        </a>
+                            <a href="#"
+                                onclick="imprimirId(<?= $usuario['id']?>, 'desactivar'); return false;"
+                                class="accion desactivar" title="Desactivar">
+                                <i class="fa-solid fa-ban"></i>
+                            </a>
+
+                            <a href="#"
+                                onclick="imprimirId(<?= $usuario['id']?>, 'editar'); return false;"
+                                class="accion editar" title="Editar">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+
+                            <a href="#"
+                                onclick="imprimirId(<?= $usuario['id']?>, 'password'); return false;"
+                                class="accion password" title="Cambiar contraseña">
+                                <i class="fa-solid fa-lock"></i>
+                            </a>
                         </td>
+
+
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -213,12 +203,76 @@
 
       <p class="modal-footer">
         ¿No tenés cuenta?
-        <a href="registro.html">Registrate</a>
+        <a href="registro.php">Registrate</a>
       </p>
     </div>
   </div>
 
     <!--Fin Modal de inicio de sesion/registro   -->
+
+<!-- modal registro -->
+<div id="overlay-nuevo" class="overlay oculto"></div>
+
+<div id="modal-nuevo" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-modal-nuevo">&times;</button>
+
+    <div class="modal-logo">
+      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+    </div>
+
+        <?php
+            include 'newUser_form.php';
+        ?>
+  </div>
+</div>
+
+<!-- ========== MODAL DESACTIVAR ========== -->
+<div id="overlay-desactivar" class="overlay oculto"></div>
+<div id="modal-desactivar" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-desactivar">&times;</button>
+    <h3>Desactivar usuario</h3>
+    <form action="desactivar.php" method="post" class="form-login">
+      <input type="hidden" name="id" id="id-desactivar">
+      <label for="motivo-desactivar">Motivo (opcional)</label>
+      <input id="motivo-desactivar" name="motivo" type="text">
+      <button type="submit" class="btn-login">Desactivar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========== MODAL EDITAR ========== -->
+<div id="overlay-editar" class="overlay oculto"></div>
+<div id="modal-editar" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-editar">&times;</button>
+    <h3>Editar usuario</h3>
+    <form action="editar.php" method="post" class="form-login">
+      <input type="hidden" name="id" id="id-editar">
+      <label for="nombre-editar">Nuevo nombre</label>
+      <input id="nombre-editar" name="nombre" type="text" required>
+      <button type="submit" class="btn-login">Guardar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========== MODAL CAMBIAR CONTRASEÑA ========== -->
+<div id="overlay-password" class="overlay oculto"></div>
+<div id="modal-password" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-password">&times;</button>
+    <h3>Cambiar contraseña</h3>
+    <form action="password.php" method="post" class="form-login">
+      <input type="hidden" name="id" id="id-password">
+      <label for="pass-nuevo">Nueva contraseña</label>
+      <input id="pass-nuevo" name="password" type="password" required>
+      <button type="submit" class="btn-login">Cambiar</button>
+    </form>
+  </div>
+</div>
+
+
 
 
 
@@ -236,11 +290,14 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!--  scripts -->
-    <script defer src="js/mostrar-ocultar.js"></script>
+    
     <script defer src="js/global.js"></script>
     <script defer src="js/modal-carrito.js"></script>
     <script defer src="js/gsap-nav.js"></script>
     <script defer src="js/login.js"></script>
+    <script defer src="js/modal-nuevo.js"></script>
+    <script defer src="js/modales-usuarios.js"></script>
+
 </body>
 
 </html>
