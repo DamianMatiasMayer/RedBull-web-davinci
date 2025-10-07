@@ -214,33 +214,7 @@
 
   <!-- Modal de Login -->
 
-  <div id="modal-login" class="modal-login oculto">
-    <div class="modal-contenido">
-      <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
-
-      <div class="modal-logo">
-        <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
-      </div>
-      <form action="login.php" method="post" class="form-login">
-
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required placeholder="tu@email.com">
-
-        <label for="password">Contraseña</label>
-        <div class="campo-password">
-          <input id="login-password" type="password" name="password" required placeholder="********">
-          <i class="fa-solid fa-eye" id="togglePassword"></i>
-        </div>
-        <button type="submit" class="btn-login">Ingresar</button>
-      </form>
-
-
-      <p class="modal-footer">
-        ¿No tenés cuenta?
-        <a href="registro.php">Registrate</a>
-      </p>
-    </div>
-  </div>
+  <?php include 'login.php'; ?>
 
   <!--Fin Modal de inicio de sesion/registro   -->
 

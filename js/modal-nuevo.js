@@ -1,52 +1,62 @@
 // js/modal-nuevo.js
-document.addEventListener("DOMContentLoaded", () => {
-  const abrir  = document.getElementById("abrir-modal-nuevo");
-  const overlay = document.getElementById("overlay-nuevo");
-  const modal   = document.getElementById("modal-nuevo");
-  const cerrar  = document.getElementById("cerrar-modal-nuevo");
+document.addEventListener('DOMContentLoaded', () => {
+  /** Helper: abre/cierra un par overlay+modal por id **/
+  function bindModal(btnId, overlayId, modalId) {
+    const btn     = document.getElementById(btnId);
+    const overlay = document.getElementById(overlayId);
+    const modal   = document.getElementById(modalId);
 
-  if (!abrir || !overlay || !modal || !cerrar) {
-    console.warn("Modal Nuevo: faltan elementos en el DOM");
-    return;
+    // si falta alguno, no rompemos nada
+    if (!btn || !overlay || !modal) return;
+
+    const abrir = (e) => {
+      e && e.preventDefault();
+      overlay.classList.remove('oculto');
+      modal.classList.remove('oculto');
+      modal.querySelector('input')?.focus();
+      document.body.classList.add('no-scroll');
+
+      // Cerrar con la X del modal (busca .cerrar-modal dentro del modal)
+      const x = modal.querySelector('.cerrar-modal');
+      const cerrar = () => {
+        overlay.classList.add('oculto');
+        modal.classList.add('oculto');
+        document.body.classList.remove('no-scroll');
+        document.removeEventListener('keydown', onEsc);
+        overlay.removeEventListener('click', onOverlay);
+        x && x.removeEventListener('click', cerrar);
+      };
+
+      const onOverlay = (evt) => { if (evt.target === overlay) cerrar(); };
+      const onEsc = (evt) => { if (evt.key === 'Escape' && !modal.classList.contains('oculto')) cerrar(); };
+
+      x && x.addEventListener('click', cerrar, { once: true });
+      overlay.addEventListener('click', onOverlay);
+      document.addEventListener('keydown', onEsc);
+
+      // Guardamos referencias para inspección si te sirve
+      modal._cerrar = cerrar;
+    };
+
+    btn.addEventListener('click', abrir);
   }
 
-  /* ==== Abrir / Cerrar Modal ==== */
-  function abrirModal(e) {
-    e?.preventDefault();
-    overlay.classList.remove("oculto");
-    modal.classList.remove("oculto");
-    modal.querySelector("input")?.focus();
-    document.body.classList.add("no-scroll");
-  }
+  /** Conexiones: botón -> su modal correspondiente **/
+  // Nuevo Sys Admin
+  bindModal('abrir-modal-nuevo',   'overlay-nuevo-sysadmin', 'modal-nuevo-sysadmin');
+  // Nuevo Administrador
+  bindModal('abrir-modal-admin',   'overlay-nuevo-admin',    'modal-nuevo-admin');
+  // Nuevo Usuario
+  bindModal('abrir-modal-usuario', 'overlay-nuevo-usuario',  'modal-nuevo-usuario');
 
-  function cerrarModal() {
-    overlay.classList.add("oculto");
-    modal.classList.add("oculto");
-    document.body.classList.remove("no-scroll");
-  }
-
-  abrir.addEventListener("click", abrirModal);
-  cerrar.addEventListener("click", cerrarModal);
-  overlay.addEventListener("click", (e) => { if (e.target === overlay) cerrarModal(); });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.classList.contains("oculto")) cerrarModal();
-  });
-
-  /* ==== Toggle password (ojito) dentro del modal ==== */
-  modal.addEventListener("click", (e) => {
-    // Busca si se hizo clic en un icono <i> dentro de .campo-password
-    const eye = e.target.closest(".campo-password i");
+  /** Toggle de ojito de contraseña (global, funciona en todos los modales) */
+  document.addEventListener('click', (e) => {
+    const eye = e.target.closest('.campo-password i');
     if (!eye) return;
-
-    const input = eye.closest(".campo-password")?.querySelector("input");
+    const input = eye.closest('.campo-password')?.querySelector('input');
     if (!input) return;
-
-    // Alternar tipo de input
-    input.type = input.type === "password" ? "text" : "password";
-
-    // Cambiar icono FontAwesome
-    eye.classList.toggle("fa-eye");
-    eye.classList.toggle("fa-eye-slash");
+    input.type = input.type === 'password' ? 'text' : 'password';
+    eye.classList.toggle('fa-eye');
+    eye.classList.toggle('fa-eye-slash');
   });
 });

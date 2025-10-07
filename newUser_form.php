@@ -1,4 +1,4 @@
-          <form action="registro.php" method="post" class="form-registro">
+          
             <!-- Nombre -->
             <label for="registro-nombre">Nombre</label>
             <input
@@ -46,5 +46,3 @@
             </div>
 
             <!-- Botón -->
-            <button type="submit" class="btn-registrarse">Registrarse</button>
-          </form>

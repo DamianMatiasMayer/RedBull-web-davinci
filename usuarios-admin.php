@@ -1,6 +1,14 @@
 <?php
+    @session_start();
     
-    
+    $tipo_user = $_SESSION['tipo_usuario'] ?? null; // '0', '1' o '2'
+    /*if(isset($_SESSION['data'])){
+      if(isset($_SESSION['data']['invitacion']))
+
+        $link = $_SESSION['data']['invitacion'];
+        echo $link;
+    }
+    */
     require 'db_conn.php';
     
 
@@ -8,7 +16,7 @@
 
     $resultado = $conexion->query($sql);
 
-    $resultado->fetch_all(MYSQLI_ASSOC);//Buscar y traer, en un array asociativo
+    $resultado->fetch_all(MYSQLI_ASSOC); //buscar y traer info de la db
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/modal-carrito.css" />
-    <link rel="stylesheet" href="css/modal-login.css">
+    <link rel="stylesheet" href="css/modal-login.css" />
     <link rel="stylesheet" href="css/usuario-admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -43,7 +51,11 @@
         <section class="admin-usuarios">
             <div class="encabezado-admin">
                 <h2>Administrador de Usuarios</h2>
-                 <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo</a>
+                  <?php if($tipo_user == 2) : ?>
+                        <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo Sys Admin</a>
+                        <a href="#" class="btn-nuevo" id="abrir-modal-admin">Nuevo Administrador</a>
+                  <?php endif; ?>
+                        <a href="#" class="btn-nuevo" id="abrir-modal-usuario">Nuevo Usuario</a>
             </div>
             <table class="tabla-redbull">
                 <thead>
@@ -52,7 +64,7 @@
                         <th>Nombre</th>
                         <th>Mail</th>
                         <th>Status</th>
-                        <th>Is Admin</th>
+                        <th>Tipo de usuario</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -63,7 +75,7 @@
                         <td><?= $usuario['nombre']?></td>
                         <td><?= $usuario['mail']?></td>
                         <td><span class="badge activo"><?= $usuario['activo']?></span></td>
-                        <td><?= $usuario['admin']?></td>
+                        <td><?= $usuario['tipo_user']?></td>
                         <td class="acciones">
                             <a href="#"
                                 onclick="imprimirId(<?= $usuario['id']?>, 'desactivar'); return false;"
@@ -173,7 +185,6 @@
 
     <!-- Fin Footer   -->
 
-    <!-- Modal de inicio de sesion/registro   -->
 
     <!-- Overlay oscuro -->
     <div id="overlay-login" class="overlay oculto"></div>
@@ -210,6 +221,7 @@
 
     <!--Fin Modal de inicio de sesion/registro   -->
 
+
 <!-- modal registro -->
 <div id="overlay-nuevo" class="overlay oculto"></div>
 
@@ -221,11 +233,75 @@
       <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
     </div>
 
-        <?php
-            include 'newUser_form.php';
-        ?>
+    <form action="registro.php" method="post" class="form-login form-registro">
+      <?php include 'newUser_form.php'; ?>
+      <button type="submit" class="btn-registrarse">Registrarse</button>
+    </form>
   </div>
 </div>
+
+
+
+<!-- ========== MODAL NUEVO SYS ADMIN ========== -->
+<div id="overlay-nuevo-sysadmin" class="overlay oculto"></div>
+<div id="modal-nuevo-sysadmin" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-modal-nuevo-sysadmin">&times;</button>
+
+    <div class="modal-logo">
+      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+    </div>
+
+    
+    <form action="registro.php" method="post" class="form-login form-registro">      
+      <?php include 'newUser_form.php'; ?>  
+      <input type="hidden" name="scope"  value="sysadmin">
+      <button type="submit" class="btn-registrarse">Registrarse</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========== MODAL NUEVO ADMINISTRADOR ========== -->
+<div id="overlay-nuevo-admin" class="overlay oculto"></div>
+<div id="modal-nuevo-admin" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-modal-nuevo-admin">&times;</button>
+
+    <div class="modal-logo">
+      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+    </div>
+
+    <form action="registro.php" method="post" class="form-login form-registro">
+      <?php include 'newUser_form.php'; ?> 
+      <input type="hidden" name="scope"  value="admin">     
+      <button type="submit" class="btn-registrarse">Registrarse</button>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- ========== MODAL NUEVO USUARIO ========== -->
+<div id="overlay-nuevo-usuario" class="overlay oculto"></div>
+<div id="modal-nuevo-usuario" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-modal-nuevo-usuario">&times;</button>
+
+    <div class="modal-logo">
+      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+    </div>
+
+    <form action="registro.php" method="post" class="form-login form-registro">
+      <?php include 'newUser_form.php'; ?> 
+      <input type="hidden" name="scope"  value="usuario">     
+      <button type="submit" class="btn-registrarse">Registrarse</button>
+    </form>
+  </div>
+</div>
+
+
+
+
 
 <!-- ========== MODAL DESACTIVAR ========== -->
 <div id="overlay-desactivar" class="overlay oculto"></div>
@@ -295,7 +371,7 @@
     <script defer src="js/modal-carrito.js"></script>
     <script defer src="js/gsap-nav.js"></script>
     <script defer src="js/login.js"></script>
-    <script defer src="js/modal-nuevo.js"></script>
+    <script defer src="js/modal-nuevo.js?v=<?= filemtime('js/modal-nuevo.js') ?>"></script>
     <script defer src="js/modales-usuarios.js"></script>
 
 </body>
