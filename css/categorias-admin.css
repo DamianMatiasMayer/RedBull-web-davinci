@@ -1,0 +1,85 @@
+:root{
+  --rb-bg:#0b0d17;
+  --rb-card:#141826;
+  --rb-text:#f2f2f2;
+  --rb-muted:#9aa0a6;
+  --rb-red:#e10600;
+  --rb-blue:#00205b;
+  --rb-yellow:#ffd200;
+  --rb-green:#22c55e;
+}
+
+.rb-body{
+  background:linear-gradient(180deg,var(--rb-bg),#0f1220);
+  color:var(--rb-text);
+  font-family:'Oswald',sans-serif;
+  min-height:100vh;
+}
+
+.rb-container{max-width:1100px;margin:24px auto 64px;padding:0 16px;}
+
+.rb-title{font-size:26px;font-weight:700;letter-spacing:.5px;margin:0;}
+
+/* ----- TOPBAR ----- */
+.rb-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(90deg,var(--rb-blue),#0f1424);
+  padding:12px 16px;margin-bottom:20px;border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.4);
+}
+.rb-topbar .rb-flash{margin:0 16px;color:var(--rb-green);}
+.rb-topbar .rb-btn--primary{
+  background:linear-gradient(90deg,var(--rb-red),#ff4d3d);
+  color:#fff;border:none;border-radius:10px;padding:10px 16px;
+  font-weight:600;cursor:pointer;transition:.15s;
+}
+.rb-topbar .rb-btn--primary:hover{transform:scale(1.05);}
+
+/* ----- CARD / TABLE ----- */
+.rb-card{background:var(--rb-card);border-radius:14px;padding:16px;}
+.rb-table{width:100%;border-collapse:collapse;}
+.rb-table th,.rb-table td{padding:12px 14px;text-align:left;}
+.rb-table thead th{background:rgba(255,255,255,.05);color:var(--rb-muted);}
+.rb-table tbody tr:hover td{background:rgba(225,6,0,.07);}
+.rb-empty{text-align:center;color:var(--rb-muted);padding:20px 0;}
+.rb-actions{display:flex;gap:6px;}
+
+/* ----- BUTTONS ----- */
+.rb-btn{border:none;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600;}
+.rb-btn--danger{background:#b91c1c;color:#fff;}
+.rb-icon-btn{background:rgba(255,255,255,.08);border:none;color:#fff;padding:8px 10px;border-radius:8px;cursor:pointer;}
+.rb-icon-btn.rb-danger{color:#ffbaba;}
+.rb-icon-btn:hover{background:rgba(255,255,255,.15);}
+
+/* ----- MODALS ----- */
+.rb-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:999;}
+.rb-modal.is-open{display:flex;}
+.rb-modal__dialog{background:#0f1424;border-radius:16px;max-width:480px;width:90%;padding:20px;}
+.rb-modal__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.rb-close{background:transparent;border:none;color:#fff;font-size:22px;cursor:pointer;}
+.rb-field{display:grid;gap:4px;margin-bottom:10px;}
+.rb-field span{color:var(--rb-muted);font-size:14px;}
+.rb-field input,.rb-field select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:10px;}
+.rb-field input:focus,.rb-field select:focus{border-color:var(--rb-yellow);}
+.rb-modal__actions{display:flex;justify-content:flex-end;gap:10px;}
+.rb-warning{color:#ffd7d7;}
+/* Altura del nav fijo (ajustá si tu nav es más alto/bajo) */
+:root { --nav-h: 84px; }
+
+/* Deja espacio debajo del nav para que no tape el topbar */
+.rb-nav-spacer { height: var(--nav-h); }
+/* Select legible en tema oscuro */
+.rb-field select{
+  color:#fff;
+  background: rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.rb-field select option{
+  color:#fff;               /* texto visible */
+  background:#0f1424;       /* fondo del desplegable */
+}
+.rb-field select:focus{
+  border-color: var(--rb-yellow);
+}

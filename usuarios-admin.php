@@ -1,23 +1,29 @@
 <?php
     @session_start();
     
-    $tipo_user = $_SESSION['tipo_usuario'] ?? null; // '0', '1' o '2'
-    /*if(isset($_SESSION['data'])){
-      if(isset($_SESSION['data']['invitacion']))
-
-        $link = $_SESSION['data']['invitacion'];
-        echo $link;
-    }
-    */
     require 'db_conn.php';
-    
 
-    $sql = "Select * from usuarios";
+    $tipo_user = $_SESSION['tipo_usuario'] ?? null; // 0 usuario, 1 admin, 2 sysadmin
 
+     
+
+    //  Armamos la consulta según el tipo
+    if ($tipo_user == 1) {
+      $sql = "SELECT * FROM usuarios WHERE tipo_user = 0";
+    } elseif ($tipo_user == 2) {
+      $sql = "SELECT * FROM usuarios";
+    } else {
+      header('Location: index.php');
+      exit;
+    }
+
+    //  Ejecutamos y guardamos el resultado
     $resultado = $conexion->query($sql);
 
-    $resultado->fetch_all(MYSQLI_ASSOC); //buscar y traer info de la db
+    //  Convertimos el resultado en un array
+    $usuarios = $resultado->fetch_all(MYSQLI_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -69,7 +75,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($resultado as $usuario): ?>
+                    <?php foreach($usuarios as $usuario): ?>
                     <tr>
                         <td><?= $usuario['id']?></td>
                         <td><?= $usuario['nombre']?></td>
