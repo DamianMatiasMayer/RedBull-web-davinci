@@ -323,3 +323,22 @@ footer {
     font-family: 'Oswald', sans-serif;
   }
 }
+
+.mensaje-sistema {
+  background-color: #e3f7e3;
+  color: #075f07;
+  border: 1px solid #75c375;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  animation: fadeOut 4s 3s forwards; /* desaparece a los 3 segundos */
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

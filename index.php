@@ -239,6 +239,7 @@
   <script defer src="js/gsap-nav.js"></script>
   <script defer src="js/login.js"></script>
   <script defer src="js/gsap-index.js"></script>
+  <script defer src="js/login-error.js"></script>
 </body>
 
 </html>

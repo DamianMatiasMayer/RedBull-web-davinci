@@ -81,6 +81,22 @@ $padres = $categorias;
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/categorias-admin.css">
+  <link rel="stylesheet" href="css/modal-carrito.css" />
+  <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
+      rel="stylesheet"
+  />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+    <!-- fontawesome para los iconos -->
+  <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
+    <!-- icono pestaña navegador -->
   <title>Administrador de Categorías</title>
 </head>
 <body class="rb-body">
@@ -88,7 +104,7 @@ $padres = $categorias;
   <div class="rb-nav-spacer"></div>
   <main class="rb-container">
 
-    <!-- TOPBAR -->
+    
     <div class="rb-topbar">
       <h1 class="rb-title">Administrador de Categorías</h1>
       <?php if (isset($_GET['msg'])): ?>
@@ -220,6 +236,55 @@ $padres = $categorias;
     </div>
   </div>
 
+      <!-- MODAL DE DETALLE DE PRODUCTO -->
+    <div id="modal-detalle" class="modal oculto">
+      <div class="modal-producto">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+        <div class="modal-izq">
+          <div class="galeria-miniaturas" id="miniaturas"></div>
+          <img id="modal-imagen" class="imagen-grande" src="" alt="Imagen principal del producto" />
+        </div>
+        <div class="modal-der">
+          <h2 id="modal-nombre"></h2>
+          <p id="modal-descripcion" class="modal-descripcion"></p>
+          <p id="modal-precio" class="modal-precio"></p>
+          <button onclick="agregarAlCarrito()" class="boton-agregar">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARRITO LATERAL -->
+    <div id="carrito-container" class="carrito oculto">
+      <div class="carrito-header">
+        <h3>Tu Carrito</h3>
+        <button class="cerrar-carrito" onclick="toggleCarrito(event)">
+          X
+        </button>
+      </div>
+      <div id="lista-carrito" class="contenido-carrito"></div>
+      <p id="carrito-vacio" class="carrito-vacio oculto">
+        TU CARRITO ESTÁ VACÍO
+      </p>
+      <p id="total-carrito" class="carrito-total"></p>
+      <button id="boton-finalizar" class="boton-finalizar oculto" onclick="finalizarCompra()">
+        Finalizar compra
+      </button>
+    </div>
+
+    <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
+    <div id="mensaje-compra" class="modal-compra oculto">
+      <div class="modal-compra-contenido">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu pedido fue procesado con éxito.</p>
+        <button onclick="cerrarMensajeCompra()">Cerrar</button>
+      </div>
+    </div>
+  </main>
+
+
   <!-- JS -->
   <script>
     function openModal(id){ document.getElementById(id).classList.add('is-open'); }
@@ -239,5 +304,15 @@ $padres = $categorias;
       openModal('modalDelete');
     }
   </script>
+      <!-- GSAP -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- ScrollTrigger (para animar con el scroll) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Scripts -->
+    <script defer src="js/global.js"></script>
+    <script defer src="js/modal-carrito.js"></script>
+    <script defer src="js/gsap-nav.js"></script>
+
 </body>
 </html>

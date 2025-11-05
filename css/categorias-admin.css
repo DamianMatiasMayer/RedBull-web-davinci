@@ -63,12 +63,12 @@
 .rb-field input:focus,.rb-field select:focus{border-color:var(--rb-yellow);}
 .rb-modal__actions{display:flex;justify-content:flex-end;gap:10px;}
 .rb-warning{color:#ffd7d7;}
-/* Altura del nav fijo (ajustá si tu nav es más alto/bajo) */
+
 :root { --nav-h: 84px; }
 
-/* Deja espacio debajo del nav para que no tape el topbar */
+
 .rb-nav-spacer { height: var(--nav-h); }
-/* Select legible en tema oscuro */
+
 .rb-field select{
   color:#fff;
   background: rgba(255,255,255,.08);
@@ -77,8 +77,8 @@
   appearance: none;
 }
 .rb-field select option{
-  color:#fff;               /* texto visible */
-  background:#0f1424;       /* fondo del desplegable */
+  color:#fff;              
+  background:#0f1424;       
 }
 .rb-field select:focus{
   border-color: var(--rb-yellow);

@@ -31,11 +31,18 @@
         <div class="registro-box">
           <h2>Perfil de usuario</h2>
 
+          <?php if (isset($_SESSION['msg'])): ?>
+            <div class="mensaje-sistema">
+              <?= htmlspecialchars($_SESSION['msg'], ENT_QUOTES, 'UTF-8') ?>
+            </div>
+            <?php unset($_SESSION['msg']); ?>
+          <?php endif; ?>
+
           <form action="changePass.php" method="post" class="form-login form-registro">
             <label for="old_pass">Contraseña actual</label>
             <input
               id="old_pass"
-              type="text"
+              type="password"
               name="old_pass"
               required
               placeholder="Contraseña actual"
@@ -44,7 +51,7 @@
             <label for="pswd">Nueva contraseña</label>
             <input
               id="pswd"
-              type="text"
+              type="password"
               name="pswd"
               required
               placeholder="Nueva contraseña"
