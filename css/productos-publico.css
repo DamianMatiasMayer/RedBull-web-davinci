@@ -1,0 +1,117 @@
+/* ===========================
+   ESTILO DE TIENDA PÚBLICA
+   =========================== */
+
+main.contenedor { 
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #111;
+  margin-top: 50px;
+  
+}
+
+/* ======= Buscador ======= */
+.buscador {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 8px;
+}
+.buscador input {
+  width: 280px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.buscador button {
+  padding: 10px 18px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.buscador button:hover {
+  background: #0065d4;
+}
+
+/* ======= Grilla de productos ======= */
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.info {
+  padding: 14px 16px;
+}
+.info h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: #111;
+}
+.categoria {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 8px;
+}
+.precio {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+.stock.ok {
+  color: #198754;
+}
+.stock.no {
+  color: #b51c1c;
+}
+
+/* ======= Paginación ======= */
+.paginacion {
+  text-align: center;
+  margin-top: 35px;
+}
+.paginacion a {
+  display: inline-block;
+  margin: 0 4px;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.paginacion a:hover {
+  background: #ddd;
+}
+.paginacion a.activa {
+  background: #007bff;
+  color: #fff;
+}

@@ -1,891 +1,135 @@
+<?php
+@session_start();
+require 'db_conn.php';
+
+/* Helper para imagen */
+function h($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
+function imagen_principal(int $id): string {
+  $baseAbs = __DIR__ . "/uploads/products/$id/";
+  $baseRel = "uploads/products/$id/";
+  $candidatas = ['main.webp','main.jpg','main.png','1.webp','1.jpg','1.png'];
+  foreach ($candidatas as $f) {
+    if (is_file($baseAbs.$f)) return $baseRel.$f;
+  }
+  return 'imagenes/placeholder.webp';
+}
+
+/* Parámetros de búsqueda */
+$buscar = trim($_GET['q'] ?? '');
+$pag    = max(1, (int)($_GET['p'] ?? 1));
+$porPag = 12;
+$offset = ($pag - 1) * $porPag;
+
+$where = "p.activo = 1";
+$params = [];
+$types  = '';
+
+if ($buscar !== '') {
+  $where .= " AND (p.nombre LIKE CONCAT('%', ?, '%') OR p.descripcion LIKE CONCAT('%', ?, '%'))";
+  $params[] = $buscar;
+  $params[] = $buscar;
+  $types   .= 'ss';
+}
+
+/* Conteo total */
+$stmt = $conexion->prepare("SELECT COUNT(*) FROM producto p WHERE $where");
+if ($types) $stmt->bind_param($types, ...$params);
+$stmt->execute();
+$stmt->bind_result($total);
+$stmt->fetch();
+$stmt->close();
+
+$totalPaginas = ceil($total / $porPag);
+
+/* Consulta principal */
+$sql = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, c.nombre AS categoria
+        FROM producto p
+        LEFT JOIN categoria c ON c.id = p.categoria_id
+        WHERE $where
+        ORDER BY p.id DESC
+        LIMIT ? OFFSET ?";
+$stmt = $conexion->prepare($sql);
+
+if ($types !== '') {
+    // Agregamos los tipos de LIMIT y OFFSET
+    $types2  = $types . 'ii';
+    // Sumamos los valores a bindear
+    $params2 = array_merge($params, [$porPag, $offset]);
+
+    // bind_param requiere referencias -> las construimos
+    $bind = [];
+    $bind[] = &$types2;
+    foreach ($params2 as $k => $v) {
+        $bind[] = &$params2[$k];
+    }
+    call_user_func_array([$stmt, 'bind_param'], $bind);
+} else {
+    $stmt->bind_param('ii', $porPag, $offset);
+}
+
+
+$stmt->execute();
+$res = $stmt->get_result();
+$productos = $res->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/global.css" />
-  <link rel="stylesheet" href="css/productos.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos - RedBull Store</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/productos-publico.css">
   <link rel="stylesheet" href="css/modal-carrito.css" />
   <link rel="stylesheet" href="css/modal-login.css">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
-  <!-- icono pestaña navegador -->
-  <title>RedBull Productos</title>
 </head>
-
 <body>
-  <!-- inicio header -->
+  <?php include 'nav.php'; ?>
 
-  <header>
-    <?php
-        include 'nav.php';
-    ?>
-  </header>
+  <main class="contenedor">
+    <h1>Tienda oficial</h1>
 
-  <!-- fin header -->
+    <form class="buscador" method="get" action="productos.php">
+      <input type="text" name="q" placeholder="Buscar producto..." value="<?= h($buscar) ?>">
+      <button type="submit">Buscar</button>
+    </form>
 
-  <main>
-    <!-- inicio video debajo de nav -->
-    <div class="video-nav">
-      <video autoplay muted loop class="video-header">
-        <source src="videos/RBB_Performance_Hero_Header_desktop_new.webm" type="video/webm" />
-        Tu navegador no soporta la reproducción de video.
-        <!-- fallback por si falla el video -->
-      </video>
-
-      <div class="texto-sobre-video contenedor-margenes">
-        <h1>Red Bull BORA Team: Rider collections</h1>
-      </div>
-    </div>
-    <!-- fin video -->
-
-    <!-- inicio logo redbull bora -->
-
-    <div class="logo-redbull-bora contenedor-margenes">
-      <img src="imagenes/nav_rbh-logo_small.png" alt="logo redbull bora" />
-      <h2 class="texto-logo">Red Bull - Bora - Coleccion hansgrohe</h2>
-    </div>
-
-    <!-- fin logo redbull bora -->
-
-    <!-- inicio productos redbull bora -->
-
-    <section class="seccion-productos contenedor-margenes">
-      <button class="flecha izquierda" id="flecha-izq">‹</button>
-
-      <div class="contenedor-productos" id="productos-scroll">
-        <div class="producto" data-id="prod1">
-          <div class="imagen-carrusel">
-            <img src="imagenes/conjunto-redbull-riders-1.3.avif" alt="Producto 1" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Chaqueta SoftShell Riders</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod2">
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-carrera 1.1.avif" alt="Producto 2" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Camiseta TGA Carrera</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod3">
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-entrenamiento 1.1.avif" alt="Producto 3" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Camiseta Entrenamiento</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod4">
-          <div class="imagen-carrusel">
-            <img src="imagenes/traje-carreras 1.1.avif" alt="Producto 4" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Traje Corto De Carretera Carrera</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod5">
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-carrera-especial 1.1.avif" alt="Producto 5" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Camiseta Carrera</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod6">
-          <div class="imagen-carrusel">
-            <img src="imagenes/short-termico 1.1.avif" alt="Producto 6" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Short Térmico Corto</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod7">
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-para-clima 1.1.avif" alt="Producto 7" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Camiseta Corta Para Clima</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod8">
-          <div class="imagen-carrusel">
-            <img src="imagenes/camiseta-larga 1.1.avif" alt="Producto 8" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Camiseta Manga Larga</p>
-          <p class="precio">$1500</p>
-        </div>
-
-        <div class="producto" data-id="prod9">
-          <div class="imagen-carrusel">
-            <img src="imagenes/short-carrera 1.1.avif" alt="Producto 9" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-ropa">Camiseta Carrera TGA</p>
-          <p class="precio">$1500</p>
-        </div>
-      </div>
-
-      <button class="flecha derecha" id="flecha-der">›</button>
-    </section>
-
-    <!-- fin productos redbull bora -->
-
-    <!-- inicio productos redbull oracle f1 -->
-
-    <section class="seccion-oracle">
-      <div class="oracle-contenido">
-        <img src="imagenes/coleccion oracle f1.avif" alt="Colección Oracle F1" />
-
-        <!-- Texto superpuesto -->
-        <div class="oracle-texto">
-          <img src="imagenes/logo redbull oracle.png" class="logo-oracle" alt="Logo Oracle F1" />
-          <h2>
-            Red Bull - Oracle <br />
-            F1 Team Collection
-          </h2>
-        </div>
-      </div>
-
-      <div class="oracle-carrusel contenedor-margenes">
-        <section class="seccion-productos">
-          <button class="flecha izquierda" id="flecha-izq-oracle">‹</button>
-          <!-- flecha izquierda carrousel -->
-
-          <div class="contenedor-productos" id="productos-scroll-oracle">
-            <div class="producto" data-id="oracle1">
-              <div class="imagen-carrusel">
-                <img src="imagenes/chomba-max-1.1.avif" alt="Oracle Producto 1" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Chomba Max Verstappen</p>
-              <p class="precio">$1600</p>
+    <?php if (!$productos): ?>
+      <p class="sin-resultados">No se encontraron productos.</p>
+    <?php else: ?>
+      <section class="grid-productos">
+        <?php foreach ($productos as $p): ?>
+          <article class="card">
+            <img src="<?= h(imagen_principal((int)$p['id'])) ?>" alt="<?= h($p['nombre']) ?>">
+            <div class="info">
+              <h3><?= h($p['nombre']) ?></h3>
+              <p class="categoria"><?= h($p['categoria'] ?? 'Sin categoría') ?></p>
+              <div class="precio">$<?= number_format((float)$p['precio'], 2, ',', '.') ?></div>
+              <?php if ($p['stock'] > 0): ?>
+                <div class="stock ok">Stock: <?= (int)$p['stock'] ?></div>
+              <?php else: ?>
+                <div class="stock no">Sin stock</div>
+              <?php endif; ?>
             </div>
+          </article>
+        <?php endforeach; ?>
+      </section>
 
-            <div class="producto" data-id="oracle2">
-              <div class="imagen-carrusel">
-                <img src="imagenes/remera-max 1.1.avif" alt="Oracle Producto 2" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Remera Max Verstappen</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle3">
-              <div class="imagen-carrusel">
-                <img src="imagenes/chomba-max-mujer-1.1.avif" alt="Oracle Producto 3" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Chomba Max Verstappen Femenino</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle4">
-              <div class="imagen-carrusel">
-                <img src="imagenes/remera-max-femenino 1.1.avif" alt="Oracle Producto 4" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Remera Max Verstappen Femenino</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle5">
-              <div class="imagen-carrusel">
-                <img src="imagenes/chaleco-oracle1.1.avif" alt="Oracle Producto 5" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Chaleco Red Bull Oracle</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle6">
-              <div class="imagen-carrusel">
-                <img src="imagenes/campera-oracle 1.1.avif" alt="Oracle Producto 6" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Campera Red Bull Oracle</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle7">
-              <div class="imagen-carrusel">
-                <img src="imagenes/hoodie-oracle 1.1.avif" alt="Oracle Producto 7" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Buzo Red Bull Oracle</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle8">
-              <div class="imagen-carrusel">
-                <img src="imagenes/campera-invierno-oracle 1.1.avif" alt="Oracle Producto 8" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Campera Invierno Red Bull Oracle</p>
-              <p class="precio">$1800</p>
-            </div>
-
-            <div class="producto" data-id="oracle9">
-              <div class="imagen-carrusel">
-                <img src="imagenes/buzo-campera-oracle.avif" alt="Oracle Producto 9" />
-                <button class="prev">‹</button>
-                <button class="next">›</button>
-              </div>
-              <p class="textos-ropa">Buzo Estilo Campera Red Bull Oracle</p>
-              <p class="precio">$1800</p>
-            </div>
-          </div>
-
-          <button class="flecha derecha" id="flecha-der-oracle">›</button>
-          <!-- flecha derecha de carrousel -->
-        </section>
-      </div>
-    </section>
-
-    <!-- fin productos redbull oracle f1 -->
-
-    <!-- inicio accesorios -->
-
-    <section class="accesorios">
-      <div class="texto-accesorios contenedor-margenes">
-        <h2>Accesorios</h2>
-      </div>
-
-      <!-- Botón principal para desplegar filtros, todo este bloque sirve para filtrar los productos -->
-      <div class="filtro-wrapper">
-        <button id="boton-filtro" class="boton-filtrar">Filtrar ▾</button>
-
-        <div id="filtros" class="filtros" style="display: none">
-          <button class="filtro-categoria" data-filtro="cascos">
-            Cascos
-          </button>
-          <button class="filtro-categoria" data-filtro="mochilas">
-            Mochilas
-          </button>
-          <button class="filtro-categoria" data-filtro="paraguas">
-            Paraguas
-          </button>
-          <button class="filtro-categoria" data-filtro="botellas">
-            Botellas
-          </button>
-          <button class="filtro-categoria" data-filtro="anteojos">
-            Anteojos
-          </button>
-          <button class="filtro-categoria" data-filtro="guantes">
-            Guantes
-          </button>
-          <button id="limpiar-filtros" class="boton-limpiar">
-            Limpiar Filtros
-          </button>
+      <!-- Paginación -->
+      <?php if ($totalPaginas > 1): ?>
+        <div class="paginacion">
+          <?php for ($i=1; $i <= $totalPaginas; $i++): ?>
+            <a href="?q=<?= urlencode($buscar) ?>&p=<?= $i ?>" class="<?= $i === $pag ? 'activa' : '' ?>">
+              <?= $i ?>
+            </a>
+          <?php endfor; ?>
         </div>
-      </div>
-
-      <div id="chips-activos" class="chips"></div>
-
-      <!-- fin de botones para filtrar productos -->
-
-      <!-- accesorios cascos -->
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="cascos1" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/minicasco-verstappen 1.1.avif" alt="mini casco accesorios oracle" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Max Verstappen Temporada 2025 Mini Casco
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="cascos2" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/minicasco-verstappen-japones 1.1.avif"
-              alt="mini casco accesorio orracle japones oracle" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:4 Max Verstappen Mini Casco Japones GP Temporada 2025
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="cascos4" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/1-4-Max-Verstappen-2025-Orange-Mini-Helmet1.1.avif" alt="cascos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Max Verstappen Temporada 2025 Mini Casco Naranja
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="cascos3" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/1-2-Max-Verstappen-WC-2024-Mini-Helmet1.1.avif" alt="cascos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Max Verstappen WV Temporada 2024 Mini Casco
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="cascos5" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/1-2-Checo-Perez-Mexico-GP-2024-Mini-Helm1.1.avif"
-              alt="mini casco accesorios checo perez" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Checo Perez Temporada Mexico 2024 Mini Casco
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="cascos6" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/1-2-Checo-Perez-2024-Season-Mini-Helmet1.1.avif"
-              alt="mini casco accesorio checo perez" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Checo Perez Temporada 2024 Mini Casco
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="cascos7" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/1-2-Max-Verstappen-2024-Orange-Tribute-Mini-Helmet1.1.avif" alt="cascos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Max Verstappen Temporada 2024 Mini Casco Naranja
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="cascos8" data-categoria="cascos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/1-2-Max-Verstappen-2024-Season-Mini-Helmet1.1.avif" alt="cascos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">
-            1:2 Max Verstappen temporada 2024 Mini Casco EA Sports
-          </p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <!-- fin accesorios cascos -->
-
-      <!-- accesorios paraguas -->
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="paragua1" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/paragua-redbull-rojo1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas ECS</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="paragua2" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/paragua-redbull-bora1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas de bolsillo Essential</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="paragua3" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Grid-Pocket-Umbrella1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas de bolsillo Grid</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="paragua4" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/ECM-Rink-Umbrella1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas ECM Rink</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="paragua5" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-Pocket-Umbrella1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas RBL de Bolsillo</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="paragua6" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Dive-Umbrella1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas Dive</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="paragua7" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Adrenaline-Umbrella1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas Adrenaline</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="paragua8" data-categoria="paraguas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/The-Flying-Bulls-Mono-Umbrella1.1.avif" alt="paragua redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Paraguas Flying Bulls mono</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <!--fin accesorios paraguas -->
-
-      <!--inicio accesorios botellas -->
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="botellas1" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Urban-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RB Urbana</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="botellas2" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Frost-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RB Frost</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="botellas3" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/botella-rampage1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RB Rampage</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="botellas4" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Blaze-Water-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RB Blaze</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="botellas5" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Grid-Water-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RB Grid</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="botellas6" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-Rubin-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RBL Rubin</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="botellas7" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-Dynamic-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella RBL Dynamic</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="botellas8" data-categoria="botellas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/ECS-Ice-Bottle1.1.avif" alt="botellas" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Botella ECS Ice</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <!--fin accesorios botellas -->
-
-      <!--inicio guantes -->
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="guante1" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/guantes-bora1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes Bora Sport</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="guante2" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-guante-reflectivo-niño1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RBL Reflectivo Niño</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="guante3" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-guante-reflectivo-adulto1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RBL Reflectivo Adulto</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="guante4" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-PUMA-colab-guantes1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RBL Puma Colab</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="guante5" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBS-Puma-colab-jugador1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RBL Puma Colab Jugador</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="guante6" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Pulse-Gloves1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RB Pulse</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="guante7" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBL-Dawn-Gloves1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RBL Dawn</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="guante8" data-categoria="guantes">
-          <div class="imagen-accesorio">
-            <img src="imagenes/RBS-Winter-Gloves1.1.avif" alt="guantes red bull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Guantes RBS Invierno</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <!-- mochilas -->
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="mochilas1" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/redbull-mochila 1.1.avif" alt="mochila redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Mochila RB Racing Oracle</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="mochilas2" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/redbull-dakar-1.1.avif" alt="mochila redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Mochila RB Dakar</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="mochilas3" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/mochila-bora-1.1.avif" alt="mochila bora" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Mochila RB Bora</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="mochilas4" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/mochila-rampage-1.1.avif" alt="mochila rampage" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Mochila RB Rampage</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="mochilas5" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/bandolera-redbull-1.1.avif" alt="bandolera redbull" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Bandolera RB</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="mochilas6" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/bolsa-bici-1.1.avif" alt="bolsa para bici bora" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Bolsa RB Bora</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="mochilas7" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/bandolera-redbull-azul-1.1.avif" alt="bandolera redbull azul" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Bandolera RB Azul</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="mochilas8" data-categoria="mochilas">
-          <div class="imagen-accesorio">
-            <img src="imagenes/bolso-bora-1.1.avif" alt="bolso redbull bora" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">Bolso RB Bora</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <!-- fin mochilas -->
-
-      <!-- anteojos -->
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="anteojos1" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Red-Bull-anteojos-ski1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB SPECT Ski Goggles SOLO-011S</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="anteojos2" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Red-Bull-anteojos-ski-rojo1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB SPECT Ski Goggles SOLO-004</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="anteojos3" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Red-Bull-anteojos-ski-blancos1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB SPECT Ski Goggles SOLO-012S</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="anteojos4" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/Red-Bull-anteojos-ski-negros1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB SPECT Ski Goggles SOLO-009S</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <div class="fila-accesorios contenedor-margenes">
-        <div class="productos-accesorios" data-id="anteojos5" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/anteojos-sol-blanco1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB Anteojos De Sol Dundee-004</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="anteojos6" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/anteojos-sol-negro1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB Anteojos De Sol Dundee-001</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="anteojos7" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/anteojos-sol-azul1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB SPECT Anteojos De Sol DAFT-004</p>
-          <p class="precios">$1800</p>
-        </div>
-
-        <div class="productos-accesorios" data-id="anteojos8" data-categoria="anteojos">
-          <div class="imagen-accesorio">
-            <img src="imagenes/anteojos-sol-blancoyazul1.1.avif" alt="anteojos" />
-            <button class="prev">‹</button>
-            <button class="next">›</button>
-          </div>
-          <p class="textos-productos">RB SPECT Anteojos De Sol DAKOTA-002</p>
-          <p class="precios">$1800</p>
-        </div>
-      </div>
-
-      <!-- fin anteojos -->
-
-      <div class="contenedor-margenes">
-        <button id="cargar-mas" class="boton-cargar-mas">
-          Cargar más productos
-        </button>
-      </div>
-    </section>
-
-    <!-- fin accesorios -->
-
-    <!-- MODAL DE DETALLE DE PRODUCTO -->
-    <div id="modal-detalle" class="modal oculto">
-      <div class="modal-producto">
-        <span class="cerrar" onclick="cerrarModal()">&times;</span>
-
-        <div class="modal-izq">
-          <div class="galeria-miniaturas" id="miniaturas"></div>
-          <img id="modal-imagen" class="imagen-grande" src="" alt="Imagen principal del producto" />
-        </div>
-        <div class="modal-der">
-          <h2 id="modal-nombre"></h2>
-          <p id="modal-descripcion" class="modal-descripcion"></p>
-          <p id="modal-precio" class="modal-precio"></p>
-          <button onclick="agregarAlCarrito()" class="boton-agregar">
-            Agregar al carrito
-          </button>
-        </div>
-      </div>
-    </div>
-
+      <?php endif; ?>
+    <?php endif; ?>
     <!-- CARRITO LATERAL -->
     <div id="carrito-container" class="carrito oculto">
       <div class="carrito-header">
@@ -912,9 +156,13 @@
         <button onclick="cerrarMensajeCompra()">Cerrar</button>
       </div>
     </div>
-  </main>
 
-  <!-- Inicio Footer -->
+
+
+
+
+  </main>
+      <!-- Inicio Footer -->
 
   <footer>
     <div class="contenido-footer">
@@ -982,6 +230,8 @@
   <script defer src="js/modal-carrito.js"></script>
   <script defer src="js/gsap-nav.js"></script>
   <script defer src="js/login.js"></script>
-</body>
 
+
+
+</body>
 </html>
