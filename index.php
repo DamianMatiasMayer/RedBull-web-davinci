@@ -30,7 +30,7 @@
         Precisión, velocidad y control absoluto: el arte del aerobatic flying
         llevado al límite.
       </h2>
-      <a href="eventosYdeportes.html" class="btn-leer-mas"><span>Leer más</span></a>
+      <a href="eventosYdeportes.php" class="btn-leer-mas"><span>Leer más</span></a>
     </div>
 
     <!-- fin Cartel sobre la imagen -->
@@ -51,7 +51,7 @@
             y largas jornadas de manejo.
           </p>
 
-          <a href="energizantes.html" class="btn-productos"><span>Todos los energizantes</span></a>
+          <a href="energizantes.php" class="btn-productos"><span>Todos los energizantes</span></a>
         </div>
       </div>
     </section>
@@ -86,7 +86,7 @@
                 de semana, mientras Oracle Red Bull Racing celebra una
                 colaboración icónica con una decoración especial.
               </h3>
-              <a href="eventosYdeportes.html" class="boton-leer-mas-noticia">Leer más</a>
+              <a href="eventosYdeportes.php" class="boton-leer-mas-noticia">Leer más</a>
             </div>
           </article>
 
@@ -100,7 +100,7 @@
                 Nacional en un año de celebración de los 20 años de rimas.
                 ¿Quién representará al país en la Final Internacional de 2026?
               </h3>
-              <a href="eventosYdeportes.html" class="boton-leer-mas-noticia">Leer más</a>
+              <a href="eventosYdeportes.php" class="boton-leer-mas-noticia">Leer más</a>
             </div>
           </article>
 
@@ -116,7 +116,7 @@
                 empezar La serie se reinventa una vez más y ofrece un soplo de
                 aire fresco con la ambientación japonesa.
               </h3>
-              <a href="eventosYdeportes.html" class="boton-leer-mas-noticia">Leer más</a>
+              <a href="eventosYdeportes.php" class="boton-leer-mas-noticia">Leer más</a>
             </div>
           </article>
         </div>
@@ -175,38 +175,11 @@
 
   <!-- Footer   -->
 
-  <footer>
-    <div class="contenido-footer">
-      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo" class="footer-logo" />
-
-      <ul class="footer-links">
-        <li><a href="productos.html">nuestros productos</a></li>
-        <li><a href="#" onclick="mostrarAviso(event)">Empleo</a></li>
-        <li><a href="#" onclick="mostrarAviso(event)">Términos</a></li>
-        <li>
-          <a href="#" onclick="mostrarAviso(event)">Política de privacidad</a>
-        </li>
-        <li><a href="contacto.html">Contactanos</a></li>
-      </ul>
-
-      <div class="footer-redes">
-        <a href="#" onclick="mostrarAviso(event)">
-          <img src="imagenes/instagram.png" alt="Instagram" /></a>
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/youtube.png" alt="YouTube" /></a>
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/facebook.png" alt="Facebook" /></a>
-        <a href="#" onclick="mostrarAviso(event)"><img src="imagenes/X.png" alt="X" /></a>
-      </div>
-
-      <p class="footer-copy">
-        © 2025 Red Bull Argentina. Todos los derechos reservados. Damián Mayer
-        Escuela Davinci
-      </p>
-    </div>
-  </footer>
+    <?php
+        include 'footer.php';
+    ?>
 
   <!-- Fin Footer   -->
-
-  <!-- Modal de inicio de sesion/registro   -->
 
   <!-- Overlay oscuro -->
 

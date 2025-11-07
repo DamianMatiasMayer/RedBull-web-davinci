@@ -364,5 +364,9 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
       </div>
     </div>
   </main>
+  
+    <?php
+        include 'footer.php';
+    ?>
 </body>
 </html>

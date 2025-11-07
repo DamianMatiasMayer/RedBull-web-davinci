@@ -151,6 +151,12 @@ $padres = $categorias;
     </section>
   </main>
 
+  
+<!-- footer -->
+    <?php
+        include 'footer.php';
+    ?>
+
   <!-- MODAL NUEVA -->
   <div id="modalCreate" class="rb-modal">
     <div class="rb-modal__dialog">
@@ -310,9 +316,9 @@ $padres = $categorias;
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Scripts -->
-    <script defer src="js/global.js"></script>
-    <script defer src="js/modal-carrito.js"></script>
-    <script defer src="js/gsap-nav.js"></script>
+  <script defer src="js/global.js"></script>
+  <script defer src="js/modal-carrito.js"></script>
+  <script defer src="js/gsap-nav.js"></script>
 
 </body>
 </html>
