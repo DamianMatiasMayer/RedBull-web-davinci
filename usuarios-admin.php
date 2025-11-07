@@ -1,27 +1,143 @@
 <?php
-    @session_start();
-    
-    require 'db_conn.php';
 
-    $tipo_user = $_SESSION['tipo_usuario'] ?? null; // 0 usuario, 1 admin, 2 sysadmin
+@session_start();
 
-     
+require 'db_conn.php';
 
-    //  Armamos la consulta según el tipo
-    if ($tipo_user == 1) {
-      $sql = "SELECT * FROM usuarios WHERE tipo_user = 0";
-    } elseif ($tipo_user == 2) {
-      $sql = "SELECT * FROM usuarios";
-    } else {
-      header('Location: index.php');
+$tipo_user = $_SESSION['tipo_usuario'] ?? null; // 0 usuario, 1 admin, 2 sysadmin
+if (!$tipo_user || !in_array($tipo_user, ['1','2'], true)) {
+  header('Location: index.php');
+  exit;
+}
+
+/* ====== PROCESO DE ACCIONES (POST) ====== */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  $accion = $_POST['accion'] ?? '';
+  $id     = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+
+  // Validación ID básico
+  if ($id <= 0) {
+    header('Location: usuarios-admin.php?msg=id_invalido');
+    exit;
+  }
+
+  if ($accion === 'desactivar') {
+    // Admin 1 solo puede desactivar usuarios tipo 0. Sysadmin 2 cualquiera.
+    if ($tipo_user === '1') {
+      $sql  = "UPDATE usuarios u
+               JOIN (SELECT id, tipo_user FROM usuarios WHERE id = ?) t ON u.id = t.id
+               SET u.activo = 0
+               WHERE u.id = ? AND t.tipo_user = 0";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("ii", $id, $id);
+    } else { // '2'
+      $sql  = "UPDATE usuarios SET activo = 0 WHERE id = ?";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("i", $id);
+    }
+    $ok = $stmt->execute();
+    $stmt->close();
+    header('Location: usuarios-admin.php?msg=' . ($ok ? 'desactivado' : 'error_desactivar'));
+    exit;
+  }
+
+  if ($accion === 'reactivar') {
+    // Admin 1 solo puede reactivar usuarios tipo 0. Sysadmin 2 cualquiera.
+    if ($tipo_user === '1') {
+      $sql  = "UPDATE usuarios u
+               JOIN (SELECT id, tipo_user FROM usuarios WHERE id = ?) t ON u.id = t.id
+               SET u.activo = 1
+               WHERE u.id = ? AND t.tipo_user = 0";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("ii", $id, $id);
+    } else { // '2'
+      $sql  = "UPDATE usuarios SET activo = 1 WHERE id = ?";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("i", $id);
+    }
+    $ok = $stmt->execute();
+    $stmt->close();
+    header('Location: usuarios-admin.php?msg=' . ($ok ? 'reactivado' : 'error_reactivar'));
+    exit;
+  }
+
+  if ($accion === 'editar') {
+    $nombre = trim($_POST['nombre'] ?? '');
+
+    if ($nombre === '' || mb_strlen($nombre) > 100) {
+      header('Location: usuarios-admin.php?msg=nombre_invalido');
       exit;
     }
 
-    //  Ejecutamos y guardamos el resultado
-    $resultado = $conexion->query($sql);
+    if ($tipo_user === '1') {
+      $sql  = "UPDATE usuarios u
+               JOIN (SELECT id, tipo_user FROM usuarios WHERE id = ?) t ON u.id = t.id
+               SET u.nombre = ?
+               WHERE u.id = ? AND t.tipo_user = 0";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("isi", $id, $nombre, $id);
+    } else { // '2'
+      $sql  = "UPDATE usuarios SET nombre = ? WHERE id = ?";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("si", $nombre, $id);
+    }
+    $ok = $stmt->execute();
+    $stmt->close();
+    header('Location: usuarios-admin.php?msg=' . ($ok ? 'editado' : 'error_editar'));
+    exit;
+  }
 
-    //  Convertimos el resultado en un array
-    $usuarios = $resultado->fetch_all(MYSQLI_ASSOC);
+  if ($accion === 'password') {
+    $password = trim($_POST['password'] ?? '');
+    if ($password === '' || strlen($password) < 8) {
+      header('Location: usuarios-admin.php?msg=pass_invalida');
+      exit;
+    }
+
+    /* IMPORTANTE:
+       Esto mantiene tu login actual que usa la columna `contraseña` en texto plano.
+       Cuando quieras migrar a hash:
+         $hash = password_hash($password, PASSWORD_DEFAULT);
+         y reemplazar el SET por `contraseña` = $hash
+         + cambiar el login a password_verify().
+    */
+    if ($tipo_user === '1') {
+      $sql  = "UPDATE usuarios u
+               JOIN (SELECT id, tipo_user FROM usuarios WHERE id = ?) t ON u.id = t.id
+               SET u.`contraseña` = ?
+               WHERE u.id = ? AND t.tipo_user = 0";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("ssi", $id, $password, $id);
+    } else { // '2'
+      $sql  = "UPDATE usuarios SET `contraseña` = ? WHERE id = ?";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bind_param("si", $password, $id);
+    }
+    $ok = $stmt->execute();
+    $stmt->close();
+    header('Location: usuarios-admin.php?msg=' . ($ok ? 'pass_cambiada' : 'error_pass'));
+    exit;
+  }
+
+  // Acción desconocida
+  header('Location: usuarios-admin.php?msg=accion_desconocida');
+  exit;
+}
+
+/* ====== LECTURA PARA PINTAR LA TABLA ====== */
+if ($tipo_user == 1) {
+  $sql = "SELECT * FROM usuarios WHERE tipo_user = 0";
+} elseif ($tipo_user == 2) {
+  $sql = "SELECT * FROM usuarios";
+} else {
+  header('Location: index.php');
+  exit;
+}
+
+$resultado = $conexion->query($sql);
+$usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
+
 ?>
 
 
@@ -83,26 +199,36 @@
                         <td><span class="badge activo"><?= $usuario['activo']?></span></td>
                         <td><?= $usuario['tipo_user']?></td>
                         <td class="acciones">
-                            <a href="#"
-                                onclick="imprimirId(<?= $usuario['id']?>, 'desactivar'); return false;"
-                                class="accion desactivar" title="Desactivar">
-                                <i class="fa-solid fa-ban"></i>
-                            </a>
+                            <?php if ((int)$usuario['activo'] === 1): ?>
+                              <!-- Desactivar -->
+                              <a href="#"
+                                  onclick="imprimirId(<?= (int)$usuario['id']?>, 'desactivar'); return false;"
+                                  class="accion desactivar" title="Desactivar">
+                                  <i class="fa-solid fa-ban"></i>
+                              </a>
+                            <?php else: ?>
+                              <!-- Reactivar -->
+                              <a href="#"
+                                  onclick="imprimirId(<?= (int)$usuario['id']?>, 'reactivar'); return false;"
+                                  class="accion reactivar" title="Reactivar">
+                                  <i class="fa-solid fa-rotate-right"></i>
+                              </a>
+                            <?php endif; ?>
 
+                            <!-- Editar -->
                             <a href="#"
-                                onclick="imprimirId(<?= $usuario['id']?>, 'editar'); return false;"
+                                onclick="imprimirId(<?= (int)$usuario['id']?>, 'editar'); return false;"
                                 class="accion editar" title="Editar">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
 
+                            <!-- Cambiar contraseña -->
                             <a href="#"
-                                onclick="imprimirId(<?= $usuario['id']?>, 'password'); return false;"
+                                onclick="imprimirId(<?= (int)$usuario['id']?>, 'password'); return false;"
                                 class="accion password" title="Cambiar contraseña">
                                 <i class="fa-solid fa-lock"></i>
                             </a>
                         </td>
-
-
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -282,6 +408,21 @@
 
 
 
+<!-- ========== MODAL REACTIVAR ========== -->
+<div id="overlay-reactivar" class="overlay oculto"></div>
+<div id="modal-reactivar" class="modal-login oculto">
+  <div class="modal-contenido">
+    <button class="cerrar-modal" id="cerrar-reactivar">&times;</button>
+    <h3>Reactivar usuario</h3>
+    <form action="usuarios-admin.php" method="post" class="form-login">
+      <input type="hidden" name="accion" value="reactivar">
+      <input type="hidden" name="id" id="id-reactivar">
+      <p>¿Confirmás reactivar este usuario?</p>
+      <button type="submit" class="btn-login">Reactivar</button>
+    </form>
+  </div>
+</div>
+
 
 
 <!-- ========== MODAL DESACTIVAR ========== -->
@@ -290,7 +431,8 @@
   <div class="modal-contenido">
     <button class="cerrar-modal" id="cerrar-desactivar">&times;</button>
     <h3>Desactivar usuario</h3>
-    <form action="desactivar.php" method="post" class="form-login">
+    <form action="usuarios-admin.php" method="post" class="form-login">
+      <input type="hidden" name="accion" value="desactivar">
       <input type="hidden" name="id" id="id-desactivar">
       <label for="motivo-desactivar">Motivo (opcional)</label>
       <input id="motivo-desactivar" name="motivo" type="text">
@@ -305,7 +447,8 @@
   <div class="modal-contenido">
     <button class="cerrar-modal" id="cerrar-editar">&times;</button>
     <h3>Editar usuario</h3>
-    <form action="editar.php" method="post" class="form-login">
+    <form action="usuarios-admin.php" method="post" class="form-login">
+      <input type="hidden" name="accion" value="editar">
       <input type="hidden" name="id" id="id-editar">
       <label for="nombre-editar">Nuevo nombre</label>
       <input id="nombre-editar" name="nombre" type="text" required>
@@ -320,7 +463,8 @@
   <div class="modal-contenido">
     <button class="cerrar-modal" id="cerrar-password">&times;</button>
     <h3>Cambiar contraseña</h3>
-    <form action="password.php" method="post" class="form-login">
+    <form action="usuarios-admin.php" method="post" class="form-login">
+      <input type="hidden" name="accion" value="password">
       <input type="hidden" name="id" id="id-password">
       <label for="pass-nuevo">Nueva contraseña</label>
       <input id="pass-nuevo" name="password" type="password" required>
@@ -331,14 +475,10 @@
 
 
 
-
-
     <!-- Aviso emergente en trabajo  -->
-
     <div id="aviso-trabajo" class="aviso-trabajo oculto">
         🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
     </div>
-
     <!-- fin Aviso emergente en trabajo  -->
 
     <!-- GSAP -->
@@ -347,13 +487,14 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!--  scripts -->
-    
     <script defer src="js/global.js"></script>
     <script defer src="js/modal-carrito.js"></script>
     <script defer src="js/gsap-nav.js"></script>
     <script defer src="js/login.js"></script>
     <script defer src="js/modal-nuevo.js?v=<?= filemtime('js/modal-nuevo.js') ?>"></script>
     <script defer src="js/modales-usuarios.js"></script>
+
+
 
 </body>
 
