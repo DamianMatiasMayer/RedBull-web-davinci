@@ -90,6 +90,10 @@ $stmt->close();
 <body>
   <?php include 'nav.php'; ?>
 
+<section class="banner">
+  <img src="imagenes/redbullcompras.avif" alt="Red Bull Shop" />
+</section>
+
   <main class="contenedor">
     <h1>Tienda oficial</h1>
 

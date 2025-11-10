@@ -17,7 +17,7 @@ $tipo_user = $_SESSION['tipo_usuario'] ?? null;
     <ul>
       <li><a href="energizantes.php">Energizantes</a></li>
       <li><a href="productos.php">Productos</a></li>
-      <li><a href="eventosYdeportes.php">Eventos y Deportes</a></li>
+      <li><a href="eventosYdeportes.php">Eventos</a></li>
       <li><a href="contacto.php">Contacto</a></li>
 
       <!--  Mostrar "Usuarios" solo si el tipo_user es 1 o 2 -->

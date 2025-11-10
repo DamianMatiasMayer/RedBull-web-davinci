@@ -1,6 +1,3 @@
-/* ===========================
-   ESTILO DE TIENDA PÚBLICA
-   =========================== */
 
 main.contenedor { 
   max-width: 1200px;
@@ -115,3 +112,22 @@ h1 {
   background: #007bff;
   color: #fff;
 }
+
+/*banner*/
+
+.banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner img {
+  margin-top: 7%;
+  width: 120%;
+  height: 100%; 
+  object-fit: cover;
+  display: block;
+  transform: scale(1.2) translateX(-10%);
+}
+
+

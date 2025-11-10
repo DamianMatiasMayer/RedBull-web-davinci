@@ -11,8 +11,6 @@ if (!$tipo_user || !in_array($tipo_user, ['1','2'], true)) {
 
 require 'db_conn.php';
 
-/* ================= Helpers ================= */
-
 function h($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
 /**
@@ -60,19 +58,19 @@ function guardar_imagen_main(int $id, array &$errores): void {
   }
 }
 
-/* ============ Cargar categorías para el select ============ */
+/* Cargar categorías para el select */
 $categorias = [];
 if ($resCat = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre")) {
   $categorias = $resCat->fetch_all(MYSQLI_ASSOC);
 }
 
-/* ================== Acciones ================== */
+/* Acciones  */
 $errores = [];
 $msg = $_GET['msg'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  /* ---- Alta ---- */
+  /* Alta */
   if (isset($_POST['crear_producto'])) {
     $nombre      = trim($_POST['nombre'] ?? '');
     $descripcion = trim($_POST['descripcion'] ?? '');
@@ -168,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
-  /* ---- Activar / Desactivar (baja lógica) ---- */
+  /*  Activar / Desactivar (baja lógica)  */
   if (isset($_POST['toggle_activo'])) {
     $id = (int)($_POST['id'] ?? 0);
     $nuevoEstado = (int)($_POST['nuevo_estado'] ?? 0);
@@ -186,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-/* ============== Cargar producto para edición ============== */
+/*  Cargar producto para edición  */
 $editId = isset($_GET['edit']) ? (int)$_GET['edit'] : 0;
 $editProd = null;
 if ($editId > 0) {
@@ -197,7 +195,7 @@ if ($editId > 0) {
   $stmt->close();
 }
 
-/* =================== Listado =================== */
+/*  Listado  */
 $sqlListado = "SELECT p.*, c.nombre AS categoria_nombre
                FROM producto p
                LEFT JOIN categoria c ON c.id = p.categoria_id
@@ -226,7 +224,7 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
     <?php if ($msg === 'creado'):   ?><div class="msg ok">✅ Producto creado.</div><?php endif; ?>
     <?php if ($msg === 'editado'):  ?><div class="msg ok">✅ Producto editado.</div><?php endif; ?>
     <?php if ($msg === 'estado'):   ?><div class="msg ok">🔁 Estado actualizado.</div><?php endif; ?>
-    <?php if ($msg === 'error'):    ?><div class="msg err">❌ Ocurrió un error.</div><?php endif; ?>
+    <?php if ($msg === 'error'):    ?><div class="msg err"> Ocurrió un error.</div><?php endif; ?>
 
     <?php if ($errores): ?>
       <div class="msg err">
