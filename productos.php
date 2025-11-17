@@ -4,6 +4,7 @@ require 'db_conn.php';
 
 /* Helper para imagen */
 function h($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
+
 function imagen_principal(int $id): string {
   $baseAbs = __DIR__ . "/uploads/products/$id/";
   $baseRel = "uploads/products/$id/";
@@ -166,7 +167,7 @@ $stmt->close();
 
 
   </main>
-      <!-- Inicio Footer -->
+  <!-- Inicio Footer -->
 
     <?php
         include 'footer.php';

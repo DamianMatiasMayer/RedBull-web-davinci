@@ -11,7 +11,7 @@ if (!$tipo_user || !in_array($tipo_user, ['1','2'], true)) {
 
 require 'db_conn.php';
 
-/* ======= CRUD ======= */
+/*  ABM */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-  // Edición
+  // modificacion
   if (isset($_POST['id_editar'])) {
     $id     = (int)($_POST['id_editar'] ?? 0);
     $nombre = trim($_POST['nombreEditar'] ?? '');
@@ -46,21 +46,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-  // Eliminación
-  if (isset($_POST['id_eliminar'])) {
+// baja
+if (isset($_POST['id_eliminar'])) {
     $id = (int)($_POST['id_eliminar'] ?? 0);
+    $ok = false;
+
     if ($id > 0) {
-      $stmt = $conexion->prepare("DELETE FROM categoria WHERE id = ?");
-      $stmt->bind_param("i", $id);
-      $ok = $stmt->execute();
-      $stmt->close();
+        // 1) Ver si tiene hijas
+        $stmt = $conexion->prepare("SELECT COUNT(*) FROM categoria WHERE padre_id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->bind_result($hijas);
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($hijas > 0) {
+            // Tiene categorías hijas => no borramos
+            header('Location: categorias-admin.php?msg=tiene_hijas');
+            exit;
+        }
+
+        // 2) Si no tiene hijas, recién ahí borramos
+        $stmt = $conexion->prepare("DELETE FROM categoria WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $ok = $stmt->execute();
+        $stmt->close();
     }
+
     header('Location: categorias-admin.php?msg=' . ($ok ? 'eliminada' : 'error'));
     exit;
   }
 }
 
-/* ======= LISTADO ======= */
+/*  LISTADO  */
 $sql = "
   SELECT c.id, c.nombre, c.padre_id, p.nombre AS padre_nombre
   FROM categoria c
@@ -108,8 +126,13 @@ $padres = $categorias;
     <div class="rb-topbar">
       <h1 class="rb-title">Administrador de Categorías</h1>
       <?php if (isset($_GET['msg'])): ?>
-        <p class="rb-flash <?= $_GET['msg']==='error' ? 'rb-flash--error':'rb-flash--ok' ?>">
-          <?= htmlspecialchars($_GET['msg']) ?>
+        <p class="rb-flash 
+              <?= $_GET['msg'] === 'error' || $_GET['msg'] === 'tiene_hijas' ? 'rb-flash--error' : 'rb-flash--ok' ?>">
+          <?php if ($_GET['msg'] === 'tiene_hijas'): ?>
+            No podés eliminar una categoría que tiene subcategorías.
+          <?php else: ?>
+            <?= htmlspecialchars($_GET['msg']) ?>
+          <?php endif; ?>
         </p>
       <?php endif; ?>
       <button type="button" class="rb-btn rb-btn--primary" onclick="openModal('modalCreate')">

@@ -363,8 +363,47 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
     </div>
   </main>
   
+  <!-- Inicio Footer -->
+
     <?php
         include 'footer.php';
     ?>
+
+  <!-- Fin Footer -->
+
+  <!-- Modal de inicio de sesion/registro   -->
+
+  <!-- Overlay oscuro -->
+  <div id="overlay-login" class="overlay oculto"></div>
+
+  <!-- Modal de Login -->
+
+  <?php include 'login.php'; ?>
+
+  <!--Fin Modal de inicio de sesion/registro   -->
+
+
+  <!-- Aviso emergente en trabajo  -->
+
+  <div id="aviso-trabajo" class="aviso-trabajo oculto">
+    🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
+  </div>
+
+  <!-- fin Aviso emergente en trabajo  -->
+
+
+  <!-- GSAP -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- ScrollTrigger (para animar con el scroll) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+
+  <!-- Scritps -->
+
+
+  <script defer src="js/global.js"></script>
+  <script defer src="js/gsap-nav.js"></script>
+  <script defer src="js/login.js"></script>
+
 </body>
 </html>

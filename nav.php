@@ -20,10 +20,10 @@ $tipo_user = $_SESSION['tipo_usuario'] ?? null;
       <li><a href="eventosYdeportes.php">Eventos</a></li>
       <li><a href="contacto.php">Contacto</a></li>
 
-      <!--  Mostrar "Usuarios" solo si el tipo_user es 1 o 2 -->
+      <!--  Mostrar Usuarios solo si el tipo_user es 1 o 2 -->
       <?php if ($tipo_user === '1' || $tipo_user === '2'): ?>
         <li><a href="usuarios-admin.php">Usuarios</a></li>
-        <li><a href="productos-admin.php">Productos</a></li>
+        <li><a href="productos-admin.php">Productos-admin</a></li>
         <li><a href="categorias-admin.php">Categorias</a></li>
       <?php endif; ?>
 

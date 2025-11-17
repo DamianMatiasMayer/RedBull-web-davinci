@@ -95,13 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit;
     }
 
-    /* IMPORTANTE:
-       Esto mantiene tu login actual que usa la columna `contraseña` en texto plano.
-       Cuando quieras migrar a hash:
-         $hash = password_hash($password, PASSWORD_DEFAULT);
-         y reemplazar el SET por `contraseña` = $hash
-         + cambiar el login a password_verify().
-    */
     if ($tipo_user === '1') {
       $sql  = "UPDATE usuarios u
                JOIN (SELECT id, tipo_user FROM usuarios WHERE id = ?) t ON u.id = t.id
