@@ -1,5 +1,4 @@
 <?php
-
 @session_start();
 
 require 'db_conn.php';
@@ -16,12 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $accion = $_POST['accion'] ?? '';
   $id     = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
-  // Validación ID básico
-  if ($id <= 0) {
+  // Validación ID básico (salvo que la acción no lo use)
+  if ($accion !== 'algo_que_no_use_id' && $id <= 0) {
     header('Location: usuarios-admin.php?msg=id_invalido');
     exit;
   }
 
+  /* --- DESACTIVAR --- */
   if ($accion === 'desactivar') {
     // Admin 1 solo puede desactivar usuarios tipo 0. Sysadmin 2 cualquiera.
     if ($tipo_user === '1') {
@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
+  /* --- REACTIVAR --- */
   if ($accion === 'reactivar') {
     // Admin 1 solo puede reactivar usuarios tipo 0. Sysadmin 2 cualquiera.
     if ($tipo_user === '1') {
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
+  /* --- EDITAR NOMBRE --- */
   if ($accion === 'editar') {
     $nombre = trim($_POST['nombre'] ?? '');
 
@@ -88,10 +90,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
+  /* --- CAMBIAR CONTRASEÑA --- */
   if ($accion === 'password') {
-    $password = trim($_POST['password'] ?? '');
-    if ($password === '' || strlen($password) < 8) {
+    $password  = trim($_POST['password']  ?? '');
+    $password2 = trim($_POST['password2'] ?? '');
+
+    // Validaciones de contraseña
+    if ($password === '' || $password2 === '') {
       header('Location: usuarios-admin.php?msg=pass_invalida');
+      exit;
+    }
+
+    if (strlen($password) < 8) {
+      header('Location: usuarios-admin.php?msg=pass_invalida');
+      exit;
+    }
+
+    if ($password !== $password2) {
+      header('Location: usuarios-admin.php?msg=pass_no_coincide');
       exit;
     }
 
@@ -131,9 +147,78 @@ if ($tipo_user == 1) {
 $resultado = $conexion->query($sql);
 $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
 
+/* ====== MENSAJES PARA LA VISTA ====== */
+$codigo_msg  = $_GET['msg'] ?? '';
+$mensaje     = '';
+$tipo_alerta = ''; // 'exito' o 'error'
+
+switch ($codigo_msg) {
+  case 'desactivado':
+    $mensaje = 'Usuario desactivado correctamente.';
+    $tipo_alerta = 'exito';
+    break;
+
+  case 'error_desactivar':
+    $mensaje = 'No se pudo desactivar el usuario.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'reactivado':
+    $mensaje = 'Usuario reactivado correctamente.';
+    $tipo_alerta = 'exito';
+    break;
+
+  case 'error_reactivar':
+    $mensaje = 'No se pudo reactivar el usuario.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'nombre_invalido':
+    $mensaje = 'El nombre ingresado no es válido.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'editado':
+    $mensaje = 'Usuario editado correctamente.';
+    $tipo_alerta = 'exito';
+    break;
+
+  case 'error_editar':
+    $mensaje = 'No se pudo editar el usuario.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'pass_invalida':
+    $mensaje = 'La contraseña es inválida. Debe tener al menos 8 caracteres.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'pass_no_coincide':
+    $mensaje = 'Las contraseñas nuevas no coinciden.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'pass_cambiada':
+    $mensaje = 'Contraseña cambiada correctamente.';
+    $tipo_alerta = 'exito';
+    break;
+
+  case 'error_pass':
+    $mensaje = 'No se pudo cambiar la contraseña.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'id_invalido':
+    $mensaje = 'ID de usuario inválido.';
+    $tipo_alerta = 'error';
+    break;
+
+  case 'accion_desconocida':
+    $mensaje = 'Acción desconocida.';
+    $tipo_alerta = 'error';
+    break;
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -154,11 +239,8 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
 
     <!-- inicio header -->
     <header>
-        <?php
-            include 'nav.php';
-        ?>
+        <?php include 'nav.php'; ?>
     </header>
-
     <!-- fin header -->
 
     <main>
@@ -166,12 +248,19 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="admin-usuarios">
             <div class="encabezado-admin">
                 <h2>Administrador de Usuarios</h2>
-                  <?php if($tipo_user == 2) : ?>
-                        <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo Sys Admin</a>
-                        <a href="#" class="btn-nuevo" id="abrir-modal-admin">Nuevo Administrador</a>
-                  <?php endif; ?>
-                        <a href="#" class="btn-nuevo" id="abrir-modal-usuario">Nuevo Usuario</a>
+                <?php if($tipo_user == 2) : ?>
+                      <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo Sys Admin</a>
+                      <a href="#" class="btn-nuevo" id="abrir-modal-admin">Nuevo Administrador</a>
+                <?php endif; ?>
+                      <a href="#" class="btn-nuevo" id="abrir-modal-usuario">Nuevo Usuario</a>
             </div>
+
+            <?php if (!empty($mensaje)): ?>
+              <div class="alerta <?= $tipo_alerta === 'exito' ? 'alerta-exito' : 'alerta-error' ?>">
+                <?= htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8') ?>
+              </div>
+            <?php endif; ?>
+
             <table class="tabla-redbull">
                 <thead>
                     <tr>
@@ -186,11 +275,24 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
                 <tbody>
                     <?php foreach($usuarios as $usuario): ?>
                     <tr>
-                        <td><?= $usuario['id']?></td>
-                        <td><?= $usuario['nombre']?></td>
-                        <td><?= $usuario['mail']?></td>
-                        <td><span class="badge activo"><?= $usuario['activo']?></span></td>
-                        <td><?= $usuario['tipo_user']?></td>
+                        <td><?= (int)$usuario['id']?></td>
+                        <td><?= htmlspecialchars($usuario['nombre'], ENT_QUOTES, 'UTF-8')?></td>
+                        <td><?= htmlspecialchars($usuario['mail'], ENT_QUOTES, 'UTF-8')?></td>
+                        <td>
+                          <span class="badge <?= (int)$usuario['activo'] === 1 ? 'activo' : 'inactivo' ?>">
+                            <?= (int)$usuario['activo'] === 1 ? 'Activo' : 'Inactivo' ?>
+                          </span>
+                        </td>
+                        <td>
+                          <?php
+                            switch ((int)$usuario['tipo_user']) {
+                              case 0: echo 'Usuario'; break;
+                              case 1: echo 'Admin'; break;
+                              case 2: echo 'SysAdmin'; break;
+                              default: echo (int)$usuario['tipo_user'];
+                            }
+                          ?>
+                        </td>
                         <td class="acciones">
                             <?php if ((int)$usuario['activo'] === 1): ?>
                               <!-- Desactivar -->
@@ -278,11 +380,7 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
     </main>
 
     <!-- Footer   -->
-
-    <?php
-        include 'footer.php';
-    ?>
-
+    <?php include 'footer.php'; ?>
     <!-- Fin Footer   -->
 
 
@@ -290,183 +388,172 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
     <div id="overlay-login" class="overlay oculto"></div>
 
     <!-- Modal de Login -->
+    <div id="modal-login" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
 
-  <div id="modal-login" class="modal-login oculto">
-    <div class="modal-contenido">
-      <button class="cerrar-modal" onclick="cerrarModalLogin()">&times;</button>
-
-      <div class="modal-logo">
-        <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
-      </div>
-      <form action="login.php" method="post" class="form-login">
-
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required placeholder="tu@email.com">
-
-        <label for="password">Contraseña</label>
-        <div class="campo-password">
-          <input id="login-password" type="password" name="password" required placeholder="********">
-          <i class="fa-solid fa-eye" id="togglePassword"></i>
+        <div class="modal-logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
         </div>
-        <button type="submit" class="btn-login">Ingresar</button>
-      </form>
+        <form action="login.php" method="post" class="form-login">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required placeholder="tu@email.com">
 
+          <label for="password">Contraseña</label>
+          <div class="campo-password">
+            <input id="login-password" type="password" name="password" required placeholder="********">
+            <i class="fa-solid fa-eye" id="togglePassword"></i>
+          </div>
+          <button type="submit" class="btn-login">Ingresar</button>
+        </form>
 
-      <p class="modal-footer">
-        ¿No tenés cuenta?
-        <a href="registro.php">Registrate</a>
-      </p>
+        <p class="modal-footer">
+          ¿No tenés cuenta?
+          <a href="registro.php">Registrate</a>
+        </p>
+      </div>
     </div>
-  </div>
-
     <!--Fin Modal de inicio de sesion/registro   -->
 
+    <!-- modal registro -->
+    <div id="overlay-nuevo" class="overlay oculto"></div>
 
-<!-- modal registro -->
-<div id="overlay-nuevo" class="overlay oculto"></div>
+    <div id="modal-nuevo" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-modal-nuevo">&times;</button>
 
-<div id="modal-nuevo" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-modal-nuevo">&times;</button>
+        <div class="modal-logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        </div>
 
-    <div class="modal-logo">
-      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        <form action="registro.php" method="post" class="form-login form-registro">
+          <?php include 'newUser_form.php'; ?>
+          <button type="submit" class="btn-registrarse">Registrarse</button>
+        </form>
+      </div>
     </div>
 
-    <form action="registro.php" method="post" class="form-login form-registro">
-      <?php include 'newUser_form.php'; ?>
-      <button type="submit" class="btn-registrarse">Registrarse</button>
-    </form>
-  </div>
-</div>
+    <!-- ========== MODAL NUEVO SYS ADMIN ========== -->
+    <div id="overlay-nuevo-sysadmin" class="overlay oculto"></div>
+    <div id="modal-nuevo-sysadmin" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-modal-nuevo-sysadmin">&times;</button>
 
+        <div class="modal-logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        </div>
 
-
-<!-- ========== MODAL NUEVO SYS ADMIN ========== -->
-<div id="overlay-nuevo-sysadmin" class="overlay oculto"></div>
-<div id="modal-nuevo-sysadmin" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-modal-nuevo-sysadmin">&times;</button>
-
-    <div class="modal-logo">
-      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        <form action="registro.php" method="post" class="form-login form-registro">
+          <?php include 'newUser_form.php'; ?>
+          <input type="hidden" name="scope"  value="sysadmin">
+          <button type="submit" class="btn-registrarse">Registrarse</button>
+        </form>
+      </div>
     </div>
 
-    
-    <form action="registro.php" method="post" class="form-login form-registro">      
-      <?php include 'newUser_form.php'; ?>  
-      <input type="hidden" name="scope"  value="sysadmin">
-      <button type="submit" class="btn-registrarse">Registrarse</button>
-    </form>
-  </div>
-</div>
+    <!-- ========== MODAL NUEVO ADMINISTRADOR ========== -->
+    <div id="overlay-nuevo-admin" class="overlay oculto"></div>
+    <div id="modal-nuevo-admin" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-modal-nuevo-admin">&times;</button>
 
-<!-- ========== MODAL NUEVO ADMINISTRADOR ========== -->
-<div id="overlay-nuevo-admin" class="overlay oculto"></div>
-<div id="modal-nuevo-admin" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-modal-nuevo-admin">&times;</button>
+        <div class="modal-logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        </div>
 
-    <div class="modal-logo">
-      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        <form action="registro.php" method="post" class="form-login form-registro">
+          <?php include 'newUser_form.php'; ?>
+          <input type="hidden" name="scope"  value="admin">
+          <button type="submit" class="btn-registrarse">Registrarse</button>
+        </form>
+      </div>
     </div>
 
-    <form action="registro.php" method="post" class="form-login form-registro">
-      <?php include 'newUser_form.php'; ?> 
-      <input type="hidden" name="scope"  value="admin">     
-      <button type="submit" class="btn-registrarse">Registrarse</button>
-    </form>
-  </div>
-</div>
+    <!-- ========== MODAL NUEVO USUARIO ========== -->
+    <div id="overlay-nuevo-usuario" class="overlay oculto"></div>
+    <div id="modal-nuevo-usuario" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-modal-nuevo-usuario">&times;</button>
 
+        <div class="modal-logo">
+          <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        </div>
 
-
-<!-- ========== MODAL NUEVO USUARIO ========== -->
-<div id="overlay-nuevo-usuario" class="overlay oculto"></div>
-<div id="modal-nuevo-usuario" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-modal-nuevo-usuario">&times;</button>
-
-    <div class="modal-logo">
-      <img src="imagenes/redbullcom-logo_double-with-text.svg" alt="Red Bull Logo">
+        <form action="registro.php" method="post" class="form-login form-registro">
+          <?php include 'newUser_form.php'; ?>
+          <input type="hidden" name="scope"  value="usuario">
+          <button type="submit" class="btn-registrarse">Registrarse</button>
+        </form>
+      </div>
     </div>
 
-    <form action="registro.php" method="post" class="form-login form-registro">
-      <?php include 'newUser_form.php'; ?> 
-      <input type="hidden" name="scope"  value="usuario">     
-      <button type="submit" class="btn-registrarse">Registrarse</button>
-    </form>
-  </div>
-</div>
+    <!-- ========== MODAL REACTIVAR ========== -->
+    <div id="overlay-reactivar" class="overlay oculto"></div>
+    <div id="modal-reactivar" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-reactivar">&times;</button>
+        <h3>Reactivar usuario</h3>
+        <form action="usuarios-admin.php" method="post" class="form-login">
+          <input type="hidden" name="accion" value="reactivar">
+          <input type="hidden" name="id" id="id-reactivar">
+          <p>¿Confirmás reactivar este usuario?</p>
+          <button type="submit" class="btn-login">Reactivar</button>
+        </form>
+      </div>
+    </div>
 
+    <!-- ========== MODAL DESACTIVAR ========== -->
+    <div id="overlay-desactivar" class="overlay oculto"></div>
+    <div id="modal-desactivar" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-desactivar">&times;</button>
+        <h3>Desactivar usuario</h3>
+        <form action="usuarios-admin.php" method="post" class="form-login">
+          <input type="hidden" name="accion" value="desactivar">
+          <input type="hidden" name="id" id="id-desactivar">
+          <label for="motivo-desactivar">Motivo (opcional)</label>
+          <input id="motivo-desactivar" name="motivo" type="text">
+          <button type="submit" class="btn-login">Desactivar</button>
+        </form>
+      </div>
+    </div>
 
+    <!-- ========== MODAL EDITAR ========== -->
+    <div id="overlay-editar" class="overlay oculto"></div>
+    <div id="modal-editar" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-editar">&times;</button>
+        <h3>Editar usuario</h3>
+        <form action="usuarios-admin.php" method="post" class="form-login">
+          <input type="hidden" name="accion" value="editar">
+          <input type="hidden" name="id" id="id-editar">
+          <label for="nombre-editar">Nuevo nombre</label>
+          <input id="nombre-editar" name="nombre" type="text" required>
+          <button type="submit" class="btn-login">Guardar</button>
+        </form>
+      </div>
+    </div>
 
-<!-- ========== MODAL REACTIVAR ========== -->
-<div id="overlay-reactivar" class="overlay oculto"></div>
-<div id="modal-reactivar" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-reactivar">&times;</button>
-    <h3>Reactivar usuario</h3>
-    <form action="usuarios-admin.php" method="post" class="form-login">
-      <input type="hidden" name="accion" value="reactivar">
-      <input type="hidden" name="id" id="id-reactivar">
-      <p>¿Confirmás reactivar este usuario?</p>
-      <button type="submit" class="btn-login">Reactivar</button>
-    </form>
-  </div>
-</div>
+    <!-- ========== MODAL CAMBIAR CONTRASEÑA ========== -->
+    <div id="overlay-password" class="overlay oculto"></div>
+    <div id="modal-password" class="modal-login oculto">
+      <div class="modal-contenido">
+        <button class="cerrar-modal" id="cerrar-password">&times;</button>
+        <h3>Cambiar contraseña</h3>
+        <form action="usuarios-admin.php" method="post" class="form-login">
+          <input type="hidden" name="accion" value="password">
+          <input type="hidden" name="id" id="id-password">
 
+          <label for="pass-nuevo">Nueva contraseña</label>
+          <input id="pass-nuevo" name="password" type="password" required>
 
+          <label for="pass-nuevo2">Repetir nueva contraseña</label>
+          <input id="pass-nuevo2" name="password2" type="password" required>
 
-<!-- ========== MODAL DESACTIVAR ========== -->
-<div id="overlay-desactivar" class="overlay oculto"></div>
-<div id="modal-desactivar" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-desactivar">&times;</button>
-    <h3>Desactivar usuario</h3>
-    <form action="usuarios-admin.php" method="post" class="form-login">
-      <input type="hidden" name="accion" value="desactivar">
-      <input type="hidden" name="id" id="id-desactivar">
-      <label for="motivo-desactivar">Motivo (opcional)</label>
-      <input id="motivo-desactivar" name="motivo" type="text">
-      <button type="submit" class="btn-login">Desactivar</button>
-    </form>
-  </div>
-</div>
-
-<!-- ========== MODAL EDITAR ========== -->
-<div id="overlay-editar" class="overlay oculto"></div>
-<div id="modal-editar" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-editar">&times;</button>
-    <h3>Editar usuario</h3>
-    <form action="usuarios-admin.php" method="post" class="form-login">
-      <input type="hidden" name="accion" value="editar">
-      <input type="hidden" name="id" id="id-editar">
-      <label for="nombre-editar">Nuevo nombre</label>
-      <input id="nombre-editar" name="nombre" type="text" required>
-      <button type="submit" class="btn-login">Guardar</button>
-    </form>
-  </div>
-</div>
-
-<!-- ========== MODAL CAMBIAR CONTRASEÑA ========== -->
-<div id="overlay-password" class="overlay oculto"></div>
-<div id="modal-password" class="modal-login oculto">
-  <div class="modal-contenido">
-    <button class="cerrar-modal" id="cerrar-password">&times;</button>
-    <h3>Cambiar contraseña</h3>
-    <form action="usuarios-admin.php" method="post" class="form-login">
-      <input type="hidden" name="accion" value="password">
-      <input type="hidden" name="id" id="id-password">
-      <label for="pass-nuevo">Nueva contraseña</label>
-      <input id="pass-nuevo" name="password" type="password" required>
-      <button type="submit" class="btn-login">Cambiar</button>
-    </form>
-  </div>
-</div>
-
-
+          <button type="submit" class="btn-login">Cambiar</button>
+        </form>
+      </div>
+    </div>
 
     <!-- Aviso emergente en trabajo  -->
     <div id="aviso-trabajo" class="aviso-trabajo oculto">
@@ -487,8 +574,5 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
     <script defer src="js/modal-nuevo.js?v=<?= filemtime('js/modal-nuevo.js') ?>"></script>
     <script defer src="js/modales-usuarios.js"></script>
 
-
-
 </body>
-
 </html>

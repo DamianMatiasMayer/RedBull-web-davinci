@@ -1,64 +1,106 @@
 <?php
+session_start();
 require 'db_conn.php';
 
-$arr = explode("/", $_SERVER['HTTP_REFERER']);
+/* Obtener página anterior */
+$arr = explode("/", $_SERVER['HTTP_REFERER'] ?? "");
 
+/* Generador de invitaciones */
 function generateInvitation($largo){
   $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"-$%&/()=?¿';
   return substr(str_shuffle($chars), 0, $largo);
 }
 
+/* --- PROCESAR FORMULARIO --- */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  
+
     $scope  = $_POST['scope'] ?? 'usuario';
-    $nombre = $_POST['nombre'] ?? '';
-    $mail   = $_POST['email'] ?? '';
-    $pass   = $_POST['password'] ?? '';
-    $pass2  = $_POST['confirm-password'] ?? '';
+    $nombre = trim($_POST['nombre'] ?? '');
+    $mail   = trim($_POST['email'] ?? '');
+    $pass   = trim($_POST['password'] ?? '');
+    $pass2  = trim($_POST['confirm-password'] ?? '');
 
+    $errores = [];
 
-  switch ($scope) {
+    /* Validaciones básicas */
+    if ($nombre === '' || $mail === '') {
+        $errores[] = 'Nombre y email son obligatorios.';
+    }
 
-    case 'usuario':
-      
-      $contraseña = generateInvitation(10);
-      $invitacion = generateInvitation(50);
-      $query = "INSERT INTO usuarios (nombre, mail, contraseña, activo, tipo_user, invitacion)
-                VALUES ('$nombre', '$mail', '$contraseña', 1, 0, '$invitacion')";
-      break;
+    /* Validar contraseña */
+    if ($pass === '' || $pass2 === '') {
+        $errores[] = 'Debés completar la contraseña y la confirmación.';
+    } elseif ($pass !== $pass2) {
+        $errores[] = 'Las contraseñas no coinciden.';
+    } elseif (strlen($pass) < 8){
+        $errores[] = 'La contraseña debe tener al menos 8 caracteres.';
+    }
 
-    case 'admin':
-      $query = "INSERT INTO usuarios (nombre, mail, contraseña, activo, tipo_user)
-                VALUES ('$nombre', '$mail', '$pass', 1, 1)";
-      break;
+        /* Validar que el email no esté ya registrado */
+    if ($mail !== '') {
+        $sql = "SELECT id FROM usuarios WHERE mail = ? LIMIT 1";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("s", $mail);
+        $stmt->execute();
+        $res = $stmt->get_result();
 
-    case 'sysadmin':
-      $query = "INSERT INTO usuarios (nombre, mail, contraseña, activo, tipo_user)
-                VALUES ('$nombre', '$mail', '$pass', 1, 2)";
-      break;
-  }
+        if ($res && $res->num_rows > 0) {
+            $errores[] = 'El email ingresado ya está en uso.';
+        }
 
-  
-  mysqli_query($conexion, $query);
- 
+        $stmt->close();
+    }
 
-  mysqli_close($conexion);
+    /* Si hubo errores, volver con mensajes */
+    if (!empty($errores)) {
+        $_SESSION['errores_registro'] = $errores;
 
-  session_start();
+        $volver = $arr[count($arr)-1] ?? 'registro.php';
+        header('Location: ' . $volver);
+        exit;
+    }
 
-  $link = "http://localhost/redbull-web/RedBull-web-davinci/registro.php?invitacion=" . $invitacion;
-  
-  $_SESSION['data'] = ['invitacion' => $link];
-  
-  
-  header('Location: ' . $arr[count($arr)-1]);
+    /* INSERT SEGÚN EL TIPO DE USUARIO */
+    switch ($scope) {
 
-  
+        case 'usuario':
+            $invitacion = generateInvitation(50);
+            $query = "INSERT INTO usuarios (nombre, mail, contraseña, activo, tipo_user, invitacion)
+                      VALUES ('$nombre', '$mail', '$pass', 1, 0, '$invitacion')";
+            break;
 
-  
-  
+        case 'admin':
+            $query = "INSERT INTO usuarios (nombre, mail, contraseña, activo, tipo_user)
+                      VALUES ('$nombre', '$mail', '$pass', 1, 1)";
+            break;
+
+        case 'sysadmin':
+            $query = "INSERT INTO usuarios (nombre, mail, contraseña, activo, tipo_user)
+                      VALUES ('$nombre', '$mail', '$pass', 1, 2)";
+            break;
+    }
+
+    $ok = mysqli_query($conexion, $query);
+    mysqli_close($conexion);
+
+    if ($ok) {
+        // Flag para mostrar mensaje y abrir modal
+        $_SESSION['registro_ok'] = true;
+    } else {
+        $_SESSION['errores_registro'] = ['Error al registrar el usuario.'];
+    }
+
+    $volver = $arr[count($arr)-1] ?? 'registro.php';
+    header('Location: ' . $volver);
+    exit;
 }
 
+/* Recuperar errores y éxito si existen */
+$errores_registro = $_SESSION['errores_registro'] ?? [];
+unset($_SESSION['errores_registro']);
+
+$registro_ok = $_SESSION['registro_ok'] ?? false;
+unset($_SESSION['registro_ok']);
 ?>
 
 
@@ -71,37 +113,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/modal-carrito.css" />
     <link rel="stylesheet" href="css/modal-login.css" />
     <link rel="stylesheet" href="css/registro.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
     <title>Registro</title>
   </head>
 
   <body>
-    <!-- inicio header -->
-    <header>
-        <?php
-            include 'nav.php';
-        ?>
-    </header>
 
-    <!-- fin header -->
+    <!-- Header -->
+    <header>
+      <?php include 'nav.php'; ?>
+    </header>
 
     <main>
       <div class="registro-page">
         <div class="registro-box">
           <h2>Crear cuenta</h2>
 
-    <form action="registro.php" method="post" class="form-login form-registro">
-      <?php include 'newUser_form.php'; ?>
-      <button type="submit" class="btn-registrarse">Registrarse</button>
-    </form>
+          <!-- MENSAJE DE ÉXITO SIN ABRIR MODAL -->
+          <?php if ($registro_ok): ?>
+            <div class="mensaje-exito">
+              Usuario registrado con éxito. Ya podés iniciar sesión.
+            </div>
+          <?php endif; ?>
+
+          <!-- Mostrar errores -->
+          <?php if (!empty($errores_registro)): ?>
+            <div class="mensaje-error">
+              <ul>
+                <?php foreach ($errores_registro as $e): ?>
+                  <li><?= htmlspecialchars($e) ?></li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          <?php endif; ?>
+
+          <!-- Formulario -->
+          <form action="registro.php" method="post" class="form-login form-registro">
+            <?php include 'newUser_form.php'; ?>
+            <button type="submit" class="btn-registrarse">Registrarse</button>
+          </form>
 
           <p class="registro-footer">
             ¿Ya tenés cuenta?

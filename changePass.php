@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Datos del form
 $old_pass = trim($_POST['old_pass'] ?? '');
 $new_pass = trim($_POST['pswd'] ?? '');
+$new_pass2 = trim($_POST['new_pass2'] ?? '');
+
+
 
 // Validaciones mínimas
 $errores = [];
@@ -27,6 +30,9 @@ if ($old_pass === '' || $new_pass === '') {
 }
 if (strlen($new_pass) < 8) {
   $errores[] = 'La nueva contraseña debe tener al menos 8 caracteres.';
+}
+if ($new_pass !== $new_pass2) {
+  $errores[] = 'Las contraseñas nuevas no coinciden.';
 }
 if ($errores) {
   $_SESSION['msg'] = implode(' ', $errores);

@@ -56,7 +56,7 @@
               required
               placeholder="Nueva contraseña"
             />
-        <!-- 
+        
             <label for="confirm-pass">Repetir nueva contraseña</label>
             <input
               id="confirm-pass"
@@ -65,7 +65,7 @@
               required
               placeholder="Repetir nueva contraseña"
             />
-            -->
+            
             <button type="submit" class="btn-registrarse">Modificar contraseña</button>
           </form>
 
