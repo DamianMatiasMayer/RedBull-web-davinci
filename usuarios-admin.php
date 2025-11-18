@@ -134,18 +134,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   exit;
 }
 
-/* ====== LECTURA PARA PINTAR LA TABLA ====== */
+/* ====== LECTURA PARA PINTAR LA TABLA (CON FILTRO + PAGINADO) ====== */
+$buscar = trim($_GET['buscar'] ?? '');
+
+// Config paginado
+$por_pagina = 10;
+$pagina     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($pagina < 1) { $pagina = 1; }
+$offset     = ($pagina - 1) * $por_pagina;
+
+// Armamos el WHERE según el tipo de usuario
+$where = [];
+
 if ($tipo_user == 1) {
-  $sql = "SELECT * FROM usuarios WHERE tipo_user = 0";
-} elseif ($tipo_user == 2) {
-  $sql = "SELECT * FROM usuarios";
+  // Admin: solo ver tipo_user = 0
+  $where[] = "tipo_user = 0";
 } else {
-  header('Location: index.php');
-  exit;
+  // Sysadmin: ver todos
+  $where[] = "1";
 }
+
+// Filtro de búsqueda
+if ($buscar !== '') {
+  $buscar_sql = $conexion->real_escape_string($buscar);
+  $where[] = "(
+      nombre LIKE '%$buscar_sql%' OR
+      mail   LIKE '%$buscar_sql%' OR
+      id     LIKE '%$buscar_sql%'
+  )";
+}
+
+$where_sql = implode(' AND ', $where);
+
+// 1) Contar total de registros (para saber cuántas páginas hay)
+$sql_count = "SELECT COUNT(*) AS total FROM usuarios WHERE $where_sql";
+$res_count = $conexion->query($sql_count);
+$fila_total = $res_count->fetch_assoc();
+$total_registros = (int)$fila_total['total'];
+$total_paginas   = max(1, (int)ceil($total_registros / $por_pagina));
+
+// Ajustar página si se pasa del máximo
+if ($pagina > $total_paginas) {
+  $pagina = $total_paginas;
+  $offset = ($pagina - 1) * $por_pagina;
+}
+
+// 2) Traer solo los usuarios de la página actual
+$sql = "SELECT * FROM usuarios
+        WHERE $where_sql
+        ORDER BY id ASC
+        LIMIT $por_pagina OFFSET $offset";
 
 $resultado = $conexion->query($sql);
 $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
+
 
 /* ====== MENSAJES PARA LA VISTA ====== */
 $codigo_msg  = $_GET['msg'] ?? '';
@@ -248,6 +290,15 @@ switch ($codigo_msg) {
         <section class="admin-usuarios">
             <div class="encabezado-admin">
                 <h2>Administrador de Usuarios</h2>
+                <form method="get" class="filtro-usuarios">
+                  <input 
+                    type="text" 
+                    name="buscar" 
+                    placeholder="Buscar usuario..." 
+                    value="<?= htmlspecialchars($_GET['buscar'] ?? '') ?>"
+                  >
+                  <button type="submit" class="btn-nuevo">Filtrar</button>
+                </form>
                 <?php if($tipo_user == 2) : ?>
                       <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo Sys Admin</a>
                       <a href="#" class="btn-nuevo" id="abrir-modal-admin">Nuevo Administrador</a>
@@ -328,6 +379,36 @@ switch ($codigo_msg) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php if ($total_paginas > 1): ?>
+              <div class="paginacion">
+                <?php
+                  // mantener el filtro de búsqueda en los links
+                  $query_base = [];
+                  if ($buscar !== '') {
+                    $query_base['buscar'] = $buscar;
+                  }
+
+                  // Botón Anterior
+                  if ($pagina > 1) {
+                    $query_base['page'] = $pagina - 1;
+                    echo '<a class="pag-link" href="usuarios-admin.php?' . http_build_query($query_base) . '">&laquo; Anterior</a>';
+                  }
+
+                  // Números de página
+                  for ($p = 1; $p <= $total_paginas; $p++) {
+                    $query_base['page'] = $p;
+                    $clase = $p == $pagina ? 'pag-link pag-activa' : 'pag-link';
+                    echo '<a class="' . $clase . '" href="usuarios-admin.php?' . http_build_query($query_base) . '">' . $p . '</a>';
+                  }
+
+                  // Botón Siguiente
+                  if ($pagina < $total_paginas) {
+                    $query_base['page'] = $pagina + 1;
+                    echo '<a class="pag-link" href="usuarios-admin.php?' . http_build_query($query_base) . '">Siguiente &raquo;</a>';
+                  }
+                ?>
+              </div>
+            <?php endif; ?>
         </section>
 
 
