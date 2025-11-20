@@ -68,6 +68,44 @@ if ($resCat = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre
 $errores = [];
 $msg = $_GET['msg'] ?? null;
 
+/* ====== FILTROS Y PAGINACIÓN (GET) ====== */
+$busqueda        = trim($_GET['busqueda'] ?? '');
+$filtroCategoria = $_GET['filtro_categoria'] ?? '';
+$filtroEstado    = $_GET['filtro_estado'] ?? ''; // '', '1', '0'
+
+$pagina    = max(1, (int)($_GET['pagina'] ?? 1));
+$porPagina = 8; // productos por página
+
+// Armamos el WHERE dinámico
+$where = " WHERE 1=1 ";
+
+if ($busqueda !== '') {
+  $busqEsc = $conexion->real_escape_string($busqueda);
+  $where .= " AND (p.nombre LIKE '%$busqEsc%' OR p.descripcion LIKE '%$busqEsc%')";
+}
+
+if ($filtroCategoria !== '' && ctype_digit($filtroCategoria)) {
+  $catId = (int)$filtroCategoria;
+  $where .= " AND p.categoria_id = $catId";
+}
+
+if ($filtroEstado === '1' || $filtroEstado === '0') {
+  $est = (int)$filtroEstado;
+  $where .= " AND p.activo = $est";
+}
+
+// Total de registros con esos filtros
+$sqlTotal = "SELECT COUNT(*) AS total FROM producto p $where";
+$resTotal = $conexion->query($sqlTotal);
+$totalReg = $resTotal ? (int)$resTotal->fetch_assoc()['total'] : 0;
+
+$totalPaginas = max(1, (int)ceil($totalReg / $porPagina));
+if ($pagina > $totalPaginas) {
+  $pagina = $totalPaginas;
+}
+$offset = ($pagina - 1) * $porPagina;
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   /* Alta */
@@ -195,13 +233,17 @@ if ($editId > 0) {
   $stmt->close();
 }
 
-/*  Listado  */
+
+/*  Listado con filtros + paginación  */
 $sqlListado = "SELECT p.*, c.nombre AS categoria_nombre
                FROM producto p
                LEFT JOIN categoria c ON c.id = p.categoria_id
-               ORDER BY p.id DESC";
+               $where
+               ORDER BY p.id DESC
+               LIMIT $porPagina OFFSET $offset";
 $resListado = $conexion->query($sqlListado);
 $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
+
 
 ?>
 <!DOCTYPE html>
@@ -307,10 +349,54 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
       <!-- ====== Listado ====== -->
       <div class="card">
         <h2>Listado</h2>
+        <!-- Filtros -->
+        <form class="filtros" method="get" action="productos-admin.php">
+          <div class="row">
+            <div>
+              <label for="busqueda">Buscar</label>
+              <input
+                type="text"
+                id="busqueda"
+                name="busqueda"
+                placeholder="Nombre o descripción"
+                value="<?php echo h($busqueda); ?>"
+              >
+            </div>
+
+            <div>
+              <label for="filtro_categoria">Categoría</label>
+              <select id="filtro_categoria" name="filtro_categoria">
+                <option value="">Todas</option>
+                <?php foreach ($categorias as $c): ?>
+                  <option value="<?php echo (int)$c['id']; ?>"
+                    <?php if ($filtroCategoria !== '' && (int)$filtroCategoria === (int)$c['id']) echo 'selected'; ?>>
+                    <?php echo h($c['nombre']); ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+
+            <div>
+              <label for="filtro_estado">Estado</label>
+              <select id="filtro_estado" name="filtro_estado">
+                <option value="">Todos</option>
+                <option value="1" <?php if ($filtroEstado === '1') echo 'selected'; ?>>Activos</option>
+                <option value="0" <?php if ($filtroEstado === '0') echo 'selected'; ?>>Inactivos</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px; gap:8px;">
+            <button class="btn btn-primary" type="submit">Aplicar filtros</button>
+            <a class="btn btn-secondary" href="productos-admin.php">Limpiar</a>
+          </div>
+        </form>
+
         <?php if (!$productos): ?>
           <p>No hay productos cargados.</p>
         <?php else: ?>
           <table>
+
             <thead>
               <tr>
                 <th>ID</th>
@@ -358,6 +444,29 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
             <?php endforeach; ?>
             </tbody>
           </table>
+        <?php endif; ?>
+        
+        <!-- Paginación -->
+        <?php if ($totalPaginas > 1): ?>
+          <div class="paginacion">
+            <?php
+              // mantenemos filtros en los links
+              $paramsBase = $_GET;
+              unset($paramsBase['pagina']); // la seteamos nosotros
+            ?>
+            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+              <?php
+                $paramsBase['pagina'] = $i;
+                $urlPagina = 'productos-admin.php?' . http_build_query($paramsBase);
+              ?>
+              <a
+                href="<?php echo h($urlPagina); ?>"
+                class="<?php echo ($i === $pagina) ? 'activa' : ''; ?>"
+              >
+                <?php echo $i; ?>
+              </a>
+            <?php endfor; ?>
+          </div>
         <?php endif; ?>
       </div>
     </div>
