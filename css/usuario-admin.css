@@ -227,18 +227,68 @@ body.no-scroll { overflow: hidden; }
   border: 1px solid #f5c6cb;
 }
 
-.filtro-usuarios {
+/* ====== Filtros arriba de la tabla ====== */
+.encabezado-admin {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
+.filtro-usuarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* input de búsqueda */
 .filtro-usuarios input {
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  flex: 1;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  min-width: 180px;
 }
+
+/* selects de estado y tipo */
+.filtro-usuarios select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+/* Botón de filtrar reutiliza .btn-nuevo, pero lo ajustamos un poco en este contexto */
+.filtro-usuarios .btn-nuevo {
+  padding: 8px 14px;
+  box-shadow: none;
+}
+
+/* Responsive: en pantallas chicas, que se apilen prolijos */
+@media (max-width: 768px) {
+  .encabezado-admin {
+    align-items: flex-start;
+  }
+
+  .filtro-usuarios {
+    width: 100%;
+  }
+
+  .filtro-usuarios input,
+  .filtro-usuarios select {
+    flex: 1 1 100%;
+  }
+
+  .filtro-usuarios .btn-nuevo {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 
 /*hasta aca*/
 

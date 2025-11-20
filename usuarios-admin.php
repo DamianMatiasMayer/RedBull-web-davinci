@@ -134,8 +134,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   exit;
 }
 
-/* ====== LECTURA PARA PINTAR LA TABLA (CON FILTRO + PAGINADO) ====== */
-$buscar = trim($_GET['buscar'] ?? '');
+/* ====== LECTURA PARA PINTAR LA TABLA (FILTROS + PAGINADO) ====== */
+$buscar     = trim($_GET['buscar'] ?? '');
+$estado     = $_GET['estado'] ?? '';
+$tipoFiltro = $_GET['tipo'] ?? '';
 
 // Config paginado
 $por_pagina = 10;
@@ -143,18 +145,31 @@ $pagina     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($pagina < 1) { $pagina = 1; }
 $offset     = ($pagina - 1) * $por_pagina;
 
-// Armamos el WHERE según el tipo de usuario
+// Armamos el WHERE según el tipo de usuario logueado
 $where = [];
 
 if ($tipo_user == 1) {
-  // Admin: solo ver tipo_user = 0
+  // Admin: solo ver usuarios comunes
   $where[] = "tipo_user = 0";
-} else {
+} elseif ($tipo_user == 2) {
   // Sysadmin: ver todos
   $where[] = "1";
+} else {
+  header('Location: index.php');
+  exit;
 }
 
-// Filtro de búsqueda
+// Filtro por estado (activo/inactivo)
+if ($estado === '1' || $estado === '0') {
+  $where[] = "activo = " . (int)$estado;
+}
+
+// Filtro por tipo de usuario (0,1,2)
+if ($tipoFiltro !== '' && in_array($tipoFiltro, ['0','1','2'], true)) {
+  $where[] = "tipo_user = " . (int)$tipoFiltro;
+}
+
+// Filtro de búsqueda (texto)
 if ($buscar !== '') {
   $buscar_sql = $conexion->real_escape_string($buscar);
   $where[] = "(
@@ -187,6 +202,7 @@ $sql = "SELECT * FROM usuarios
 
 $resultado = $conexion->query($sql);
 $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
+
 
 
 /* ====== MENSAJES PARA LA VISTA ====== */
@@ -288,23 +304,40 @@ switch ($codigo_msg) {
     <main>
 
         <section class="admin-usuarios">
-            <div class="encabezado-admin">
-                <h2>Administrador de Usuarios</h2>
-                <form method="get" class="filtro-usuarios">
-                  <input 
-                    type="text" 
-                    name="buscar" 
-                    placeholder="Buscar usuario..." 
-                    value="<?= htmlspecialchars($_GET['buscar'] ?? '') ?>"
-                  >
-                  <button type="submit" class="btn-nuevo">Filtrar</button>
-                </form>
-                <?php if($tipo_user == 2) : ?>
-                      <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo Sys Admin</a>
-                      <a href="#" class="btn-nuevo" id="abrir-modal-admin">Nuevo Administrador</a>
-                <?php endif; ?>
-                      <a href="#" class="btn-nuevo" id="abrir-modal-usuario">Nuevo Usuario</a>
-            </div>
+          <div class="encabezado-admin">
+              <h2>Administrador de Usuarios</h2>
+
+              <form method="get" class="filtro-usuarios">
+                <input 
+                  type="text" 
+                  name="buscar" 
+                  placeholder="Buscar por nombre, mail o ID..." 
+                  value="<?= htmlspecialchars($_GET['buscar'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                >
+
+                <select name="estado">
+                  <option value="">Todos los estados</option>
+                  <option value="1" <?= (($_GET['estado'] ?? '') === '1') ? 'selected' : '' ?>>Activo (1)</option>
+                  <option value="0" <?= (($_GET['estado'] ?? '') === '0') ? 'selected' : '' ?>>Inactivo (0)</option>
+                </select>
+
+                <select name="tipo">
+                  <option value="">Todos los tipos</option>
+                  <option value="0" <?= (($_GET['tipo'] ?? '') === '0') ? 'selected' : '' ?>>Usuario (0)</option>
+                  <option value="1" <?= (($_GET['tipo'] ?? '') === '1') ? 'selected' : '' ?>>Admin (1)</option>
+                  <option value="2" <?= (($_GET['tipo'] ?? '') === '2') ? 'selected' : '' ?>>SysAdmin (2)</option>
+                </select>
+
+                <button type="submit" class="btn-nuevo">Filtrar</button>
+              </form>
+
+              <?php if($tipo_user == 2) : ?>
+                    <a href="#" class="btn-nuevo" id="abrir-modal-nuevo">Nuevo Sys Admin</a>
+                    <a href="#" class="btn-nuevo" id="abrir-modal-admin">Nuevo Administrador</a>
+              <?php endif; ?>
+                    <a href="#" class="btn-nuevo" id="abrir-modal-usuario">Nuevo Usuario</a>
+          </div>
+
 
             <?php if (!empty($mensaje)): ?>
               <div class="alerta <?= $tipo_alerta === 'exito' ? 'alerta-exito' : 'alerta-error' ?>">
@@ -382,10 +415,16 @@ switch ($codigo_msg) {
             <?php if ($total_paginas > 1): ?>
               <div class="paginacion">
                 <?php
-                  // mantener el filtro de búsqueda en los links
+                  // mantener todos los filtros en los links
                   $query_base = [];
                   if ($buscar !== '') {
                     $query_base['buscar'] = $buscar;
+                  }
+                  if ($estado !== '') {
+                    $query_base['estado'] = $estado;
+                  }
+                  if ($tipoFiltro !== '') {
+                    $query_base['tipo'] = $tipoFiltro;
                   }
 
                   // Botón Anterior
@@ -409,6 +448,7 @@ switch ($codigo_msg) {
                 ?>
               </div>
             <?php endif; ?>
+
         </section>
 
 

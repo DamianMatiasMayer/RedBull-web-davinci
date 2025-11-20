@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           "INSERT INTO producto (nombre, descripcion, precio, stock, categoria_id, activo)
            VALUES (?, ?, ?, ?, ?, ?)"
         );
-        $stmt->bind_param("ssdiis", $nombre, $descripcion, $precio, $stock, $categoria, $activo);
+         $stmt->bind_param("ssdiii", $nombre, $descripcion, $precio, $stock, $categoria, $activo);
       }
 
       $ok = $stmt->execute();
