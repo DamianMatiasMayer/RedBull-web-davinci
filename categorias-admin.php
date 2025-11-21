@@ -78,17 +78,68 @@ if (isset($_POST['id_eliminar'])) {
   }
 }
 
-/*  LISTADO  */
+/* ====== FILTROS + PAGINADO (GET) ====== */
+$buscar    = trim($_GET['buscar'] ?? '');
+$tipoPadre = $_GET['tipo_padre'] ?? ''; // '', 'raiz', 'sub'
+
+$porPagina = 10;
+$pagina    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($pagina < 1) { $pagina = 1; }
+
+$where = " WHERE 1=1 ";
+
+// Buscar por nombre o ID
+if ($buscar !== '') {
+  $buscarSql = $conexion->real_escape_string($buscar);
+  $where .= " AND (c.nombre LIKE '%$buscarSql%' OR c.id LIKE '%$buscarSql%')";
+}
+
+// Filtrar por tipo de categoría
+// raiz = sin padre, sub = tiene padre
+if ($tipoPadre === 'raiz') {
+  $where .= " AND c.padre_id IS NULL";
+} elseif ($tipoPadre === 'sub') {
+  $where .= " AND c.padre_id IS NOT NULL";
+}
+
+// Total de registros para paginado
+$sqlCount = "SELECT COUNT(*) AS total
+             FROM categoria c
+             $where";
+$resCount = $conexion->query($sqlCount);
+$totalReg = $resCount ? (int)$resCount->fetch_assoc()['total'] : 0;
+$resCount?->close();
+
+$totalPaginas = max(1, (int)ceil($totalReg / $porPagina));
+if ($pagina > $totalPaginas) {
+  $pagina = $totalPaginas;
+}
+$offset = ($pagina - 1) * $porPagina;
+
+
+/*  LISTADO con filtros + paginación */
 $sql = "
   SELECT c.id, c.nombre, c.padre_id, p.nombre AS padre_nombre
   FROM categoria c
   LEFT JOIN categoria p ON p.id = c.padre_id
+  $where
   ORDER BY c.id ASC
+  LIMIT $porPagina OFFSET $offset
 ";
 $res = $conexion->query($sql);
 $categorias = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
 $res?->close();
-$padres = $categorias;
+
+// Para los selects de padre uso todas las categorías (sin paginar)
+$sqlPadres = "
+  SELECT id, nombre
+  FROM categoria
+  ORDER BY id ASC
+";
+$resPadres = $conexion->query($sqlPadres);
+$padres = $resPadres ? $resPadres->fetch_all(MYSQLI_ASSOC) : [];
+$resPadres?->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -142,6 +193,35 @@ $padres = $categorias;
 
     <!-- TABLA -->
     <section class="rb-card">
+       <!-- Filtros -->
+      <form method="get" class="rb-filtros">
+        <div class="rb-filtros__row">
+          <div class="rb-filtros__field">
+            <label for="buscar">Buscar</label>
+            <input
+              type="text"
+              id="buscar"
+              name="buscar"
+              placeholder="Nombre o ID..."
+              value="<?= htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8') ?>"
+            >
+          </div>
+
+          <div class="rb-filtros__field">
+            <label for="tipo_padre">Tipo de categoría</label>
+            <select id="tipo_padre" name="tipo_padre">
+              <option value="">Todas</option>
+              <option value="raiz" <?= $tipoPadre === 'raiz' ? 'selected' : '' ?>>Solo raíz (sin padre)</option>
+              <option value="sub"  <?= $tipoPadre === 'sub'  ? 'selected' : '' ?>>Solo subcategorías</option>
+            </select>
+          </div>
+
+          <div class="rb-filtros__actions">
+            <button type="submit" class="rb-btn rb-btn--primary">Filtrar</button>
+            <a href="categorias-admin.php" class="rb-btn">Limpiar</a>
+          </div>
+        </div>
+      </form>
       <div class="rb-table-wrap">
         <table class="rb-table">
           <thead>
@@ -171,6 +251,39 @@ $padres = $categorias;
           </tbody>
         </table>
       </div>
+        <?php if ($totalPaginas > 1): ?>
+        <div class="rb-paginacion">
+          <?php
+            // mantener filtros en los links
+            $queryBase = [];
+            if ($buscar !== '') {
+              $queryBase['buscar'] = $buscar;
+            }
+            if ($tipoPadre !== '') {
+              $queryBase['tipo_padre'] = $tipoPadre;
+            }
+
+            // botón "Anterior"
+            if ($pagina > 1) {
+              $queryBase['page'] = $pagina - 1;
+              echo '<a class="rb-pag-link" href="categorias-admin.php?' . http_build_query($queryBase) . '">&laquo; Anterior</a>';
+            }
+
+            // números
+            for ($p = 1; $p <= $totalPaginas; $p++) {
+              $queryBase['page'] = $p;
+              $clase = $p == $pagina ? 'rb-pag-link rb-pag-link--activa' : 'rb-pag-link';
+              echo '<a class="' . $clase . '" href="categorias-admin.php?' . http_build_query($queryBase) . '">' . $p . '</a>';
+            }
+
+            // botón "Siguiente"
+            if ($pagina < $totalPaginas) {
+              $queryBase['page'] = $pagina + 1;
+              echo '<a class="rb-pag-link" href="categorias-admin.php?' . http_build_query($queryBase) . '">Siguiente &raquo;</a>';
+            }
+          ?>
+        </div>
+      <?php endif; ?>
     </section>
   </main>
 
