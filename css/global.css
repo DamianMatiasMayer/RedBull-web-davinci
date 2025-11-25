@@ -342,3 +342,77 @@ footer {
     visibility: hidden;
   }
 }
+
+
+.nav-has-mega {
+  position: relative;
+}
+
+.nav-has-mega:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);   
+}
+
+
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;                         
+  transform: translate(-50%, 10px);  
+  width: max-content;
+  min-width: 100%;
+  background: #ffffff;
+  padding: 25px 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+
+.mega-menu-inner {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.mega-col {
+  min-width: 150px;
+}
+
+
+
+.mega-col-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #111;
+  text-transform: uppercase;
+}
+
+.mega-col-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mega-col-list a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+
+
+.mega-col-title a {
+  color: #111 !important;      
+  text-decoration: none;
+  font-weight: 700;
+}
+
+

@@ -16,7 +16,10 @@ $tipo_user = $_SESSION['tipo_usuario'] ?? null;
 
     <ul>
       <li><a href="energizantes.php">Energizantes</a></li>
-      <li><a href="productos.php">Productos</a></li>
+      <li class="nav-has-mega">
+        <a href="productos.php">Productos</a>
+        <?php include 'mega-menu.php'; ?>
+      </li>
       <li><a href="eventosYdeportes.php">Eventos</a></li>
       <li><a href="contacto.php">Contacto</a></li>
 

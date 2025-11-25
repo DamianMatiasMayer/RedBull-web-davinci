@@ -15,16 +15,64 @@ function imagen_principal(int $id): string {
   return 'imagenes/placeholder.webp';
 }
 
-/* Parámetros de búsqueda */
+/**
+ * Devuelve un array con el id de la categoría dada
+ * + TODOS sus descendientes (hijos, nietos, etc.)
+ */
+function categorias_con_descendientes(mysqli $conexion, int $idCategoria): array {
+  $ids        = [$idCategoria];
+  $pendientes = [$idCategoria];
+
+  while (!empty($pendientes)) {
+    $actual = array_pop($pendientes);
+
+    $sql = "SELECT id FROM categoria WHERE padre_id = $actual";
+    if ($res = $conexion->query($sql)) {
+      while ($row = $res->fetch_assoc()) {
+        $hijoId = (int)$row['id'];
+        if (!in_array($hijoId, $ids, true)) {
+          $ids[]        = $hijoId;
+          $pendientes[] = $hijoId;
+        }
+      }
+      $res->close();
+    }
+  }
+
+  return $ids;
+}
+
+/* Parámetros de búsqueda y filtros */
 $buscar = trim($_GET['q'] ?? '');
+$catId  = isset($_GET['cat']) ? (int)$_GET['cat'] : 0;
+$deep   = isset($_GET['deep']) && $_GET['deep'] == '1';
+
 $pag    = max(1, (int)($_GET['p'] ?? 1));
 $porPag = 12;
 $offset = ($pag - 1) * $porPag;
 
-$where = "p.activo = 1";
+$where  = "p.activo = 1";
 $params = [];
 $types  = '';
 
+/* Filtro por categoría (padre o hijo) */
+if ($catId > 0) {
+  if ($deep) {
+    // Padre: traer padre + todos sus hijos
+    $idsCat = categorias_con_descendientes($conexion, $catId);
+  } else {
+    // Hijo: sólo esa categoría
+    $idsCat = [$catId];
+  }
+
+  if (!empty($idsCat)) {
+    $idsCat = array_map('intval', $idsCat);
+    $lista  = implode(',', $idsCat);
+    $where .= " AND p.categoria_id IN ($lista)";
+  }
+}
+
+/* Filtro por texto (buscador) */
 if ($buscar !== '') {
   $where .= " AND (p.nombre LIKE CONCAT('%', ?, '%') OR p.descripcion LIKE CONCAT('%', ?, '%'))";
   $params[] = $buscar;
@@ -34,13 +82,15 @@ if ($buscar !== '') {
 
 /* Conteo total */
 $stmt = $conexion->prepare("SELECT COUNT(*) FROM producto p WHERE $where");
-if ($types) $stmt->bind_param($types, ...$params);
+if ($types) {
+  $stmt->bind_param($types, ...$params);
+}
 $stmt->execute();
 $stmt->bind_result($total);
 $stmt->fetch();
 $stmt->close();
 
-$totalPaginas = ceil($total / $porPag);
+$totalPaginas = $total > 0 ? ceil($total / $porPag) : 1;
 
 /* Consulta principal */
 $sql = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.stock, c.nombre AS categoria
@@ -68,11 +118,22 @@ if ($types !== '') {
     $stmt->bind_param('ii', $porPag, $offset);
 }
 
-
 $stmt->execute();
 $res = $stmt->get_result();
 $productos = $res->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
+
+/* Armamos extras para mantener filtros en la paginación */
+$extraQuery = '';
+if ($buscar !== '') {
+  $extraQuery .= '&q=' . urlencode($buscar);
+}
+if ($catId > 0) {
+  $extraQuery .= '&cat=' . $catId;
+}
+if ($deep) {
+  $extraQuery .= '&deep=1';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -91,15 +152,21 @@ $stmt->close();
 <body>
   <?php include 'nav.php'; ?>
 
-<section class="banner">
-  <img src="imagenes/redbullcompras.avif" alt="Red Bull Shop" />
-</section>
+  <section class="banner">
+    <img src="imagenes/redbullcompras.avif" alt="Red Bull Shop" />
+  </section>
 
   <main class="contenedor">
     <h1>Tienda oficial</h1>
 
     <form class="buscador" method="get" action="productos.php">
       <input type="text" name="q" placeholder="Buscar producto..." value="<?= h($buscar) ?>">
+      <?php if ($catId > 0): ?>
+        <input type="hidden" name="cat" value="<?= (int)$catId ?>">
+      <?php endif; ?>
+      <?php if ($deep): ?>
+        <input type="hidden" name="deep" value="1">
+      <?php endif; ?>
       <button type="submit">Buscar</button>
     </form>
 
@@ -127,14 +194,15 @@ $stmt->close();
       <!-- Paginación -->
       <?php if ($totalPaginas > 1): ?>
         <div class="paginacion">
-          <?php for ($i=1; $i <= $totalPaginas; $i++): ?>
-            <a href="?q=<?= urlencode($buscar) ?>&p=<?= $i ?>" class="<?= $i === $pag ? 'activa' : '' ?>">
+          <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+            <a href="?p=<?= $i . $extraQuery ?>" class="<?= $i === $pag ? 'activa' : '' ?>">
               <?= $i ?>
             </a>
           <?php endfor; ?>
         </div>
       <?php endif; ?>
     <?php endif; ?>
+
     <!-- CARRITO LATERAL -->
     <div id="carrito-container" class="carrito oculto">
       <div class="carrito-header">
@@ -161,49 +229,29 @@ $stmt->close();
         <button onclick="cerrarMensajeCompra()">Cerrar</button>
       </div>
     </div>
-
-
-
-
-
   </main>
+
   <!-- Inicio Footer -->
-
-    <?php
-        include 'footer.php';
-    ?>
-
+  <?php include 'footer.php'; ?>
   <!-- Fin Footer -->
-
-  <!-- Modal de inicio de sesion/registro   -->
 
   <!-- Overlay oscuro -->
   <div id="overlay-login" class="overlay oculto"></div>
 
   <!-- Modal de Login -->
-
   <?php include 'login.php'; ?>
 
-  <!--Fin Modal de inicio de sesion/registro   -->
-
-
   <!-- Aviso emergente en trabajo  -->
-
   <div id="aviso-trabajo" class="aviso-trabajo oculto">
     🔧 Esta sección está en desarrollo. ¡Pronto estará disponible!
   </div>
-
   <!-- fin Aviso emergente en trabajo  -->
-
 
   <!-- GSAP -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <!-- ScrollTrigger (para animar con el scroll) -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-
   <!-- Scritps -->
-
   <script defer src="js/productos.js"></script>
   <script defer src="js/global.js"></script>
   <script defer src="js/filtros.js"></script>
@@ -211,8 +259,5 @@ $stmt->close();
   <script defer src="js/modal-carrito.js"></script>
   <script defer src="js/gsap-nav.js"></script>
   <script defer src="js/login.js"></script>
-
-
-
 </body>
 </html>
