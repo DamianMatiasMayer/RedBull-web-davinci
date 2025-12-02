@@ -150,8 +150,11 @@ if ($deep) {
   <link rel="icon" href="imagenes/favicon.redbull.jpg.png" />
 </head>
 <body>
+  
+  <!-- Nav -->
   <?php include 'nav.php'; ?>
 
+  <!-- imagen de entrada -->
   <section class="banner">
     <img src="imagenes/redbullcompras.avif" alt="Red Bull Shop" />
   </section>
@@ -159,6 +162,7 @@ if ($deep) {
   <main class="contenedor">
     <h1>Tienda oficial</h1>
 
+    <!-- input par filtrado de nombre -->
     <form class="buscador" method="get" action="productos.php">
       <input type="text" name="q" placeholder="Buscar producto..." value="<?= h($buscar) ?>">
       <?php if ($catId > 0): ?>
@@ -175,7 +179,16 @@ if ($deep) {
     <?php else: ?>
       <section class="grid-productos">
         <?php foreach ($productos as $p): ?>
-          <article class="card">
+          <article
+            class="card card-producto"
+            data-id="<?= (int)$p['id'] ?>"
+            data-nombre="<?= h($p['nombre']) ?>"
+            data-descripcion="<?= h($p['descripcion']) ?>"
+            data-precio="<?= number_format((float)$p['precio'], 2, ',', '.') ?>"
+            data-img="<?= h(imagen_principal((int)$p['id'])) ?>"
+            data-categoria="<?= h($p['categoria'] ?? 'Sin categoría') ?>"
+            data-stock="<?= (int)$p['stock'] ?>"
+          >
             <img src="<?= h(imagen_principal((int)$p['id'])) ?>" alt="<?= h($p['nombre']) ?>">
             <div class="info">
               <h3><?= h($p['nombre']) ?></h3>
@@ -190,6 +203,7 @@ if ($deep) {
           </article>
         <?php endforeach; ?>
       </section>
+
 
       <!-- Paginación -->
       <?php if ($totalPaginas > 1): ?>
@@ -220,6 +234,36 @@ if ($deep) {
         Finalizar compra
       </button>
     </div>
+
+
+    <!-- MODAL DETALLE PRODUCTO -->
+    <div id="modal-producto" class="modal-detalle-producto oculto">
+      <div class="modal-detalle-producto__contenido">
+        <button id="modal-producto-cerrar" class="modal-producto__cerrar">&times;</button>
+
+        <div class="modal-producto__img">
+          <img id="modal-producto-img" src="" alt="">
+        </div>
+
+        <div class="modal-producto__info">
+          <h2 id="modal-producto-nombre"></h2>
+          <p class="modal-producto__categoria" id="modal-producto-categoria"></p>
+          <p id="modal-producto-descripcion"></p>
+          <p class="modal-producto__precio" id="modal-producto-precio"></p>
+          <p class="modal-producto__stock" id="modal-producto-stock"></p>
+
+          <div class="form-carrito-modal">
+            <input type="hidden" id="modal-producto-id">
+            <button type="button" id="btn-agregar-modal" class="btn-agregar-modal">
+              Agregar al carrito
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
 
     <!-- MENSAJE DE COMPRA REALIZADA CON EXITO  -->
     <div id="mensaje-compra" class="modal-compra oculto">

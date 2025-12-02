@@ -86,8 +86,28 @@ if ($busqueda !== '') {
 
 if ($filtroCategoria !== '' && ctype_digit($filtroCategoria)) {
   $catId = (int)$filtroCategoria;
-  $where .= " AND p.categoria_id = $catId";
+
+  // 1) arrancamos con el ID elegido
+  $ids = [$catId];
+
+  // 2) buscamos hijos directos de esa categoría
+  $stmt = $conexion->prepare("SELECT id FROM categoria WHERE padre_id = ?");
+  $stmt->bind_param("i", $catId);
+  $stmt->execute();
+  $resHijos = $stmt->get_result();
+
+  while ($row = $resHijos->fetch_assoc()) {
+    $ids[] = (int)$row['id'];
+  }
+  $stmt->close();
+
+  // 3) armamos la lista para el IN (ej: 3,5,7)
+  $listaIds = implode(',', $ids);
+
+  // 4) filtramos por esa lista (padre + hijos)
+  $where .= " AND p.categoria_id IN ($listaIds)";
 }
+
 
 if ($filtroEstado === '1' || $filtroEstado === '0') {
   $est = (int)$filtroEstado;

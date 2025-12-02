@@ -132,3 +132,96 @@ h1 {
 }
 
 
+/* ===== Modal detalle de producto (simplificado) ===== */
+
+
+.modal-detalle-producto {
+  position: fixed;
+  inset: 0;
+  display: flex;                    /* SIEMPRE flex */
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 999999999;
+}
+
+.modal-detalle-producto__contenido {
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  max-width: 900px;
+  width: 90%;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 20px;
+}
+
+
+.modal-producto__img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.modal-producto__cerrar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+
+.modal-producto__img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.modal-producto__cerrar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.modal-producto__precio {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.form-carrito-modal {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.form-carrito-modal input[type="number"] {
+  width: 80px;
+}
+
+.btn-agregar-modal {
+  background: #d0021b;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+

@@ -1,25 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
   const filas = document.querySelectorAll(".fila-accesorios");
   const botonCargarMas = document.getElementById("cargar-mas");
-  let visibles = 4; // 4 filas (16 productos) visibles inicialmente
+
+  // Si en esta página no hay filas o no hay botón, no hacemos nada
+  if (!filas.length || !botonCargarMas) return;
+
+  let filasVisibles = 4; // por ejemplo, las primeras 4
 
   function actualizarVisibilidad() {
     filas.forEach((fila, index) => {
-      fila.style.display = index < visibles ? "flex" : "none";
+      if (index < filasVisibles) {
+        fila.style.display = "flex";
+        fila.classList.add("visible");
+      } else {
+        fila.style.display = "none";
+        fila.classList.remove("visible");
+      }
     });
 
-    // Ocultar el botón si ya no hay más filas por mostrar
-    if (visibles >= filas.length) {
+    // Ocultar botón si ya no hay más para mostrar
+    if (filasVisibles >= filas.length) {
       botonCargarMas.style.display = "none";
+    } else {
+      botonCargarMas.style.display = "block";
     }
   }
 
-  // Mostrar filas iniciales
+  // Inicial
   actualizarVisibilidad();
 
-  // Al hacer clic, mostrar 4 filas más (16 productos)
+  // Evento click
   botonCargarMas.addEventListener("click", () => {
-    visibles += 4;
+    filasVisibles += 4; // mostrar 4 filas más cada vez
     actualizarVisibilidad();
   });
 });
