@@ -1,5 +1,5 @@
 <?php
-@session_start();
+@session_start();//@session_start(); inicia la sesión para poder usar $_SESSION.
 require 'db_conn.php';
 
 /* Helper para imagen */
@@ -15,9 +15,9 @@ function imagen_principal(int $id): string {
   return 'imagenes/placeholder.webp';
 }
 
-/**
- * Devuelve un array con el id de la categoría dada
- * + TODOS sus descendientes (hijos, nietos, etc.)
+/*
+  Devuelve un array con el id de la categoría dada
+  + TODOS sus descendientes (hijos, nietos, etc.)
  */
 function categorias_con_descendientes(mysqli $conexion, int $idCategoria): array {
   $ids        = [$idCategoria];
@@ -107,7 +107,7 @@ if ($types !== '') {
     // Sumamos los valores a bindear
     $params2 = array_merge($params, [$porPag, $offset]);
 
-    // bind_param requiere referencias -> las construimos
+    // bind_param requiere referencias 
     $bind = [];
     $bind[] = &$types2;
     foreach ($params2 as $k => $v) {
@@ -123,7 +123,7 @@ $res = $stmt->get_result();
 $productos = $res->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
-/* Armamos extras para mantener filtros en la paginación */
+/* extras para mantener filtros en la paginación */
 $extraQuery = '';
 if ($buscar !== '') {
   $extraQuery .= '&q=' . urlencode($buscar);

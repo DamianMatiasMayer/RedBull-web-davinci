@@ -11,7 +11,7 @@ function generateInvitation($largo){
   return substr(str_shuffle($chars), 0, $largo);
 }
 
-/* --- PROCESAR FORMULARIO --- */
+/*  PROCESAR FORMULARIO */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $scope  = $_POST['scope'] ?? 'usuario';
@@ -227,7 +227,6 @@ unset($_SESSION['registro_ok']);
 
     <!-- Fin Footer   -->
 
-    <!-- Modal de inicio de sesion/registro   -->
 
     <!-- Overlay oscuro -->
     <div id="overlay-login" class="overlay oculto"></div>

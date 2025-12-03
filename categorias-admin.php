@@ -1,9 +1,10 @@
 <?php
-@session_start();
+@session_start(); //@session_start(); inicia la sesión para poder usar $_SESSION.
 
-$user      = $_SESSION['usuario']      ?? null;
-$tipo_user = $_SESSION['tipo_usuario'] ?? null;
+$user      = $_SESSION['usuario']      ?? null; //nombrre de usuario
+$tipo_user = $_SESSION['tipo_usuario'] ?? null; //tipo(0,1,2)
 
+//solo usuarios tipo 1 o 2 pueden entrar
 if (!$tipo_user || !in_array($tipo_user, ['1','2'], true)) {
   header('Location: login.php');
   exit;
@@ -11,18 +12,18 @@ if (!$tipo_user || !in_array($tipo_user, ['1','2'], true)) {
 
 require 'db_conn.php';
 
-/*  ABM */
+// ABM
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {//Solo entra si fue enviado por POST
 
   // Alta
-  if (isset($_POST['crear_categoria'])) {
+  if (isset($_POST['crear_categoria'])) { //isset para comprobar si una variable esta definida y tiene valor distinto de null
     $nombre = trim($_POST['nombre'] ?? '');
-    $padre  = ($_POST['padre'] ?? '0') === '0' ? null : (int)$_POST['padre'];
+    $padre  = ($_POST['padre'] ?? '0') === '0' ? null : (int)$_POST['padre'];// si el valor de padre es 0 es "sin padre" si no, se castea a int
 
-    if ($nombre !== '') {
+    if ($nombre !== '') { // si el nombre no esta vacio, prepara el INSERT con placeholders ?
       $stmt = $conexion->prepare("INSERT INTO categoria (nombre, padre_id) VALUES (?, ?)");
-      $stmt->bind_param("si", $nombre, $padre);
+      $stmt->bind_param("si", $nombre, $padre); //string e int, bind_param vincula una variable a un marcador de posicion en una consulta sql
       $ok = $stmt->execute();
       $stmt->close();
     }
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = trim($_POST['nombreEditar'] ?? '');
     $padre  = ($_POST['padreEditar'] ?? '0') === '0' ? null : (int)$_POST['padreEditar'];
 
-    if ($id > 0 && $nombre !== '') {
+    if ($id > 0 && $nombre !== '') { //solo actualiza si el id es valido y el nombre no esta vacio 
       $stmt = $conexion->prepare("UPDATE categoria SET nombre = ?, padre_id = ? WHERE id = ?");
       $stmt->bind_param("sii", $nombre, $padre, $id);
       $ok = $stmt->execute();
@@ -46,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-// baja
-if (isset($_POST['id_eliminar'])) {
+  // baja
+  if (isset($_POST['id_eliminar'])) {
     $id = (int)($_POST['id_eliminar'] ?? 0);
     $ok = false;
 
     if ($id > 0) {
-        // 1) Ver si tiene hijas
+        // 1) Ver si tiene hijos
         $stmt = $conexion->prepare("SELECT COUNT(*) FROM categoria WHERE padre_id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -61,7 +62,7 @@ if (isset($_POST['id_eliminar'])) {
         $stmt->close();
 
         if ($hijas > 0) {
-            // Tiene categorías hijas => no borramos
+            // Tiene categorías hijos -> no borramos
             header('Location: categorias-admin.php?msg=tiene_hijas');
             exit;
         }
@@ -78,11 +79,12 @@ if (isset($_POST['id_eliminar'])) {
   }
 }
 
-/* ====== FILTROS + PAGINADO (GET) ====== */
+// FILTROS + PAGINADO (GET) 
+
 $buscar    = trim($_GET['buscar'] ?? '');
 $tipoPadre = $_GET['tipo_padre'] ?? ''; // '', 'raiz', 'sub'
 
-$porPagina = 10;
+$porPagina = 10; //10 registros por página
 $pagina    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($pagina < 1) { $pagina = 1; }
 
@@ -90,19 +92,19 @@ $where = " WHERE 1=1 ";
 
 // Buscar por nombre o ID
 if ($buscar !== '') {
-  $buscarSql = $conexion->real_escape_string($buscar);
+  $buscarSql = $conexion->real_escape_string($buscar); //real_escape_string para escapar caracteres especiales
   $where .= " AND (c.nombre LIKE '%$buscarSql%' OR c.id LIKE '%$buscarSql%')";
 }
 
 // Filtrar por tipo de categoría
-// raiz = sin padre, sub = tiene padre
+// raiz = sin padre  sub = tiene padre
 if ($tipoPadre === 'raiz') {
   $where .= " AND c.padre_id IS NULL";
 } elseif ($tipoPadre === 'sub') {
   $where .= " AND c.padre_id IS NOT NULL";
 }
 
-// Total de registros para paginado
+// Total de registros para paginado, $where para saber cuantas filas hay
 $sqlCount = "SELECT COUNT(*) AS total
              FROM categoria c
              $where";
@@ -110,7 +112,8 @@ $resCount = $conexion->query($sqlCount);
 $totalReg = $resCount ? (int)$resCount->fetch_assoc()['total'] : 0;
 $resCount?->close();
 
-$totalPaginas = max(1, (int)ceil($totalReg / $porPagina));
+//calcula cuantas paginas hay en total
+$totalPaginas = max(1, (int)ceil($totalReg / $porPagina)); // ceil redondea hacia arriba
 if ($pagina > $totalPaginas) {
   $pagina = $totalPaginas;
 }
@@ -233,10 +236,10 @@ $resPadres?->close();
             </tr>
           </thead>
           <tbody>
-            <?php if (count($categorias) === 0): ?>
+            <?php if (count($categorias) === 0): ?> <!-- si no hay categorias, muestra un mensaje que dice "no hay categorías cargadas" -->
               <tr><td colspan="4" class="rb-empty">No hay categorías cargadas.</td></tr>
             <?php else: ?>
-              <?php foreach ($categorias as $cat): ?>
+              <?php foreach ($categorias as $cat): ?> <!-- si hay, un foreach de cada categoria -->
                 <tr>
                   <td><?= (int)$cat['id'] ?></td>
                   <td><?= htmlspecialchars($cat['nombre']) ?></td>
@@ -251,7 +254,7 @@ $resPadres?->close();
           </tbody>
         </table>
       </div>
-        <?php if ($totalPaginas > 1): ?>
+        <?php if ($totalPaginas > 1): ?> <!--solo muestra paginación si hay más de una página -->
         <div class="rb-paginacion">
           <?php
             // mantener filtros en los links
@@ -427,31 +430,14 @@ $resPadres?->close();
   </main>
 
 
-  <!-- JS -->
-  <script>
-    function openModal(id){ document.getElementById(id).classList.add('is-open'); }
-    function closeModal(id){ document.getElementById(id).classList.remove('is-open'); }
 
-    function prefillEdit(id, nombre, padre_id){
-      document.getElementById('id_editar').value = id;
-      document.getElementById('nombreEditar').value = nombre;
-      document.getElementById('padreEditar').value = padre_id || 0;
-      openModal('modalEdit');
-    }
-
-    function prefillDelete(id, nombre){
-      document.getElementById('del_id').textContent = id;
-      document.getElementById('del_nombre').textContent = nombre;
-      document.getElementById('id_eliminar').value = id;
-      openModal('modalDelete');
-    }
-  </script>
       <!-- GSAP -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <!-- ScrollTrigger (para animar con el scroll) -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Scripts -->
+  <script defer src="js/categorias.js"></script>
   <script defer src="js/global.js"></script>
   <script defer src="js/modal-carrito.js"></script>
   <script defer src="js/gsap-nav.js"></script>

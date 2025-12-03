@@ -1,4 +1,4 @@
-// js/productos.js
+
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('productos.js cargado');
@@ -40,11 +40,11 @@ function cerrarModalProducto() {
         const nom    = card.dataset.nombre;
         const cat    = card.dataset.categoria;
         const des    = card.dataset.descripcion;
-        const preTxt = card.dataset.precio;           // "100,00"
+        const preTxt = card.dataset.precio;           
         const imgSrc = card.dataset.img;
         const st     = parseInt(card.dataset.stock, 10);
 
-        // precio número: 100.00
+        
         const precioNumero = parseFloat(
           preTxt.replace(/\./g, '').replace(',', '.')
         );
@@ -120,7 +120,7 @@ function cerrarModalProducto() {
       const carritoContainer = document.getElementById('carrito-container');
       if (carritoContainer && carritoContainer.classList.contains('oculto')) {
         carritoContainer.classList.remove('oculto');
-        // nos aseguramos que se renderice actualizado
+        
         if (typeof window.actualizarVistaCarrito === 'function') {
           window.actualizarVistaCarrito();
         }

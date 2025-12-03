@@ -1,5 +1,5 @@
 <?php
-@session_start();
+@session_start(); //@session_start(); inicia la sesión para poder usar $_SESSION.
 
 //para evitar acceso sin login
 if (!isset($_SESSION['usuario'])) {
@@ -9,8 +9,8 @@ if (!isset($_SESSION['usuario'])) {
 
 require 'db_conn.php';
 
-// Solo aceptar POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+// Solo aceptar POST, que solo se use al enviar el formulario
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') { //Si el método no es POST (por ejemplo, si el usuario entró escribiendo la URL en el navegador), no se procesa.
   $_SESSION['msg'] = 'Método inválido.';
   header('Location: profile.php');
   exit;
@@ -60,12 +60,13 @@ if (!$user) {
 }
 $user_id = (int)$user['id'];
 
-
+//actualizar contraseña en la BD
 $update = "UPDATE usuarios SET `contraseña` = ? WHERE id = ? LIMIT 1";
 $stmt2 = $conexion->prepare($update);
 $stmt2->bind_param("si", $new_pass, $user_id);
 $ok = $stmt2->execute();
 $stmt2->close();
+
 
 if ($ok) {
   session_regenerate_id(true);

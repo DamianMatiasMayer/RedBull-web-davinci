@@ -1,7 +1,7 @@
 <?php
-// mega-menu.php
 
-if (!isset($conexion)) {
+//asegurar conexion a la base
+if (!isset($conexion)) { //la variable conexion existe?
     require __DIR__ . '/db_conn.php';
 }
 

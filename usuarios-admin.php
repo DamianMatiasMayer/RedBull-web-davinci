@@ -1,5 +1,5 @@
 <?php
-@session_start();
+@session_start();//@session_start(); inicia la sesión para poder usar $_SESSION.
 
 require 'db_conn.php';
 
@@ -9,13 +9,13 @@ if (!$tipo_user || !in_array($tipo_user, ['1','2'], true)) {
   exit;
 }
 
-/* ====== PROCESO DE ACCIONES (POST) ====== */
+/* PROCESO DE ACCIONES (POST) */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $accion = $_POST['accion'] ?? '';
   $id     = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
-  // Validación ID básico (salvo que la acción no lo use)
+  // Validación ID básico 
   if ($accion !== 'algo_que_no_use_id' && $id <= 0) {
     header('Location: usuarios-admin.php?msg=id_invalido');
     exit;
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-  /* --- CAMBIAR CONTRASEÑA --- */
+  /* CAMBIAR CONTRASEÑA  */
   if ($accion === 'password') {
     $password  = trim($_POST['password']  ?? '');
     $password2 = trim($_POST['password2'] ?? '');
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   exit;
 }
 
-/* ====== LECTURA PARA PINTAR LA TABLA (FILTROS + PAGINADO) ====== */
+/* LECTURA PARA PINTAR LA TABLA (FILTROS + PAGINADO)  */
 $buscar     = trim($_GET['buscar'] ?? '');
 $estado     = $_GET['estado'] ?? '';
 $tipoFiltro = $_GET['tipo'] ?? '';
@@ -145,7 +145,7 @@ $pagina     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($pagina < 1) { $pagina = 1; }
 $offset     = ($pagina - 1) * $por_pagina;
 
-// Armamos el WHERE según el tipo de usuario logueado
+// WHERE según el tipo de usuario logueado
 $where = [];
 
 if ($tipo_user == 1) {
@@ -205,7 +205,7 @@ $usuarios  = $resultado->fetch_all(MYSQLI_ASSOC);
 
 
 
-/* ====== MENSAJES PARA LA VISTA ====== */
+/*  MENSAJES PARA LA VISTA  */
 $codigo_msg  = $_GET['msg'] ?? '';
 $mensaje     = '';
 $tipo_alerta = ''; // 'exito' o 'error'
@@ -554,7 +554,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL NUEVO SYS ADMIN ========== -->
+    <!-- MODAL NUEVO SYS ADMIN  -->
     <div id="overlay-nuevo-sysadmin" class="overlay oculto"></div>
     <div id="modal-nuevo-sysadmin" class="modal-login oculto">
       <div class="modal-contenido">
@@ -572,7 +572,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL NUEVO ADMINISTRADOR ========== -->
+    <!--  MODAL NUEVO ADMINISTRADOR  -->
     <div id="overlay-nuevo-admin" class="overlay oculto"></div>
     <div id="modal-nuevo-admin" class="modal-login oculto">
       <div class="modal-contenido">
@@ -590,7 +590,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL NUEVO USUARIO ========== -->
+    <!--  MODAL NUEVO USUARIO  -->
     <div id="overlay-nuevo-usuario" class="overlay oculto"></div>
     <div id="modal-nuevo-usuario" class="modal-login oculto">
       <div class="modal-contenido">
@@ -608,7 +608,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL REACTIVAR ========== -->
+    <!--  MODAL REACTIVAR  -->
     <div id="overlay-reactivar" class="overlay oculto"></div>
     <div id="modal-reactivar" class="modal-login oculto">
       <div class="modal-contenido">
@@ -623,7 +623,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL DESACTIVAR ========== -->
+    <!--  MODAL DESACTIVAR  -->
     <div id="overlay-desactivar" class="overlay oculto"></div>
     <div id="modal-desactivar" class="modal-login oculto">
       <div class="modal-contenido">
@@ -639,7 +639,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL EDITAR ========== -->
+    <!--  MODAL EDITAR  -->
     <div id="overlay-editar" class="overlay oculto"></div>
     <div id="modal-editar" class="modal-login oculto">
       <div class="modal-contenido">
@@ -655,7 +655,7 @@ switch ($codigo_msg) {
       </div>
     </div>
 
-    <!-- ========== MODAL CAMBIAR CONTRASEÑA ========== -->
+    <!--  MODAL CAMBIAR CONTRASEÑA  -->
     <div id="overlay-password" class="overlay oculto"></div>
     <div id="modal-password" class="modal-login oculto">
       <div class="modal-contenido">

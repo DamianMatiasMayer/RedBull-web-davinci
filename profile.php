@@ -1,3 +1,13 @@
+<?php
+@session_start();//@session_start(); inicia la sesión para poder usar $_SESSION.
+
+if (!isset($_SESSION['usuario'])) {
+  header('Location: index.php');
+  exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>

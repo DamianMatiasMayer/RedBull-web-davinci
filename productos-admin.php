@@ -1,6 +1,6 @@
 <?php
-@session_start();
-
+@session_start(); //@session_start(); inicia la sesión para poder usar $_SESSION.
+ 
 $user      = $_SESSION['usuario']      ?? null;
 $tipo_user = $_SESSION['tipo_usuario'] ?? null;
 
@@ -13,10 +13,10 @@ require 'db_conn.php';
 
 function h($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
-/**
- * Devuelve la ruta relativa de la imagen principal del producto (si existe),
- * buscando en uploads/products/{id}/ main.webp|jpg|png o 1.webp|jpg|png.
- * Si no hay, devuelve un placeholder.
+/*
+  Devuelve la ruta relativa de la imagen principal del producto (si existe),
+  buscando en uploads/products/{id}/ main.webp|jpg|png o 1.webp|jpg|png.
+  Si no hay, devuelve un placeholder.
  */
 function imagen_principal(int $id): string {
   $baseAbs = __DIR__ . "/uploads/products/$id/";
@@ -28,7 +28,7 @@ function imagen_principal(int $id): string {
   return 'imagenes/placeholder.webp';
 }
 
-/** Guarda la imagen subida (input "imagen") como main.{ext} para el producto $id */
+/* Guarda la imagen subida (input "imagen") como main.{ext} para el producto $id */
 function guardar_imagen_main(int $id, array &$errores): void {
   if (!isset($_FILES['imagen']) || $_FILES['imagen']['error'] === UPLOAD_ERR_NO_FILE) return;
 
@@ -64,11 +64,11 @@ if ($resCat = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre
   $categorias = $resCat->fetch_all(MYSQLI_ASSOC);
 }
 
-/* Acciones  */
+/* Variables de mensajes y filtros  */
 $errores = [];
 $msg = $_GET['msg'] ?? null;
 
-/* ====== FILTROS Y PAGINACIÓN (GET) ====== */
+/*  FILTROS Y PAGINACIÓN (GET) */
 $busqueda        = trim($_GET['busqueda'] ?? '');
 $filtroCategoria = $_GET['filtro_categoria'] ?? '';
 $filtroEstado    = $_GET['filtro_estado'] ?? ''; // '', '1', '0'
@@ -76,14 +76,16 @@ $filtroEstado    = $_GET['filtro_estado'] ?? ''; // '', '1', '0'
 $pagina    = max(1, (int)($_GET['pagina'] ?? 1));
 $porPagina = 8; // productos por página
 
-// Armamos el WHERE dinámico
+// WHERE dinámico
 $where = " WHERE 1=1 ";
 
+//Filtro de texto, Si hay texto de búsqueda: Lo escapa para evitar inyección.
 if ($busqueda !== '') {
   $busqEsc = $conexion->real_escape_string($busqueda);
   $where .= " AND (p.nombre LIKE '%$busqEsc%' OR p.descripcion LIKE '%$busqEsc%')";
 }
 
+//Filtro de categoría (padre + hijos directos)
 if ($filtroCategoria !== '' && ctype_digit($filtroCategoria)) {
   $catId = (int)$filtroCategoria;
 
@@ -108,7 +110,7 @@ if ($filtroCategoria !== '' && ctype_digit($filtroCategoria)) {
   $where .= " AND p.categoria_id IN ($listaIds)";
 }
 
-
+//Filtro de estado (activo/inactivo)
 if ($filtroEstado === '1' || $filtroEstado === '0') {
   $est = (int)$filtroEstado;
   $where .= " AND p.activo = $est";
@@ -283,9 +285,10 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
   <main class="container">
     <h1>Productos – Admin</h1>
 
-    <?php if ($msg === 'creado'):   ?><div class="msg ok">✅ Producto creado.</div><?php endif; ?>
-    <?php if ($msg === 'editado'):  ?><div class="msg ok">✅ Producto editado.</div><?php endif; ?>
-    <?php if ($msg === 'estado'):   ?><div class="msg ok">🔁 Estado actualizado.</div><?php endif; ?>
+    <!-- mensajes de feedback  -->
+    <?php if ($msg === 'creado'):   ?><div class="msg ok"> Producto creado.</div><?php endif; ?>
+    <?php if ($msg === 'editado'):  ?><div class="msg ok"> Producto editado.</div><?php endif; ?>
+    <?php if ($msg === 'estado'):   ?><div class="msg ok"> Estado actualizado.</div><?php endif; ?>
     <?php if ($msg === 'error'):    ?><div class="msg err"> Ocurrió un error.</div><?php endif; ?>
 
     <?php if ($errores): ?>
@@ -295,7 +298,7 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
     <?php endif; ?>
 
     <div class="grid">
-      <!-- ====== Formulario ====== -->
+      <!--  Formulario  -->
       <form class="card" method="post" enctype="multipart/form-data" action="productos-admin.php<?php echo $editProd ? '?edit='.$editProd['id'] : '' ?>">
         <h2><?php echo $editProd ? 'Editar producto #'.h($editProd['id']) : 'Crear producto'; ?></h2>
 
@@ -366,7 +369,7 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
         </div>
       </form>
 
-      <!-- ====== Listado ====== -->
+      <!--  Listado  -->
       <div class="card">
         <h2>Listado</h2>
         <!-- Filtros -->
@@ -472,7 +475,7 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
             <?php
               // mantenemos filtros en los links
               $paramsBase = $_GET;
-              unset($paramsBase['pagina']); // la seteamos nosotros
+              unset($paramsBase['pagina']); // la seteamos
             ?>
             <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
               <?php
@@ -500,7 +503,7 @@ $productos = $resListado ? $resListado->fetch_all(MYSQLI_ASSOC) : [];
 
   <!-- Fin Footer -->
 
-  <!-- Modal de inicio de sesion/registro   -->
+
 
   <!-- Overlay oscuro -->
   <div id="overlay-login" class="overlay oculto"></div>
