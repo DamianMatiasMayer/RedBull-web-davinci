@@ -173,6 +173,15 @@
     </div>
   </main>
 
+    <!-- Boton para wpp  -->
+
+    <a href="https://wa.me/5491139311074?text=Hola%20quiero%20más%20info" 
+     class="whatsapp-float" 
+     target="_blank">
+     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" 
+          alt="WhatsApp">
+    </a>
+
   <!-- Footer   -->
 
     <?php
@@ -192,7 +201,6 @@
   <!--Fin Modal de inicio de sesion/registro   -->
 
 
-
   <!-- Aviso emergente en trabajo  -->
 
   <div id="aviso-trabajo" class="aviso-trabajo oculto">
@@ -207,6 +215,19 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!--  scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.querySelector(".whatsapp-float");
+
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 200) {
+          btn.classList.add("mostrar");
+        } else {
+          btn.classList.remove("mostrar");
+        }
+      });
+    });
+</script>
   <script defer src="js/global.js"></script>
   <script defer src="js/modal-carrito.js"></script>
   <script defer src="js/gsap-nav.js"></script>
